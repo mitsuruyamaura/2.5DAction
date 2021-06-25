@@ -9,9 +9,13 @@ public class PlayerController : MonoBehaviour
 
     private float x;
     private float z;
+    private float scale;
 
     [SerializeField]
     private float moveSpeed;
+
+    [SerializeField]
+    private float dashPower;
 
     public enum PlayerState {
         Wait,      // ゲージチャージ
@@ -26,7 +30,9 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         TryGetComponent(out rb);
-        TryGetComponent(out anim);
+        anim = transform.GetComponentInChildren<Animator>();
+
+        scale = transform.localScale.x;
     }
 
 
@@ -45,6 +51,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate() {
         Move();
+        DashAvoid();
     }
 
     /// <summary>
@@ -53,16 +60,40 @@ public class PlayerController : MonoBehaviour
     private void Move() {
         if (x != 0 || z != 0) {
             rb.velocity = new Vector3(x * moveSpeed, rb.velocity.y, z * moveSpeed);
+            
         } else {
             rb.velocity = Vector3.zero;
         }
+
+        if (x != 0) {
+            Vector3 temp = transform.localScale;
+
+            if (x >= 0) {
+                temp.x = scale;
+            } else {
+                temp.x = -scale;
+            }
+            transform.localScale = temp;
+        }
+        
     }
 
     /// <summary>
-    /// 回避
+    /// ダッシュ回避
     /// </summary>
-    private void Avoid() {
+    private void DashAvoid() {
+        if (Input.GetButtonDown("Jump")) {
+            //if (x != 0 || z != 0) {
+                Vector3 dashX = transform.right * (x * dashPower);
+                Vector3 dashZ = transform.forward * (z * dashPower);
 
+
+                rb.AddForce(dashX + dashZ, ForceMode.Impulse);
+
+                Debug.Log(dashX + dashZ);
+
+            //}
+        }
     }
 
     private void OnCollisionEnter(Collision collision) {
