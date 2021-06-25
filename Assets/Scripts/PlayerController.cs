@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float dashAvoidIntervalTime;
 
+
+
     public enum PlayerState {
         Wait,      // ゲージチャージ
         Ready,     // ゲージMax 攻撃可能
@@ -177,6 +179,11 @@ public class PlayerController : MonoBehaviour
                 chargePoint = 0;
 
                 currentPlayerState = PlayerState.Ready;
+
+                GameObject chargeEffect = Instantiate(EffectManager.instance.chargeUpEffectPrefab, transform.position, EffectManager.instance.chargeUpEffectPrefab.transform.rotation);
+                chargeEffect.transform.SetParent(transform);
+                chargeEffect.transform.localPosition = new Vector3(chargeEffect.transform.localPosition.x, chargeEffect.transform.localPosition.y + 0.5f, chargeEffect.transform.localPosition.z);
+                Destroy(chargeEffect, 1.5f);
             }
 
             yield return null;

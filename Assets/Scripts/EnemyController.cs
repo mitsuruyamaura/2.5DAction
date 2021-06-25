@@ -28,12 +28,11 @@ public class EnemyController : MonoBehaviour
         isDamaged = true;
 
         hp -= damage;
-
-        if (hp <= 0) {
-            Destroy(gameObject, 1.0f);
-        }
-
+        
         DoRotate();
+
+        GameObject hitEffect = Instantiate(EffectManager.instance.enemyHitEffectPrefab, transform);
+        Destroy(hitEffect, 1.0f);
 
         //StartCoroutine(Rotate());
     }
@@ -54,9 +53,28 @@ public class EnemyController : MonoBehaviour
         isDamaged = false;
     }
 
+    /// <summary>
+    /// ‰ñ“]‰‰o
+    /// </summary>
     private void DoRotate() {
         transform.DORotate(new Vector3(0, 720, 0), 1.5f, RotateMode.FastBeyond360)
             .SetEase(Ease.OutBack)
-            .OnComplete(() => { isDamaged = false; });
+            .OnComplete(() => 
+            { 
+                isDamaged = false;
+                CheckDestroy();
+            });
+    }
+
+    /// <summary>
+    /// “G‚Ì”j‰óŠm”F
+    /// </summary>
+    private void CheckDestroy() {
+        if (hp <= 0) {
+            Destroy(gameObject);
+
+            GameObject destroyEffect = Instantiate(EffectManager.instance.destroyEffectPrefab, transform.position, EffectManager.instance.destroyEffectPrefab.transform.rotation);
+            Destroy(destroyEffect, 1.0f);
+        } 
     }
 }
