@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class EnemyController : MonoBehaviour
 {
@@ -32,7 +33,9 @@ public class EnemyController : MonoBehaviour
             Destroy(gameObject, 1.0f);
         }
 
-        StartCoroutine(Rotate());
+        DoRotate();
+
+        //StartCoroutine(Rotate());
     }
 
     /// <summary>
@@ -49,5 +52,11 @@ public class EnemyController : MonoBehaviour
         transform.eulerAngles = Vector3.zero;
 
         isDamaged = false;
+    }
+
+    private void DoRotate() {
+        transform.DORotate(new Vector3(0, 720, 0), 1.5f, RotateMode.FastBeyond360)
+            .SetEase(Ease.OutBack)
+            .OnComplete(() => { isDamaged = false; });
     }
 }
