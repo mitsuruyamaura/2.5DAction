@@ -17,11 +17,29 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float dashPower;
 
+    [SerializeField]
+    private int chargePower;
+
+    [SerializeField]
+    private int chargePoint;
+
+    [SerializeField]
+    private int maxChargePoint;
+
+    [SerializeField]
+    private int attackPower;
+
+    [SerializeField]
+    private float attackIntervalTime;
+
+    [SerializeField]
+    private float dashAvoidIntervalTime;
+
     public enum PlayerState {
         Wait,      // ゲージチャージ
         Ready,     // ゲージMax 攻撃可能
         Attack,    // 攻撃中
-        Avoid,     // 回避中
+        DashAvoid,     // 回避中
 
     }
 
@@ -33,6 +51,8 @@ public class PlayerController : MonoBehaviour
         anim = transform.GetComponentInChildren<Animator>();
 
         scale = transform.localScale.x;
+
+        StartCoroutine(ChargeAttackGauge());
     }
 
 
@@ -51,7 +71,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate() {
         Move();
-        DashAvoid();
+        Action();
     }
 
     /// <summary>
@@ -79,21 +99,39 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// ダッシュ回避
+    /// ステートに応じて、ダッシュ回避か攻撃を行う
     /// </summary>
-    private void DashAvoid() {
+    private void Action() {
+
         if (Input.GetButtonDown("Jump")) {
-            //if (x != 0 || z != 0) {
-                Vector3 dashX = transform.right * (x * dashPower);
-                Vector3 dashZ = transform.forward * (z * dashPower);
 
+            Vector3 dashX = transform.right * (x * dashPower);
+            Vector3 dashZ = transform.forward * (z * dashPower);
 
-                rb.AddForce(dashX + dashZ, ForceMode.Impulse);
+            rb.AddForce(dashX + dashZ, ForceMode.Impulse);
+            //Debug.Log(dashX + dashZ);
 
-                Debug.Log(dashX + dashZ);
-
-            //}
+            // ステート確認
+            if (currentPlayerState == PlayerState.Ready) {
+                currentPlayerState = PlayerState.Attack;
+                StartCoroutine(ActionInterval(attackIntervalTime));
+            } else if (currentPlayerState == PlayerState.Wait) {
+                currentPlayerState = PlayerState.DashAvoid;
+                StartCoroutine(ActionInterval(dashAvoidIntervalTime));
+            }
         }
+    }
+
+    /// <summary>
+    /// 行動後の待機時間
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator ActionInterval(float intervalTime) {
+        yield return new WaitForSeconds(intervalTime);
+
+        currentPlayerState = PlayerState.Wait;
+
+        StartCoroutine(ChargeAttackGauge());
     }
 
     private void OnCollisionEnter(Collision collision) {
@@ -101,7 +139,39 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        // 敵に攻撃
+        // 敵に接触した場合
 
+        // ダメージ計算
+        CalcDamage();
+    }
+
+    /// <summary>
+    /// ダメージ計算
+    /// </summary>
+    private void CalcDamage() {　　　// 敵の情報をもらう
+        // 敵にダメージを与える
+
+    }
+
+    /// <summary>
+    /// 攻撃ゲージのチャージ
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator ChargeAttackGauge() {
+
+        while (currentPlayerState == PlayerState.Wait) {
+
+            chargePoint += chargePower;
+
+            // TODO UI 連動
+
+            if (chargePoint >= maxChargePoint) {
+                chargePoint = 0;
+
+                currentPlayerState = PlayerState.Ready;
+            }
+
+            yield return null;
+        }
     }
 }
