@@ -140,16 +140,24 @@ public class PlayerController : MonoBehaviour
         }
 
         // 敵に接触した場合
+        if (collision.gameObject.TryGetComponent(out EnemyController enemyController)) {
+           
+            rb.velocity = Vector3.zero;
 
-        // ダメージ計算
-        CalcDamage();
+            if (enemyController.IsDamaged) {
+                return;
+            }
+
+            // ダメージ計算
+            enemyController.CalcDamage(attackPower);
+        }        
     }
 
     /// <summary>
     /// ダメージ計算
     /// </summary>
     private void CalcDamage() {　　　// 敵の情報をもらう
-        // 敵にダメージを与える
+        // 敵からダメージを受ける
 
     }
 
