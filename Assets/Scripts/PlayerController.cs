@@ -90,14 +90,17 @@ public class PlayerController : MonoBehaviour
         if (x != 0) {
             Vector3 temp = transform.localScale;
 
-            if (x >= 0) {
-                temp.x = scale;
-            } else {
-                temp.x = -scale;
-            }
+            temp.x = x >= 0 ? scale : -scale;
+
+            //if (x >= 0) {
+            //    temp.x = scale;
+            //} else {
+            //    temp.x = -scale;
+            //}
             transform.localScale = temp;
         }
-        
+
+        anim.SetFloat("Speed", x != 0 ? Mathf.Abs(x) : Mathf.Abs(z));
     }
 
     /// <summary>
