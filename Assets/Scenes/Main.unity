@@ -8178,6 +8178,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1302284570}
+  - {fileID: 5370993917299283852}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8201,6 +8202,7 @@ MonoBehaviour:
   attackPower: 1
   attackIntervalTime: 1
   dashAvoidIntervalTime: 1
+  dashEffectTran: {fileID: 5370993917299283852}
   currentPlayerState: 0
 --- !u!136 &500076302
 CapsuleCollider:
@@ -20828,6 +20830,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4310614304489658, guid: 5cbae0602ce9acf41a98fda3a353569a, type: 3}
   m_PrefabInstance: {fileID: 1402660694}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1409519585
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1409519586}
+  m_Layer: 0
+  m_Name: GameObject (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1409519586
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409519585}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1412236430
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27298,6 +27330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chargeUpEffectPrefab: {fileID: 100000, guid: aa3fed151f536ee49b583c6a3ac4a2e1, type: 3}
+  dashWindPrefab: {fileID: 8955571381571785372, guid: ec09c31b2a8996a45a1533624abb9bee, type: 3}
   enemyHitEffectPrefab: {fileID: 1845240806346120, guid: b395d5d6eb4b4b846acc021ee036b744, type: 3}
   destroyEffectPrefab: {fileID: 1892078723244562, guid: 46876a2780737ec45a19d62f88e5ce56, type: 3}
 --- !u!1001 &1824474105
@@ -29746,8 +29779,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.3999469, y: 2.6675415, z: 0.2256546}
-  m_Center: {x: -0.19997346, y: -0.70467186, z: 0.0105781555}
+  m_Size: {x: 1.3999469, y: 2.6675415, z: 1.7281361}
+  m_Center: {x: -0.19997346, y: -0.70467186, z: -0.28534126}
 --- !u!1001 &1997667857
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31814,3 +31847,33 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4310614304489658, guid: 5cbae0602ce9acf41a98fda3a353569a, type: 3}
   m_PrefabInstance: {fileID: 2144872717}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4473427920706136264
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5370993917299283852}
+  m_Layer: 0
+  m_Name: DashEffectTran
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5370993917299283852
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4473427920706136264}
+  m_LocalRotation: {x: 4.065758e-20, y: -8.526513e-14, z: -2.5849394e-26, w: 1}
+  m_LocalPosition: {x: -0.38, y: -1.34, z: -0.45}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 500076300}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
