@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float dashAvoidIntervalTime;
 
+    [SerializeField]
+    private Transform dashEffectTran;
 
 
     public enum PlayerState {
@@ -119,9 +121,14 @@ public class PlayerController : MonoBehaviour
             // ステート確認
             if (currentPlayerState == PlayerState.Ready) {
                 currentPlayerState = PlayerState.Attack;
+                anim.SetTrigger("Attack");
                 StartCoroutine(ActionInterval(attackIntervalTime));
             } else if (currentPlayerState == PlayerState.Wait) {
                 currentPlayerState = PlayerState.DashAvoid;
+                anim.SetTrigger("Dash");
+                // 親の Scale を参照するので、向きも自動で変わる
+                GameObject dashEffect = Instantiate(EffectManager.instance.dashWindPrefab, dashEffectTran);
+                Destroy(dashEffect, 0.5f);
                 StartCoroutine(ActionInterval(dashAvoidIntervalTime));
             }
         }
