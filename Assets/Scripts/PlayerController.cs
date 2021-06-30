@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class PlayerController : MonoBehaviour
     private float x;
     private float z;
     private float scale;
+
+
+    private CinemachineImpulseSource cinemachineImpulseSource;
 
     [SerializeField]
     private float moveSpeed;
@@ -38,6 +42,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Transform dashEffectTran;
 
+    [SerializeField]
+    private TimingGaugeController timingGaugeController;
+
+    [SerializeField]
+    private int attackCount = 1;
+
+    private int maxAttackCount = 4;
 
     public enum PlayerState {
         Wait,      // ゲージチャージ
@@ -54,9 +65,13 @@ public class PlayerController : MonoBehaviour
         TryGetComponent(out rb);
         anim = transform.GetComponentInChildren<Animator>();
 
+        TryGetComponent(out cinemachineImpulseSource);
+
         scale = transform.localScale.x;
 
         StartCoroutine(ChargeAttackGauge());
+
+        //DamageEffect();
     }
 
 
@@ -122,6 +137,11 @@ public class PlayerController : MonoBehaviour
             if (currentPlayerState == PlayerState.Ready) {
                 currentPlayerState = PlayerState.Attack;
                 anim.SetTrigger("Attack");
+
+                //Debug.Log(timingGaugeController.CheckCritial());
+
+                StartCoroutine(timingGaugeController.PausePointer());
+
                 StartCoroutine(ActionInterval(attackIntervalTime));
             } else if (currentPlayerState == PlayerState.Wait) {
                 currentPlayerState = PlayerState.DashAvoid;
@@ -160,8 +180,22 @@ public class PlayerController : MonoBehaviour
                 return;
             }
 
+            // TODO 現在は敵にあたったときだけクリティカル判定。緩い場合には空振り時にリセットする
+            //if (timingGaugeController.CheckCritial()) {
+            //    attackCount++;
+            //} else {
+            //    attackCount = 1;
+            //}
+
+            attackCount = timingGaugeController.CheckCritial() ? attackCount += 1 : 1;
+            Debug.Log(attackCount);
+
             // ダメージ計算
-            enemyController.CalcDamage(attackPower);
+            StartCoroutine(enemyController.CalcDamage(attackPower, attackCount));
+
+            if (attackCount >= maxAttackCount) {
+                attackCount = 1;
+            }
         }        
     }
 
@@ -198,5 +232,9 @@ public class PlayerController : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    public void DamageEffect() {
+        cinemachineImpulseSource.GenerateImpulse();
     }
 }
