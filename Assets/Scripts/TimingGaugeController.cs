@@ -53,7 +53,7 @@ public class TimingGaugeController : MonoBehaviour
     }
 
     public bool CheckCritial() {
-        Debug.Log(slider.value);
+        //Debug.Log(slider.value);
         return slider.value >= 0.475f && slider.value < 0.540f ? true : false;
     }
 }

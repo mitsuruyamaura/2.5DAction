@@ -45,6 +45,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private TimingGaugeController timingGaugeController;
 
+    [SerializeField]
+    private int attackCount = 1;
+
+    private int maxAttackCount = 4;
+
     public enum PlayerState {
         Wait,      // ゲージチャージ
         Ready,     // ゲージMax 攻撃可能
@@ -133,7 +138,7 @@ public class PlayerController : MonoBehaviour
                 currentPlayerState = PlayerState.Attack;
                 anim.SetTrigger("Attack");
 
-                Debug.Log(timingGaugeController.CheckCritial());
+                //Debug.Log(timingGaugeController.CheckCritial());
 
                 StartCoroutine(timingGaugeController.PausePointer());
 
@@ -175,10 +180,22 @@ public class PlayerController : MonoBehaviour
                 return;
             }
 
-            bool isCritial = timingGaugeController.CheckCritial();
+            // TODO 現在は敵にあたったときだけクリティカル判定。緩い場合には空振り時にリセットする
+            //if (timingGaugeController.CheckCritial()) {
+            //    attackCount++;
+            //} else {
+            //    attackCount = 1;
+            //}
+
+            attackCount = timingGaugeController.CheckCritial() ? attackCount += 1 : 1;
+            Debug.Log(attackCount);
 
             // ダメージ計算
-            enemyController.CalcDamage(attackPower);
+            StartCoroutine(enemyController.CalcDamage(attackPower, attackCount));
+
+            if (attackCount >= maxAttackCount) {
+                attackCount = 1;
+            }
         }        
     }
 

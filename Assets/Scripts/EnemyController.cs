@@ -23,17 +23,22 @@ public class EnemyController : MonoBehaviour
     /// ダメージ計算
     /// </summary>
     /// <param name="damage"></param>
-    public void CalcDamage(int damage) {
+    public IEnumerator CalcDamage(int damage, int attackCount) {
         
         isDamaged = true;
 
-        hp -= damage;
-        
-        DoRotate();
+        for (int i = 0; i < attackCount; i++) {
+            hp -= damage;
 
-        GameObject hitEffect = Instantiate(EffectManager.instance.enemyHitEffectPrefab, transform);
-        Destroy(hitEffect, 1.0f);
+            DoRotate();
 
+            GameObject hitEffect = Instantiate(EffectManager.instance.enemyHitEffectPrefab, transform);
+            Destroy(hitEffect, 1.0f);
+
+            yield return new WaitForSeconds(0.15f);
+        }
+
+        Debug.Log(attackCount);
         //StartCoroutine(Rotate());
     }
 
