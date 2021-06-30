@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class PlayerController : MonoBehaviour
     private float x;
     private float z;
     private float scale;
+
+
+    private CinemachineImpulseSource cinemachineImpulseSource;
 
     [SerializeField]
     private float moveSpeed;
@@ -38,6 +42,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Transform dashEffectTran;
 
+    [SerializeField]
+    private TimingGaugeController timingGaugeController;
 
     public enum PlayerState {
         Wait,      // ゲージチャージ
@@ -54,9 +60,13 @@ public class PlayerController : MonoBehaviour
         TryGetComponent(out rb);
         anim = transform.GetComponentInChildren<Animator>();
 
+        TryGetComponent(out cinemachineImpulseSource);
+
         scale = transform.localScale.x;
 
         StartCoroutine(ChargeAttackGauge());
+
+        //DamageEffect();
     }
 
 
@@ -122,6 +132,11 @@ public class PlayerController : MonoBehaviour
             if (currentPlayerState == PlayerState.Ready) {
                 currentPlayerState = PlayerState.Attack;
                 anim.SetTrigger("Attack");
+
+                Debug.Log(timingGaugeController.CheckCritial());
+
+                StartCoroutine(timingGaugeController.PausePointer());
+
                 StartCoroutine(ActionInterval(attackIntervalTime));
             } else if (currentPlayerState == PlayerState.Wait) {
                 currentPlayerState = PlayerState.DashAvoid;
@@ -159,6 +174,8 @@ public class PlayerController : MonoBehaviour
             if (enemyController.IsDamaged) {
                 return;
             }
+
+            bool isCritial = timingGaugeController.CheckCritial();
 
             // ダメージ計算
             enemyController.CalcDamage(attackPower);
@@ -198,5 +215,9 @@ public class PlayerController : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    public void DamageEffect() {
+        cinemachineImpulseSource.GenerateImpulse();
     }
 }
