@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EffectManager : MonoBehaviour
@@ -13,6 +11,11 @@ public class EffectManager : MonoBehaviour
     // Enemy ‘¤
     public GameObject enemyHitEffectPrefab;
     public GameObject destroyEffectPrefab;
+
+    // ‹¤’Ê
+    public FloatingMessageControler floatingMessagePrefab;
+
+    public Transform effectConteinerTran;
 
 
     void Awake() {
