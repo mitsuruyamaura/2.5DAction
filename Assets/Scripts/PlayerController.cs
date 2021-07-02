@@ -60,6 +60,12 @@ public class PlayerController : MonoBehaviour
 
     public PlayerState currentPlayerState;
 
+    [SerializeField]
+    private int hp;
+
+    private int maxHp;
+
+
     void Start()
     {
         TryGetComponent(out rb);
@@ -70,6 +76,8 @@ public class PlayerController : MonoBehaviour
         scale = transform.localScale.x;
 
         StartCoroutine(ChargeAttackGauge());
+
+        maxHp = hp;
 
         //DamageEffect();
     }
@@ -200,11 +208,20 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// ダメージ計算
+    /// HP計算
     /// </summary>
-    private void CalcDamage() {　　　// 敵の情報をもらう
-        // 敵からダメージを受ける
+    public void CalcHp(int damage) {　　　// 敵の情報をもらう
 
+        hp = Mathf.Clamp(hp += damage, 0, maxHp);
+
+        // TODO エフェクト
+
+
+        Debug.Log("amount : " + damage);
+
+        if (hp <= 0) {
+            Debug.Log("Game Over");
+        }
     }
 
     /// <summary>
@@ -234,6 +251,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 画面を揺らす演出
+    /// </summary>
     public void DamageEffect() {
         cinemachineImpulseSource.GenerateImpulse();
     }
