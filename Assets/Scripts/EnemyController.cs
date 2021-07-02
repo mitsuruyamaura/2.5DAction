@@ -12,6 +12,12 @@ public class EnemyController : MonoBehaviour
     private float rotateSpeed;
 
     [SerializeField]
+    private int attackIntervalTime;
+
+    [SerializeField]
+    private int attackPower;
+
+    [SerializeField]
     private Transform floatingMessageTran;
 
     private bool isDamaged;
@@ -20,7 +26,12 @@ public class EnemyController : MonoBehaviour
         set { isDamaged = value; }
         get { return isDamaged; }  
     }
-    
+
+    private PlayerController playerController;
+    private bool isAttack;
+
+    private Animator anim;
+
     /// <summary>
     /// ダメージ計算
     /// </summary>
@@ -28,6 +39,8 @@ public class EnemyController : MonoBehaviour
     public IEnumerator CalcDamage(int damage, int attackCount) {
         
         isDamaged = true;
+
+        anim.SetTrigger("Hit");
 
         for (int i = 0; i < attackCount; i++) {
             hp -= damage;
@@ -95,5 +108,55 @@ public class EnemyController : MonoBehaviour
         FloatingMessageControler floatingMessage = Instantiate(EffectManager.instance.floatingMessagePrefab, floatingMessageTran);
 
         floatingMessage.SetUpFloatingMessage(damage);
+    }
+
+    private void OnTriggerStay(Collider other) {
+        if (playerController == null && other.TryGetComponent(out playerController)) {
+            isAttack = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other) {
+        playerController = null;
+        isAttack = false;
+    }
+
+    /// <summary>
+    /// 攻撃準備
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator PraparateAttack() {
+
+        int timer = 0;
+
+        while (true) {
+            if (isAttack) {
+                timer++;
+
+                if (timer > attackIntervalTime) {
+                    timer = 0;
+                    Attack();
+                }
+            }
+            yield return null;
+        }
+    }
+
+    void Start() {
+        transform.GetChild(0).TryGetComponent(out anim);
+        StartCoroutine(PraparateAttack());    
+    }
+
+    /// <summary>
+    /// 攻撃
+    /// </summary>
+    private void Attack() {
+        // TODO アニメーション
+        anim.SetTrigger("Attack");
+
+        // エフェクト
+
+
+        playerController.CalcHp(-attackPower);
     }
 }
