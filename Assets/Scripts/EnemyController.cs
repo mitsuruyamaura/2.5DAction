@@ -11,6 +11,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private float rotateSpeed;
 
+    [SerializeField]
+    private Transform floatingMessageTran;
 
     private bool isDamaged;
 
@@ -34,6 +36,8 @@ public class EnemyController : MonoBehaviour
 
             GameObject hitEffect = Instantiate(EffectManager.instance.enemyHitEffectPrefab, transform);
             Destroy(hitEffect, 1.0f);
+
+            GenerateFloatingMessage(damage);
 
             yield return new WaitForSeconds(0.15f);
         }
@@ -81,5 +85,15 @@ public class EnemyController : MonoBehaviour
             GameObject destroyEffect = Instantiate(EffectManager.instance.destroyEffectPrefab, transform.position, EffectManager.instance.destroyEffectPrefab.transform.rotation);
             Destroy(destroyEffect, 1.0f);
         } 
+    }
+
+    /// <summary>
+    /// フロート表示作成
+    /// </summary>
+    /// <param name="damage"></param>
+    private void GenerateFloatingMessage(int damage) {
+        FloatingMessageControler floatingMessage = Instantiate(EffectManager.instance.floatingMessagePrefab, floatingMessageTran);
+
+        floatingMessage.SetUpFloatingMessage(damage);
     }
 }
