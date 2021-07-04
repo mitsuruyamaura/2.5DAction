@@ -7,45 +7,48 @@ using DG.Tweening;
 
 public class MapMoveController : MonoBehaviour
 {
-    private Vector3 move;
-    private float moveTilePanel = 8.0f;
-    private Rigidbody2D rb;
-    Vector2 velocity;
+    private Vector3 movePos;
+    private float moveDuration = 0.5f;
+    //private float moveTilePanel = 8.0f;
+    //private Rigidbody2D rb;
+    //Vector2 velocity;
 
     [SerializeField]
-    private Grid grid;
-
-    [SerializeField]
-    private Tilemap tilemap;
+    private Tilemap tilemapWalk;
 
     [SerializeField]
     private Tilemap tilemapCollider;
 
-    public bool isMoving;
+    [SerializeField, HideInInspector]  // Debug用
+    private bool isMoving;
 
-    void Start() {
-        transform.GetChild(0).TryGetComponent(out rb);    
-    }
 
+    //void Start() {
+    //    transform.GetChild(0).TryGetComponent(out rb);    
+    //}
+
+    /// <summary>
+    /// 移動の入力判定
+    /// </summary>
+    /// <param name="context"></param>
     public void OnInputMove(InputAction.CallbackContext context) {
 
+        // 移動中には処理しない
         if (isMoving) {
             return;
         }
 
+        // キー入力値の受け取り
+        movePos = context.ReadValue<Vector2>().normalized;
 
-
-        move = context.ReadValue<Vector2>().normalized;
-
-        if (move == Vector3.zero) {
+        // 取得タイミングによって不用意な数値が入るので、その場合には処理しない
+        if (movePos == Vector3.zero) {
             return;
         }
 
         isMoving = true;
 
-        //move.x = Input.GetAxisRaw("Horizontal");
-        //move.y = Input.GetAxisRaw("Vertical");
-        Debug.Log(move);
+        Debug.Log(movePos);
         //move = (transform.position + move).normalized;
 
         //Vector3Int playerPos = new Vector3Int((int)transform.position.x, (int)transform.position.y, 0);
@@ -54,53 +57,57 @@ public class MapMoveController : MonoBehaviour
         //Vector3Int gridPos = grid.WorldToCell(playerPos + move);
         //Debug.Log(gridPos);
 
-        Ray2D ray = new Ray2D(Vector2.zero, move);
-        Debug.Log(ray.origin);
-        Debug.Log(ray.direction);
+        //Ray2D ray = new Ray2D(Vector2.zero, move);
+        //Debug.Log(ray.origin);
+        //Debug.Log(ray.direction);
 
-        RaycastHit2D[] hits = Physics2D.RaycastAll(ray.origin, ray.direction, 0.75f);  // , LayerMask.GetMask("Collider"), , LayerMask.GetMask("Confiner")
-        Debug.DrawRay(ray.origin, ray.direction, Color.red, 1.5f);
+        //RaycastHit2D[] hits = Physics2D.RaycastAll(ray.origin, ray.direction, 0.75f);  // , LayerMask.GetMask("Collider"), , LayerMask.GetMask("Confiner")
+        //Debug.DrawRay(ray.origin, ray.direction, Color.red, 1.5f);
 
-        Debug.Log(hits.Length);
+        //Debug.Log(hits.Length);
 
-        for (int i = 0; i < hits.Length; i++) {
-            //Debug.Log(hits[i].collider.name);
+        //for (int i = 0; i < hits.Length; i++) {
+        //    //Debug.Log(hits[i].collider.name);
 
-            if (hits[i].collider != null) {
+        //    if (hits[i].collider != null) {
 
-                var tilePos = tilemap.WorldToCell(transform.position + move);
-
-                Debug.Log(tilemap.GetColliderType(tilePos));
-                Debug.Log(tilemapCollider.GetColliderType(tilePos));
-
-                if (tilemapCollider.GetColliderType(tilePos) == Tile.ColliderType.Grid) {
-                    isMoving = false;
-                    break;
-                }
-
-                if (tilemap.GetColliderType(tilePos) != Tile.ColliderType.Grid){   // tilemapCollider.GetColliderType(tilePos) != Tile.ColliderType.Grid) {
-                    Move(transform.position +  move);
-                    break;
-                }
-
-
-            }
+        // 斜め移動はなしにする
+        if (Mathf.Abs(movePos.x) != 0) {
+            movePos.y = 0;
         }
 
+        // タイルマップの座標に変換
+        Vector3Int tilePos = tilemapWalk.WorldToCell(transform.position + movePos);
+
+        Debug.Log(tilemapWalk.GetColliderType(tilePos));
+        Debug.Log(tilemapCollider.GetColliderType(tilePos));
+
+        // Grid のコライダーの場合
+        if (tilemapCollider.GetColliderType(tilePos) == Tile.ColliderType.Grid) {
+
+            // 移動しないで終了
+            isMoving = false;
+            //break;
+
+        // Grid 以外の場合
+        } else if (tilemapWalk.GetColliderType(tilePos) != Tile.ColliderType.Grid) {   // tilemapCollider.GetColliderType(tilePos) != Tile.ColliderType.Grid) {
+            
+            // 移動させる
+            Move(transform.position + movePos);
+            //break;
+        }
+
+
+        //}
+        //}
+
         //isMoving = false;
-
-        
-
 
         //if (tilemap.GetColliderType(gridPos) == Tile.ColliderType.Sprite) {
         //    Move(move);
         //}
-
-
-        
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         //InputMove();
@@ -111,7 +118,11 @@ public class MapMoveController : MonoBehaviour
 
     }
 
-    private void Move(Vector2 movePos) {
+    /// <summary>
+    /// 移動
+    /// </summary>
+    /// <param name="destination"></param>
+    private void Move(Vector2 destination) {
         //transform.Translate(move * 0.5f);
         //rb.velocity = move * moveTilePanel;
 
@@ -119,7 +130,12 @@ public class MapMoveController : MonoBehaviour
 
         //rb.MovePosition(rb.position + velocity );
 
-        transform.DOMove(movePos, 0.5f).SetEase(Ease.Linear).OnComplete(() => { isMoving = false; });
-        
+        transform.DOMove(destination, moveDuration)
+            .SetEase(Ease.Linear)
+            .OnComplete(() =>
+            {
+                isMoving = false;
+                GameData.instance.moveCount.Value--;
+            });        
     }
 }
