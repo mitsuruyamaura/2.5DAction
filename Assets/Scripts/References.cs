@@ -11,4 +11,10 @@ public class References
 
     // 【Unity】【Cinemachine】衝撃を受けたらカメラをシェイク（振動）させるImpulse機能を使う
     // https://light11.hatenadiary.com/entry/2019/07/25/214726
+
+
+    // 背景画像
+    //https://seiga.nicovideo.jp/seiga/im4771781
+
+    //
 }
