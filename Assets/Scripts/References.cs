@@ -16,5 +16,6 @@ public class References
     // ”wŒi‰æ‘œ
     //https://seiga.nicovideo.jp/seiga/im4771781
 
-    //
+    // “GƒAƒCƒRƒ“
+    //https://www.ac-illust.com/main/detail.php?id=967914&word=%E6%82%AA%E9%AD%94&searchId=2296126739#
 }
