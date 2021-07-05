@@ -7,7 +7,7 @@ public class GameData : MonoBehaviour
 {
     public static GameData instance;
 
-    public ReactiveProperty<int> moveCount = new ReactiveProperty<int>();
+    public ReactiveProperty<int> staminaPoint = new ReactiveProperty<int>();
 
 
     void Awake() {

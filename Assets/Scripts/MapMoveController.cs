@@ -134,12 +134,13 @@ public class MapMoveController : MonoBehaviour
 
         //rb.MovePosition(rb.position + velocity );
 
+        GameData.instance.staminaPoint.Value--;
+
         transform.DOMove(destination, moveDuration)
             .SetEase(Ease.Linear)
             .OnComplete(() =>
             {
-                isMoving = false;
-                GameData.instance.moveCount.Value--;
+                isMoving = false;                
             });        
     }
 
@@ -151,9 +152,13 @@ public class MapMoveController : MonoBehaviour
                     Debug.Log("移動先で敵に接触");
                     StartCoroutine(PreparateBattle(symbolBase));
                     
-
                     break;
 
+                case SymbolType.Stamina:
+                    Debug.Log("移動先でスタミナ回復アイテムに接触");
+                    symbolBase.TriggerAppearEffect();
+
+                    break;
             }
         }
     }

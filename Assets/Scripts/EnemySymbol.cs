@@ -10,5 +10,6 @@ public class EnemySymbol : SymbolBase
 
         transform.DOShakeScale(0.75f, 3.0f).SetEase(Ease.OutQuart);
 
+        //base.OnExitSymbol();
     }
 }

@@ -12,17 +12,17 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         // w“ÇŠJŽn
-        GameData.instance.moveCount.Subscribe(_ => UpdateDisplayMoveCount());
+        GameData.instance.staminaPoint.Subscribe(_ => UpdateDisplayMoveCount());
     }
 
     private void UpdateDisplayMoveCount() {
-        txtMoveCount.text = GameData.instance.moveCount.ToString();
+        txtMoveCount.text = GameData.instance.staminaPoint.ToString();
 
-        if (GameData.instance.moveCount.Value <= 0) {
+        if (GameData.instance.staminaPoint.Value <= 0) {
             Debug.Log("ƒ{ƒXí");
 
             // w“Ç’âŽ~
-            GameData.instance.moveCount.Dispose();
+            GameData.instance.staminaPoint.Dispose();
 
 
             // ˆÚ“®‹ÖŽ~
