@@ -7,6 +7,7 @@ public class EffectManager : MonoBehaviour
     // Player ‘¤
     public GameObject chargeUpEffectPrefab;
     public GameObject dashWindPrefab;
+    public GameObject recoverStaminaEffectPrefab;
 
     // Enemy ‘¤
     public GameObject enemyHitEffectPrefab;
