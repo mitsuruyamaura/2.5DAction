@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour
             GameData.instance.moveCount.Dispose();
 
 
+            // 移動禁止
+
+
             // TODO ボスとのバトルシーンへ遷移
         }
     }
