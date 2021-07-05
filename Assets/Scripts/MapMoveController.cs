@@ -13,8 +13,8 @@ public class MapMoveController : MonoBehaviour
     //private Rigidbody2D rb;
     //Vector2 velocity;
 
-    [SerializeField]
-    private Tilemap tilemapWalk;
+    //[SerializeField]
+    //private Tilemap tilemapWalk;
 
     [SerializeField]
     private Tilemap tilemapCollider;
@@ -32,6 +32,9 @@ public class MapMoveController : MonoBehaviour
     /// </summary>
     /// <param name="context"></param>
     public void OnInputMove(InputAction.CallbackContext context) {
+
+        // TODO 移動禁止なら処理しない
+
 
         // 移動中には処理しない
         if (isMoving) {
@@ -77,25 +80,26 @@ public class MapMoveController : MonoBehaviour
         }
 
         // タイルマップの座標に変換
-        Vector3Int tilePos = tilemapWalk.WorldToCell(transform.position + movePos);
+        Vector3Int tilePos = tilemapCollider.WorldToCell(transform.position + movePos);
 
-        Debug.Log(tilemapWalk.GetColliderType(tilePos));
-        Debug.Log(tilemapCollider.GetColliderType(tilePos));
+        //Debug.Log(tilemapWalk.GetColliderType(tilePos));
+        //Debug.Log(tilemapCollider.GetColliderType(tilePos));
 
         // Grid のコライダーの場合
         if (tilemapCollider.GetColliderType(tilePos) == Tile.ColliderType.Grid) {
 
-            // 移動しないで終了
+           // 移動しないで終了
             isMoving = false;
-            //break;
+        //    //break;
 
-        // Grid 以外の場合
-        } else if (tilemapWalk.GetColliderType(tilePos) != Tile.ColliderType.Grid) {   // tilemapCollider.GetColliderType(tilePos) != Tile.ColliderType.Grid) {
+        //// Grid 以外の場合
+        } else { 
+        //if (tilemapWalk.GetColliderType(tilePos) == Tile.ColliderType.None) {   // tilemapCollider.GetColliderType(tilePos) != Tile.ColliderType.Grid) {
             
             // 移動させる
             Move(transform.position + movePos);
             //break;
-        }
+        } 
 
 
         //}
@@ -137,5 +141,48 @@ public class MapMoveController : MonoBehaviour
                 isMoving = false;
                 GameData.instance.moveCount.Value--;
             });        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+
+        if (collision.TryGetComponent(out SymbolBase symbolBase)) {
+            switch (symbolBase.symbolType) {
+                case SymbolType.Enemy:
+                    Debug.Log("移動先で敵に接触");
+                    StartCoroutine(PreparateBattle(symbolBase));
+                    
+
+                    break;
+
+            }
+        }
+    }
+
+    /// <summary>
+    /// バトルの準備
+    /// </summary>
+    /// <param name="symbolBase"></param>
+    /// <returns></returns>
+    private IEnumerator PreparateBattle(SymbolBase symbolBase) {
+
+
+        yield return new WaitForSeconds(moveDuration);
+
+        Debug.Log("Appear Enemy");
+
+        symbolBase.TriggerAppearEffect();
+
+        // TODO バトル前に座標情報を GameData に保持
+
+
+        // TODO エフェクトや SE
+
+
+        // TODO 敵の情報を取得
+
+
+        // TODO シーン遷移
+
+
     }
 }
