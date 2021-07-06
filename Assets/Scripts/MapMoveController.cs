@@ -155,7 +155,8 @@ public class MapMoveController : MonoBehaviour
                     break;
 
                 case SymbolType.Stamina:
-                    Debug.Log("移動先でスタミナ回復アイテムに接触");
+                case SymbolType.Life:
+                    Debug.Log("移動先で回復アイテムに接触 : " + symbolBase.symbolType.ToString());
                     symbolBase.TriggerAppearEffect();
 
                     break;

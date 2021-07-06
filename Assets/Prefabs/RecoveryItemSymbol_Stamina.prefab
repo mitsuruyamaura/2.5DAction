@@ -159,7 +159,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2662936939243133676}
   m_LocalRotation: {x: 0, y: 0, z: -0.13052624, w: 0.9914449}
-  m_LocalPosition: {x: 0, y: -0.107, z: 0}
+  m_LocalPosition: {x: 0, y: -0.1, z: 0}
   m_LocalScale: {x: 0.08, y: 0.08, z: 1}
   m_Children: []
   m_Father: {fileID: 2662936939933903161}
@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 2662936939933903166}
   - component: {fileID: 739012728}
   m_Layer: 0
-  m_Name: ItemSymbol_stamina
+  m_Name: RecoveryItemSymbol_Stamina
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -242,7 +242,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2662936939933903167}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: -3, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2662936939243133679}
@@ -291,8 +291,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   symbolType: 2
   no: 0
-  recoverStamina: 10
-  txtRecoverStamina: {fileID: 8670598606063322631}
+  recoveryPoint: 10
+  txtRecoveryPoint: {fileID: 8670598606063322631}
   effectTran: {fileID: 7467891198962845198}
 --- !u!1 &6289921061675001253
 GameObject:
@@ -453,7 +453,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8670598604849834225, guid: ffa9d8f3bb28a6143b098fb88b3b9ac0, type: 3}
       propertyPath: m_Name
-      value: txtRecoverStamina
+      value: txtRecovery
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8670598604849834223, guid: ffa9d8f3bb28a6143b098fb88b3b9ac0, type: 3}
