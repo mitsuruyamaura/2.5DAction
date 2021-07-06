@@ -1080,7 +1080,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2662936939933903167, guid: 5a33ea28859f4274aace2dfd956abf09, type: 3}
       propertyPath: m_Name
-      value: ItemSymbol_stamina
+      value: RecoveryItemSymbol_Stamina
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a33ea28859f4274aace2dfd956abf09, type: 3}
@@ -1284,6 +1284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   staminaPoint:
     value: 5
+  hp: 0
 --- !u!4 &941425069
 Transform:
   m_ObjectHideFlags: 0
@@ -7241,6 +7242,67 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &3060603752097053769
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6051095553635060171, guid: dd7cfac414c7780429b0f904e60e49ae, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1691141731}
+    - target: {fileID: 8578627562830087763, guid: dd7cfac414c7780429b0f904e60e49ae, type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8578627562830087763, guid: dd7cfac414c7780429b0f904e60e49ae, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.018
+      objectReference: {fileID: 0}
+    - target: {fileID: 8578627562830087763, guid: dd7cfac414c7780429b0f904e60e49ae, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8578627562830087763, guid: dd7cfac414c7780429b0f904e60e49ae, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8578627562830087763, guid: dd7cfac414c7780429b0f904e60e49ae, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8578627562830087763, guid: dd7cfac414c7780429b0f904e60e49ae, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8578627562830087763, guid: dd7cfac414c7780429b0f904e60e49ae, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8578627562830087763, guid: dd7cfac414c7780429b0f904e60e49ae, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8578627562830087763, guid: dd7cfac414c7780429b0f904e60e49ae, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8578627562830087763, guid: dd7cfac414c7780429b0f904e60e49ae, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8578627562830087763, guid: dd7cfac414c7780429b0f904e60e49ae, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8578627562830087765, guid: dd7cfac414c7780429b0f904e60e49ae, type: 3}
+      propertyPath: m_Name
+      value: RecoveryItemSymbol_Life
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dd7cfac414c7780429b0f904e60e49ae, type: 3}
 --- !u!1001 &4108546327344529999
 PrefabInstance:
   m_ObjectHideFlags: 0
