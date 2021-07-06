@@ -9,6 +9,8 @@ public class GameData : MonoBehaviour
 
     public ReactiveProperty<int> staminaPoint = new ReactiveProperty<int>();
 
+    public int hp;
+
 
     void Awake() {
         if (instance == null) {

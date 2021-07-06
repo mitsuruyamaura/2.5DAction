@@ -291,8 +291,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   symbolType: 2
   no: 0
-  recoverStamina: 10
-  txtRecoverStamina: {fileID: 8670598606063322631}
+  recoveryPoint: 10
+  txtRecoveryPoint: {fileID: 8670598606063322631}
   effectTran: {fileID: 7467891198962845198}
 --- !u!1 &6289921061675001253
 GameObject:
@@ -453,7 +453,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8670598604849834225, guid: ffa9d8f3bb28a6143b098fb88b3b9ac0, type: 3}
       propertyPath: m_Name
-      value: txtRecoverStamina
+      value: txtRecovery
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8670598604849834223, guid: ffa9d8f3bb28a6143b098fb88b3b9ac0, type: 3}
