@@ -8,6 +8,9 @@ public class SymbolBase : MonoBehaviour
     public SymbolType symbolType;
     public int no;
 
+    [SerializeField]
+    protected Transform effectTran;
+
     protected Tween tween;
 
     protected virtual void Start() {

@@ -9,6 +9,7 @@ public class EffectManager : MonoBehaviour
     public GameObject dashWindPrefab;
     public GameObject recoveryStaminaEffectPrefab;
     public GameObject recoveryLifeEffectPrefab;
+    public GameObject orbGetEffectPrefab;
 
     // Enemy ‘¤
     public GameObject enemyHitEffectPrefab;

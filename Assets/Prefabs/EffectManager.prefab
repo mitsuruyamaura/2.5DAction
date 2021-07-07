@@ -77,7 +77,8 @@ MonoBehaviour:
   chargeUpEffectPrefab: {fileID: 100000, guid: aa3fed151f536ee49b583c6a3ac4a2e1, type: 3}
   dashWindPrefab: {fileID: 8955571381571785372, guid: ec09c31b2a8996a45a1533624abb9bee, type: 3}
   recoveryStaminaEffectPrefab: {fileID: 100006, guid: 60bc526f4be1e044ab9e46340b82ffb3, type: 3}
-  recoveryLifeEffectPrefab: {fileID: 1844191813266838, guid: 968c924d2be019d4b9e67647551eec3e, type: 3}
+  recoveryLifeEffectPrefab: {fileID: 100004, guid: 3af6f68141914ca43ba39b2403757bd0, type: 3}
+  orbGetEffectPrefab: {fileID: 1844191813266838, guid: 968c924d2be019d4b9e67647551eec3e, type: 3}
   enemyHitEffectPrefab: {fileID: 1845240806346120, guid: b395d5d6eb4b4b846acc021ee036b744, type: 3}
   destroyEffectPrefab: {fileID: 1892078723244562, guid: 46876a2780737ec45a19d62f88e5ce56, type: 3}
   floatingMessagePrefab: {fileID: 4707443139739530422, guid: e12a793e03eb23447b9dea4e6154cc89, type: 3}

@@ -12,9 +12,6 @@ public class RecoveryItemSymbol : SymbolBase
     [SerializeField]
     private Text txtRecoveryPoint;
 
-    [SerializeField]
-    private Transform effectTran;
-
 
     public override void OnEnterSymbol() {
         base.OnEnterSymbol();
@@ -34,7 +31,7 @@ public class RecoveryItemSymbol : SymbolBase
 
     public override void TriggerAppearEffect() {
 
-        GameObject effectPrefab = new GameObject();
+        GameObject effectPrefab = null;
 
         if (symbolType == SymbolType.Stamina) {
             effectPrefab = EffectManager.instance.recoveryStaminaEffectPrefab;
