@@ -9,6 +9,8 @@ public class GameData : MonoBehaviour
 
     public ReactiveProperty<int> staminaPoint = new ReactiveProperty<int>();
 
+    public ReactiveDictionary<int, bool> orbs = new ReactiveDictionary<int, bool>();
+
     public int hp;
 
 
@@ -18,6 +20,6 @@ public class GameData : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         } else {
             Destroy(gameObject);
-        }        
+        }
     }
 }

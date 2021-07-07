@@ -48,10 +48,10 @@ public class MapMoveController : MonoBehaviour
         if (movePos == Vector3.zero) {
             return;
         }
-
+        //Debug.Log(movePos);
         isMoving = true;
 
-        Debug.Log(movePos);
+
         //move = (transform.position + move).normalized;
 
         //Vector3Int playerPos = new Vector3Int((int)transform.position.x, (int)transform.position.y, 0);
@@ -156,7 +156,8 @@ public class MapMoveController : MonoBehaviour
 
                 case SymbolType.Stamina:
                 case SymbolType.Life:
-                    Debug.Log("移動先で回復アイテムに接触 : " + symbolBase.symbolType.ToString());
+                case SymbolType.Orb:
+                    Debug.Log("移動先でアイテムに接触 : " + symbolBase.symbolType.ToString());
                     symbolBase.TriggerAppearEffect();
 
                     break;
