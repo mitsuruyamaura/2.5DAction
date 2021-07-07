@@ -22,7 +22,6 @@ public class MapMoveController : MonoBehaviour
     [SerializeField, HideInInspector]  // Debug—p
     private bool isMoving;
 
-
     //void Start() {
     //    transform.GetChild(0).TryGetComponent(out rb);    
     //}
