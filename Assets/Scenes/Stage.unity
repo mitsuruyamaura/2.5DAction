@@ -2940,7 +2940,7 @@ MonoBehaviour:
   m_Width: 0.25
   m_Softness: 1
   m_Brightness: 1
-  m_Rotation: 0
+  m_Rotation: -45
   m_Highlight: 1
   m_EffectMaterial: {fileID: 2100000, guid: 2d37c4afca8784ce9ab899810e29aa9c, type: 2}
 --- !u!1 &1145213898
@@ -6455,7 +6455,7 @@ MonoBehaviour:
   m_Width: 0.25
   m_Softness: 1
   m_Brightness: 1
-  m_Rotation: 0
+  m_Rotation: -45
   m_Highlight: 1
   m_EffectMaterial: {fileID: 2100000, guid: 2d37c4afca8784ce9ab899810e29aa9c, type: 2}
 --- !u!1 &1421033758
@@ -7055,7 +7055,7 @@ MonoBehaviour:
   m_Width: 0.25
   m_Softness: 1
   m_Brightness: 1
-  m_Rotation: 0
+  m_Rotation: -45
   m_Highlight: 1
   m_EffectMaterial: {fileID: 2100000, guid: 2d37c4afca8784ce9ab899810e29aa9c, type: 2}
 --- !u!1 &1691141729
@@ -7509,7 +7509,7 @@ MonoBehaviour:
   m_Width: 0.25
   m_Softness: 1
   m_Brightness: 1
-  m_Rotation: 0
+  m_Rotation: -45
   m_Highlight: 1
   m_EffectMaterial: {fileID: 2100000, guid: 2d37c4afca8784ce9ab899810e29aa9c, type: 2}
 --- !u!1 &2066930058
@@ -7664,6 +7664,10 @@ PrefabInstance:
     - target: {fileID: 2030681773761902111, guid: 10603dfca157d05429b3c50983adc7d7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2596277188211296371, guid: 10603dfca157d05429b3c50983adc7d7, type: 3}
+      propertyPath: no
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2596277188211296371, guid: 10603dfca157d05429b3c50983adc7d7, type: 3}
       propertyPath: bonusStaminaPoint
