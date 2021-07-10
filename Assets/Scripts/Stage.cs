@@ -5,7 +5,7 @@ using UniRx;
 using UnityEngine.UI;
 using Coffee.UIExtensions;
 
-public class GameManager : MonoBehaviour
+public class Stage : MonoBehaviour
 {
     [SerializeField]
     private Text txtStaminaPoint;
