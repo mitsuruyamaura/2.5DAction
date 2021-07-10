@@ -13,6 +13,9 @@ public class SymbolBase : MonoBehaviour
 
     protected Tween tween;
 
+    public bool isSymbolTriggerd;
+
+
     protected virtual void Start() {
         OnEnterSymbol();
     }
@@ -21,6 +24,13 @@ public class SymbolBase : MonoBehaviour
     /// 侵入判定時のエフェクト生成用
     /// </summary>
     public virtual void TriggerAppearEffect() {
+
+        if (isSymbolTriggerd) {
+            return;
+        }
+
+        isSymbolTriggerd = true;
+
         OnExitSymbol();
     }
 

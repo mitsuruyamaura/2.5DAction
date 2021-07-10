@@ -146,49 +146,24 @@ public class MapMoveController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) {
 
         if (collision.TryGetComponent(out SymbolBase symbolBase)) {
-            switch (symbolBase.symbolType) {
-                case SymbolType.Enemy:
-                    Debug.Log("移動先で敵に接触");
-                    StartCoroutine(PreparateBattle(symbolBase));
-                    
-                    break;
+            //switch (symbolBase.symbolType) {
+            //case SymbolType.Enemy:
+            //    Debug.Log("移動先で敵に接触");
+            //    StartCoroutine(PreparateBattle(symbolBase));
 
-                case SymbolType.Stamina:
-                case SymbolType.Life:
-                case SymbolType.Orb:
-                    Debug.Log("移動先でアイテムに接触 : " + symbolBase.symbolType.ToString());
-                    symbolBase.TriggerAppearEffect();
+            //    break;
 
-                    break;
+            //case SymbolType.Stamina:
+            //case SymbolType.Life:
+            //case SymbolType.Orb:
+
+            if (!symbolBase.isSymbolTriggerd) {
+                Debug.Log("移動先でシンボルに接触 : " + symbolBase.symbolType.ToString());
+                symbolBase.TriggerAppearEffect();
             }
+
+                    //break;
+            //}
         }
-    }
-
-    /// <summary>
-    /// バトルの準備
-    /// </summary>
-    /// <param name="symbolBase"></param>
-    /// <returns></returns>
-    private IEnumerator PreparateBattle(SymbolBase symbolBase) {
-
-
-        yield return new WaitForSeconds(moveDuration);
-
-        Debug.Log("Appear Enemy");
-
-        symbolBase.TriggerAppearEffect();
-
-        // TODO バトル前に座標情報を GameData に保持
-
-
-        // TODO エフェクトや SE
-
-
-        // TODO 敵の情報を取得
-
-
-        // TODO シーン遷移
-
-
     }
 }
