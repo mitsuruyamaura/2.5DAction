@@ -17,7 +17,15 @@ public class SceneStateManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         } else {
             Destroy(gameObject);
-        }   
+        }
+    }
+
+    void Start() {
+        SceneManager.sceneLoaded += SceneLoaded;
+    }
+
+    private void SceneLoaded(Scene nextScene, LoadSceneMode mode) {
+        stage.GetComponent<Stage>().UpdateDisplayHp();
     }
 
 
