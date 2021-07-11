@@ -4,6 +4,7 @@ using UnityEngine;
 using UniRx;
 using UnityEngine.UI;
 using Coffee.UIExtensions;
+using DG.Tweening;
 
 public class Stage : MonoBehaviour
 {
@@ -12,6 +13,12 @@ public class Stage : MonoBehaviour
 
     [SerializeField]
     private Image[] imgOrbs;
+
+    [SerializeField]
+    private Slider sliderHp;
+
+    [SerializeField]
+    private Text txtHp;
 
     void Start()
     {
@@ -24,6 +31,12 @@ public class Stage : MonoBehaviour
         }
         // オーブの購読開始
         GameData.instance.orbs.ObserveReplace().Subscribe((DictionaryReplaceEvent<int, bool> x) => UpdateDisplayOrbs(x.Key, x.NewValue));
+
+        GameData.instance.maxHp = GameData.instance.hp;
+
+        UpdateDisplayHp();
+
+        
     }
 
     /// <summary>
@@ -65,5 +78,16 @@ public class Stage : MonoBehaviour
             // 光る演出を再生
             imgOrbs[index].gameObject.GetComponent<ShinyEffectForUGUI>().Play();
         }
+    }
+
+    /// <summary>
+    /// Hp表示更新
+    /// </summary>
+    public void UpdateDisplayHp() {
+        txtHp.text = GameData.instance.hp + "/ " + GameData.instance.maxHp;
+
+        sliderHp.DOValue(GameData.instance.hp / GameData.instance.maxHp, 0.5f).SetEase(Ease.Linear);
+
+        Debug.Log("Hp 表示更新");
     }
 }
