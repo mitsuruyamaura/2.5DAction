@@ -8,7 +8,10 @@ public class SceneStateManager : MonoBehaviour
     public static SceneStateManager instance;
 
     [SerializeField]
-    private GameObject stage;
+    private Stage stage;
+
+    [SerializeField]
+    private float sliderWaitTime;
 
 
     void Awake() {
@@ -25,7 +28,7 @@ public class SceneStateManager : MonoBehaviour
     }
 
     private void SceneLoaded(Scene nextScene, LoadSceneMode mode) {
-        stage.GetComponent<Stage>().UpdateDisplayHp();
+        //StartCoroutine(stage.UpdateDisplayHp(sliderWaitTime));
     }
 
 
@@ -45,7 +48,7 @@ public class SceneStateManager : MonoBehaviour
 
         SceneManager.SetActiveScene(scene);
 
-        stage.SetActive(true);
+        stage.gameObject.SetActive(true);
 
         SceneManager.UnloadSceneAsync(oldSceneName);
     }
@@ -67,7 +70,7 @@ public class SceneStateManager : MonoBehaviour
 
         yield return new WaitUntil(() => scene.isLoaded);
 
-        stage.SetActive(false);
+        stage.gameObject.SetActive(false);
 
         SceneManager.SetActiveScene(scene);
     }
