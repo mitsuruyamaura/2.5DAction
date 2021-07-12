@@ -15,6 +15,7 @@ public class GameData : MonoBehaviour
 
     public int maxHp;
 
+    public bool isDebugOn;
 
     void Awake() {
         if (instance == null) {

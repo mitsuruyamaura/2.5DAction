@@ -31,6 +31,7 @@ public class EnemyController : MonoBehaviour
     private bool isAttack;
 
     private Animator anim;
+    private Battle battle;
 
     /// <summary>
     /// ダメージ計算
@@ -93,10 +94,12 @@ public class EnemyController : MonoBehaviour
     /// </summary>
     private void CheckDestroy() {
         if (hp <= 0) {
-            Destroy(gameObject);
+            battle.RemoveEnemyFromEnemiesList(this);
 
             GameObject destroyEffect = Instantiate(EffectManager.instance.destroyEffectPrefab, transform.position, EffectManager.instance.destroyEffectPrefab.transform.rotation);
             Destroy(destroyEffect, 1.0f);
+
+            Destroy(gameObject);
         } 
     }
 
@@ -158,5 +161,13 @@ public class EnemyController : MonoBehaviour
 
 
         playerController.CalcHp(-attackPower);
+    }
+
+    /// <summary>
+    /// 敵の初期設定
+    /// </summary>
+    /// <param name="battle"></param>
+    public void SetUpEnemy(Battle battle) {
+        this.battle = battle;
     }
 }

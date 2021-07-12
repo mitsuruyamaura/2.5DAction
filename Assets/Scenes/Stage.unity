@@ -1049,7 +1049,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 515c7b8c9758c0b47a799c01dafebd70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stage: {fileID: 1594420607}
+  stage: {fileID: 1594420609}
+  sliderWaitTime: 5
 --- !u!4 &592485142
 Transform:
   m_ObjectHideFlags: 0
@@ -1842,8 +1843,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   staminaPoint:
     value: 30
-  hp: 10
-  maxHp: 0
+  hp: 5
+  maxHp: 10
+  isDebugOn: 0
 --- !u!4 &941425069
 Transform:
   m_ObjectHideFlags: 0

@@ -6637,6 +6637,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sliderHp: {fileID: 1015641803}
   txtHp: {fileID: 1015641804}
+  currentBattleState: 0
+  enemiesList:
+  - {fileID: 1988813891}
+  maxEnemyCount: 1
+  destroyEnemyCount: 0
+  bonusStaminaPoint: 5
 --- !u!4 &342709491
 Transform:
   m_ObjectHideFlags: 0
