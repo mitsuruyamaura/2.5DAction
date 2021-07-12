@@ -20,6 +20,8 @@ public class Stage : MonoBehaviour
     [SerializeField]
     private Text txtHp;
 
+    private float sliderAnimeDuration = 0.5f;
+
     void Start()
     {
         // スタミナの値の購読開始
@@ -32,9 +34,9 @@ public class Stage : MonoBehaviour
         // オーブの購読開始
         GameData.instance.orbs.ObserveReplace().Subscribe((DictionaryReplaceEvent<int, bool> x) => UpdateDisplayOrbs(x.Key, x.NewValue));
 
-        GameData.instance.maxHp = GameData.instance.hp;
+        //GameData.instance.maxHp = GameData.instance.hp;
 
-        UpdateDisplayHp();
+        StartCoroutine(UpdateDisplayHp());
 
         
     }
@@ -83,11 +85,19 @@ public class Stage : MonoBehaviour
     /// <summary>
     /// Hp表示更新
     /// </summary>
-    public void UpdateDisplayHp() {
+    public IEnumerator UpdateDisplayHp(float waitTime = 0.0f) {
         txtHp.text = GameData.instance.hp + "/ " + GameData.instance.maxHp;
 
-        sliderHp.DOValue(GameData.instance.hp / GameData.instance.maxHp, 0.5f).SetEase(Ease.Linear);
+        yield return new WaitForSeconds(waitTime);
+
+        sliderHp.DOValue((float)GameData.instance.hp / GameData.instance.maxHp, sliderAnimeDuration).SetEase(Ease.Linear);
 
         Debug.Log("Hp 表示更新");
+    }
+
+    private void OnEnable() {
+
+        // バトル前の Hp からアニメして表示するために待機時間を作る
+        StartCoroutine(UpdateDisplayHp(1.0f));
     }
 }
