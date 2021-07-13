@@ -269,6 +269,10 @@ public class PlayerController : MonoBehaviour
         cinemachineImpulseSource.GenerateImpulse();
     }
 
+    /// <summary>
+    /// PlayerController ‚Ì‰Šúİ’è
+    /// </summary>
+    /// <param name="battle"></param>
     public void SetUpPlayerController(Battle battle) {
         this.battle = battle;
     }
