@@ -40,6 +40,8 @@ public class Battle : MonoBehaviour
 
     IEnumerator Start()
     {
+        SceneStateManager.instance.battle = this;
+
         if (GameData.instance.isDebugOn) {
             yield return new WaitForSeconds(1.0f);
 

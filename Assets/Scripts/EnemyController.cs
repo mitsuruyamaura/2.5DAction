@@ -33,6 +33,13 @@ public class EnemyController : MonoBehaviour
     private Animator anim;
     private Battle battle;
 
+    [SerializeField]
+    private BulletController bulletPrefab;
+
+    [SerializeField]
+    private float bulletSpeed;
+
+
     /// <summary>
     /// ダメージ計算
     /// </summary>
@@ -114,53 +121,91 @@ public class EnemyController : MonoBehaviour
     }
 
     private void OnTriggerStay(Collider other) {
+        if (playerController != null) {
+            return;
+        }
+
         if (playerController == null && other.TryGetComponent(out playerController)) {
-            isAttack = true;
+
+            if (!isAttack) {
+                isAttack = true;
+
+                StartCoroutine(PreparateAttack());
+            }
         }
     }
 
     private void OnTriggerExit(Collider other) {
-        playerController = null;
-        isAttack = false;
+        if (playerController != null && other.TryGetComponent(out playerController)) {
+            playerController = null;
+            isAttack = false;
+            Debug.Log("攻撃範囲外");
+        }
     }
 
     /// <summary>
     /// 攻撃準備
     /// </summary>
     /// <returns></returns>
-    private IEnumerator PraparateAttack() {
+    private IEnumerator PreparateAttack() {
+        Debug.Log("準備");
 
         int timer = 0;
 
-        while (true) {
-            if (isAttack) {
-                timer++;
+        while (isAttack) {
+            timer++;
 
-                if (timer > attackIntervalTime) {
-                    timer = 0;
-                    Attack();
-                }
+            if (timer > attackIntervalTime) {
+                timer = 0;
+                Attack();
             }
             yield return null;
         }
+
+        Debug.Log("攻撃終了");
     }
 
     void Start() {
         transform.GetChild(0).TryGetComponent(out anim);
-        StartCoroutine(PraparateAttack());    
+        //StartCoroutine(PreparateAttack());    
     }
 
     /// <summary>
     /// 攻撃
     /// </summary>
     private void Attack() {
+        Debug.Log("攻撃");
+
         // TODO アニメーション
         anim.SetTrigger("Attack");
 
         // エフェクト
 
 
-        playerController.CalcHp(-attackPower);
+        // 向きの切り替え確認
+        Vector3 temp = transform.localScale;
+
+        // TODO 三項演算子に変える
+        if (playerController.transform.position.x > transform.position.x) {
+            temp.x *= 1.0f;
+        } else {
+            temp.x *= -1.0f;
+        }
+        transform.localScale = temp;
+
+        BulletController bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+
+        bullet.Shoot(GetBulletDirection(), bulletSpeed, attackPower, temp.x);
+
+        //playerController.CalcHp(-attackPower);
+    }
+
+    /// <summary>
+    /// バレットを発射する方向を首都ｋ
+    /// </summary>
+    /// <returns></returns>
+    private Vector3 GetBulletDirection() {
+        return (playerController.transform.position - transform.position).normalized;
     }
 
     /// <summary>
