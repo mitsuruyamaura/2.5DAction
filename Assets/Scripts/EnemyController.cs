@@ -120,7 +120,7 @@ public class EnemyController : MonoBehaviour
         floatingMessage.SetUpFloatingMessage(damage);
     }
 
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerStay(Collider other) {
         if (playerController != null) {
             return;
         }
@@ -136,8 +136,11 @@ public class EnemyController : MonoBehaviour
     }
 
     private void OnTriggerExit(Collider other) {
-        playerController = null;
-        isAttack = false;
+        if (playerController != null && other.TryGetComponent(out playerController)) {
+            playerController = null;
+            isAttack = false;
+            Debug.Log("çUåÇîÕàÕäO");
+        }
     }
 
     /// <summary>
@@ -158,6 +161,8 @@ public class EnemyController : MonoBehaviour
             }
             yield return null;
         }
+
+        Debug.Log("çUåÇèIóπ");
     }
 
     void Start() {
@@ -181,7 +186,7 @@ public class EnemyController : MonoBehaviour
         Vector3 temp = transform.localScale;
 
         // TODO éOçÄââéZéqÇ…ïœÇ¶ÇÈ
-        if (playerController.transform.position.x < transform.position.x) {
+        if (playerController.transform.position.x > transform.position.x) {
             temp.x *= 1.0f;
         } else {
             temp.x *= -1.0f;
@@ -190,7 +195,7 @@ public class EnemyController : MonoBehaviour
 
         BulletController bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
 
-        bullet.Shoot(GetBulletDirection(), bulletSpeed, attackPower);
+        bullet.Shoot(GetBulletDirection(), bulletSpeed, attackPower, temp.x);
 
         //playerController.CalcHp(-attackPower);
     }
