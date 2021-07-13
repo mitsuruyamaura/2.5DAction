@@ -276,4 +276,27 @@ public class PlayerController : MonoBehaviour
     public void SetUpPlayerController(Battle battle) {
         this.battle = battle;
     }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.TryGetComponent(out BulletController bullet)) {
+            Debug.Log("被弾");
+
+            GameData.instance.hp -= bullet.bulletPower;
+
+            battle.UpdateDisplayHp();
+
+            // Hp が残っているか判定
+            if (GameData.instance.hp <= 0) {
+                Debug.Log("Game Over");
+
+                battle.currentBattleState = BattleState.GameUp;
+            }
+
+            // TODO ダメージアニメ再生
+
+            // TODO 演出
+
+            Destroy(other.gameObject);
+        }
+    }
 }

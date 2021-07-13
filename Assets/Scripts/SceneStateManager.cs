@@ -10,6 +10,9 @@ public class SceneStateManager : MonoBehaviour
     [SerializeField]
     private Stage stage;
 
+    public Battle battle;
+
+
     [SerializeField]
     private float sliderWaitTime;
 
