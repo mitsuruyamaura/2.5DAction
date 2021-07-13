@@ -65,6 +65,8 @@ public class PlayerController : MonoBehaviour
 
     private int maxHp;
 
+    private Battle battle;
+
 
     void Start()
     {
@@ -85,6 +87,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (battle != null && battle.currentBattleState != BattleState.Play) {
+            return;
+        }
+
         InputMove();
     }
 
@@ -97,6 +103,11 @@ public class PlayerController : MonoBehaviour
     }
 
     private void FixedUpdate() {
+        
+        if (battle != null && battle.currentBattleState != BattleState.Play) {
+            return;
+        }
+
         Move();
         Action();
     }
@@ -256,5 +267,9 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void DamageEffect() {
         cinemachineImpulseSource.GenerateImpulse();
+    }
+
+    public void SetUpPlayerController(Battle battle) {
+        this.battle = battle;
     }
 }
