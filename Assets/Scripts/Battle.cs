@@ -21,8 +21,6 @@ public class Battle : MonoBehaviour
 
     public BattleState currentBattleState;
 
-    public List<EnemyController> enemiesList = new List<EnemyController>();
-
     public int maxEnemyCount;
 
     public int destroyEnemyCount;
@@ -31,6 +29,14 @@ public class Battle : MonoBehaviour
 
     private float sliderAnimeDuration = 0.5f;
 
+    [SerializeField]
+    private EnemyGenerator enemyGenerator;
+
+    [SerializeField]
+    private List<EnemyController> enemiesList = new List<EnemyController>();
+
+    [SerializeField]
+    private PlayerController playerController;
 
     IEnumerator Start()
     {
@@ -71,10 +77,12 @@ public class Battle : MonoBehaviour
 
 
         // “G‚Ì¶¬‚Æ List ‚Ö‚Ì“o˜^
-        StartCoroutine(GenerateEnemies());
+        yield return StartCoroutine(enemyGenerator.GenerateEnemies(this));
 
         // “|‚µ‚½“G‚Ì”‚ÌŠÄ‹
         StartCoroutine(ObservateBattleState());
+
+        playerController.SetUpPlayerController(this);
 
         currentBattleState = BattleState.Play;
 
@@ -82,29 +90,6 @@ public class Battle : MonoBehaviour
         Debug.Log("ƒoƒgƒ‹ŠJn");
 
         yield return null;
-    }
-
-    /// <summary>
-    /// “G‚Ì¶¬‚Æ List ‚Ö‚Ì“o˜^
-    /// </summary>
-    /// <returns></returns>
-    private IEnumerator GenerateEnemies() {
-
-        for (int i = 0; i < maxEnemyCount; i++) {
-
-            // “G‚Ì¶¬
-
-
-            // “G‚Ì‰Šúİ’è
-
-
-            // List ‚Ö“o˜^
-
-            // Debug 
-            enemiesList[0].SetUpEnemy(this);
-
-            yield return new WaitForSeconds(0.25f);
-        }
     }
 
     /// <summary>
@@ -176,4 +161,7 @@ public class Battle : MonoBehaviour
     }
 
 
+    public void AddEnemyFromEnemiesList(EnemyController enemyController) {
+        enemiesList.Add(enemyController);
+    }
 }
