@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Events;
 
 public class EnemyController : MonoBehaviour
 {
@@ -39,6 +40,14 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private float bulletSpeed;
 
+    [SerializeField]
+    private EnemyMoveType enemyMoveType;
+
+    [SerializeField]
+    private float moveDuraiton;
+
+
+    private UnityAction<Transform, float> moveEvent;
 
     /// <summary>
     /// ダメージ計算
@@ -214,5 +223,9 @@ public class EnemyController : MonoBehaviour
     /// <param name="battle"></param>
     public void SetUpEnemy(Battle battle) {
         this.battle = battle;
+
+        moveEvent = DataBaseManager.instance.enemyMoveEventDataSO.GetEnemyMove(enemyMoveType);
+
+        moveEvent.Invoke(transform, moveDuraiton);
     }
 }
