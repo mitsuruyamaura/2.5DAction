@@ -86,7 +86,7 @@ MonoBehaviour:
   floatingMessageTran: {fileID: 5290185962871341467}
   bulletPrefab: {fileID: 1705406288181481258, guid: 6df811865de530b4d83b7c6a0552b7d3, type: 3}
   bulletSpeed: 100
-  enemyMoveType: 0
+  enemyMoveType: 1
   moveDuraiton: 10
 --- !u!65 &5290185962481650829
 BoxCollider:

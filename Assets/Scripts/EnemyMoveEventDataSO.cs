@@ -11,6 +11,7 @@ public class EnemyMoveEventDataSO : ScriptableObject
 
         return enemyMoveType switch {
             EnemyMoveType.Archer => MoveTypeArcher,
+            EnemyMoveType.Defender => MoveTypeDefender,
 
             _ => MoveTypeArcher
         };
@@ -24,6 +25,17 @@ public class EnemyMoveEventDataSO : ScriptableObject
     public void MoveTypeArcher(Transform tran, float duration) {
         Debug.Log("アーチャータイプの移動");
 
-        tran.DOMoveX(tran.position.x + 15.0f, duration).SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo);
+        tran.DOMoveX(tran.position.x + Random.Range(-15.0f, 15.0f), duration).SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="tran"></param>
+    /// <param name="duration"></param>
+    public void MoveTypeDefender(Transform tran, float duration) {
+        Debug.Log("ディフェンダータイプの移動");
+
+        tran.DOMoveX(tran.position.z + Random.Range(-15.0f, 15.0f), duration).SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo);
     }
 }
