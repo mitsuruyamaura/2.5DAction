@@ -12,4 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aa5167841941c547a1ffcdba557a11a, type: 3}
   m_Name: ExpTableSO
   m_EditorClassIdentifier: 
-  expTablesList: []
+  expTablesList:
+  - level: 1
+    minExp: 0
+    maxExp: 2
+  - level: 2
+    minExp: 0
+    maxExp: 4
+  - level: 3
+    minExp: 0
+    maxExp: 7

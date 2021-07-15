@@ -117,7 +117,7 @@ public class EnemyController : MonoBehaviour
             GameObject destroyEffect = Instantiate(EffectManager.instance.destroyEffectPrefab, transform.position, EffectManager.instance.destroyEffectPrefab.transform.rotation);
             Destroy(destroyEffect, 1.0f);
 
-            // Exp â¡éZ
+            // Exp â¡éZÅ@Ç†Ç∆Ç≈è„å¿ílÇÃêßå¿Ç¬ÇØÇÈ
             GameData.instance.totalExp += exp;
 
             Destroy(gameObject);

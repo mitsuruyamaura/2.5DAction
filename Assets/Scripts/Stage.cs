@@ -20,6 +20,18 @@ public class Stage : MonoBehaviour
     [SerializeField]
     private Text txtHp;
 
+    [SerializeField]
+    private Text txtExp;
+
+    [SerializeField]
+    private Text txtPlayerLevel;
+
+    [SerializeField]
+    private ShinyEffectForUGUI shinyEffectImgPlayerLevelFrame;
+
+    [SerializeField]
+    private Slider sliderExp;
+
     private float sliderAnimeDuration = 0.5f;
 
     int levelupCount;
@@ -38,9 +50,12 @@ public class Stage : MonoBehaviour
 
         //GameData.instance.maxHp = GameData.instance.hp;
 
+        // Hp表示更新
         StartCoroutine(UpdateDisplayHp());
 
-        
+        // プレイヤーレベルと経験値の表示更新
+        UpdateDisplayPlayerLevel();
+        UpdateDisplayExp(true);
     }
 
     /// <summary>
@@ -125,19 +140,49 @@ public class Stage : MonoBehaviour
 
         // 現在の経験値と次のレベルに必要な経験値を比べて、レベルが上がるか確認
         if (GameData.instance.totalExp < DataBaseManager.instance.CalcNextLevelExp(GameData.instance.playerLevel -1)) {
-            // 達していない場合には処理終了
+            // 達していない場合には経験値とゲージ更新
+            UpdateDisplayExp(true);
+
+            // 処理終了
             return;
         } else {
             // 達している場合にはレベルアップ
             GameData.instance.playerLevel++;
+            levelupCount++;
 
             Debug.Log("レベルアップ！ 現在のレベル : " + GameData.instance.playerLevel);
 
             // レベルアップ演出
+            shinyEffectImgPlayerLevelFrame.Play();
 
+            // プレイヤーレベルと経験値の表示更新
+            UpdateDisplayPlayerLevel();
+            UpdateDisplayExp(false);
 
             // さらにレベルが上がるか再帰処理を行って確認
             CheckExpNextLevel();
+        }
+    }
+
+    /// <summary>
+    /// プレイヤーレベルの表示更新
+    /// </summary>
+    private void UpdateDisplayPlayerLevel() {
+        // プレイヤーレベルの表示更新
+        txtPlayerLevel.text = GameData.instance.playerLevel.ToString();
+    }
+
+    /// <summary>
+    /// 経験値の表示更新
+    /// </summary>
+    /// <param name="isSliderOn"></param>
+    private void UpdateDisplayExp(bool isSliderOn) {
+        // 現在/目標経験値の表示更新
+        txtExp.text = GameData.instance.totalExp + " / " + DataBaseManager.instance.CalcNextLevelExp(GameData.instance.playerLevel - 1);
+
+        if (isSliderOn) {
+            // ゲージ更新
+            sliderExp.DOValue((float)GameData.instance.totalExp / DataBaseManager.instance.CalcNextLevelExp(GameData.instance.playerLevel - 1), 1.0f).SetEase(Ease.Linear);
         }
     }
 }
