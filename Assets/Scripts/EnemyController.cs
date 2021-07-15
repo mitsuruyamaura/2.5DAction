@@ -46,8 +46,10 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private float moveDuraiton;
 
-
     private UnityAction<Transform, float> moveEvent;
+
+    [SerializeField]
+    private int exp;
 
     /// <summary>
     /// ダメージ計算
@@ -114,6 +116,9 @@ public class EnemyController : MonoBehaviour
 
             GameObject destroyEffect = Instantiate(EffectManager.instance.destroyEffectPrefab, transform.position, EffectManager.instance.destroyEffectPrefab.transform.rotation);
             Destroy(destroyEffect, 1.0f);
+
+            // Exp 加算
+            GameData.instance.totalExp += exp;
 
             Destroy(gameObject);
         } 

@@ -22,6 +22,8 @@ public class Stage : MonoBehaviour
 
     private float sliderAnimeDuration = 0.5f;
 
+    int levelupCount;
+
     void Start()
     {
         // スタミナの値の購読開始
@@ -99,5 +101,43 @@ public class Stage : MonoBehaviour
 
         // バトル前の Hp からアニメして表示するために待機時間を作る
         StartCoroutine(UpdateDisplayHp(1.0f));
+
+        // バトル後にレベルアップした時のカウントの初期化
+        levelupCount = 0;
+     
+        // レベルアップするか確認
+        CheckExpNextLevel();
+
+        // レベルアップしていたら
+        if (levelupCount > 0) {
+
+            Debug.Log("レベルアップのボーナス発生");
+
+            // レベルアップのボーナス
+
+        }
+    }
+
+    /// <summary>
+    /// レベルアップするか確認
+    /// </summary>
+    public void CheckExpNextLevel() {
+
+        // 現在の経験値と次のレベルに必要な経験値を比べて、レベルが上がるか確認
+        if (GameData.instance.totalExp < DataBaseManager.instance.CalcNextLevelExp(GameData.instance.playerLevel -1)) {
+            // 達していない場合には処理終了
+            return;
+        } else {
+            // 達している場合にはレベルアップ
+            GameData.instance.playerLevel++;
+
+            Debug.Log("レベルアップ！ 現在のレベル : " + GameData.instance.playerLevel);
+
+            // レベルアップ演出
+
+
+            // さらにレベルが上がるか再帰処理を行って確認
+            CheckExpNextLevel();
+        }
     }
 }

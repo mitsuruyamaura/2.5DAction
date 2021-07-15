@@ -88,6 +88,7 @@ MonoBehaviour:
   bulletSpeed: 100
   enemyMoveType: 1
   moveDuraiton: 10
+  exp: 2
 --- !u!65 &5290185962481650829
 BoxCollider:
   m_ObjectHideFlags: 0
