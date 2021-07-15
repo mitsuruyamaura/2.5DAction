@@ -8,6 +8,8 @@ public class DataBaseManager : MonoBehaviour
 
     public EnemyMoveEventDataSO enemyMoveEventDataSO;
 
+    public ExpTableSO expTableSO;
+
 
     void Awake() {
         if (instance == null) {
@@ -16,5 +18,14 @@ public class DataBaseManager : MonoBehaviour
         } else {
             Destroy(gameObject);
         }
+    }
+
+    /// <summary>
+    /// 次のレベルアップに必要な経験値を計算して取得
+    /// </summary>
+    /// <param name="level"></param>
+    /// <returns></returns>
+    public int CalcNextLevelExp(int level) {
+        return expTableSO.expTablesList[level].maxExp;
     }
 }

@@ -17,6 +17,11 @@ public class GameData : MonoBehaviour
 
     public bool isDebugOn;
 
+    public int playerLevel;
+
+    public int totalExp;
+
+
     void Awake() {
         if (instance == null) {
             instance = this;
