@@ -7,17 +7,23 @@ using UnityEngine;
 /// </summary>
 public class PlayerConditionBase : MonoBehaviour
 {
+    [SerializeField]  // Debug
     protected float conditionDuration;
+
+    [SerializeField]  // Debug
     protected float conditionValue;
+
+    protected MapMoveController mapMoveController;
 
     /// <summary>
     /// コンディションをセットする際に呼び出す
     /// </summary>
     /// <param name="duration"></param>
     /// <param name="value"></param>
-    public void AddCondition(float duration, float value) {
+    public void AddCondition(float duration, float value, MapMoveController mapMoveController) {
         conditionDuration = duration;
         conditionValue = value;
+        this.mapMoveController = mapMoveController;
 
         StartCoroutine(OnEnterCondition());
     }
@@ -39,6 +45,9 @@ public class PlayerConditionBase : MonoBehaviour
         yield return null;
 
         Debug.Log("コンディション削除");
+
+        // コンディションの List から削除
+        mapMoveController.RemoveConditionsList(this);
     }
 
     /// <summary>

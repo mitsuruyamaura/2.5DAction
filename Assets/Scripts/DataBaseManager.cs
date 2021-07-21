@@ -10,6 +10,8 @@ public class DataBaseManager : MonoBehaviour
 
     public ExpTableSO expTableSO;
 
+    [SerializeField]
+    private Transform spriteMaskTran;
 
     void Awake() {
         if (instance == null) {
@@ -27,5 +29,13 @@ public class DataBaseManager : MonoBehaviour
     /// <returns></returns>
     public int CalcNextLevelExp(int level) {
         return expTableSO.expTablesList[level].maxExp;
+    }
+
+    /// <summary>
+    /// SpriteMask ゲームオブジェクトの Transfrom を取得
+    /// </summary>
+    /// <returns></returns>
+    public Transform GetSpriteMaskTransform() {
+        return spriteMaskTran;
     }
 }

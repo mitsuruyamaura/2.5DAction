@@ -22,6 +22,9 @@ public class MapMoveController : MonoBehaviour
     [SerializeField, HideInInspector]  // Debug用
     private bool isMoving;
 
+    [SerializeField]
+    private List<PlayerConditionBase> conditionsList = new List<PlayerConditionBase>();
+
     //void Start() {
     //    transform.GetChild(0).TryGetComponent(out rb);    
     //}
@@ -135,6 +138,13 @@ public class MapMoveController : MonoBehaviour
 
         GameData.instance.staminaPoint.Value--;
 
+        // コンディションが付与されている場合、持続時間を更新
+        if (conditionsList.Count > 0) {
+            // 現在のコンディションの状態の残り時間を更新
+            UpdateConditionsDuration();
+        }
+
+        // 移動
         transform.DOMove(destination, moveDuration)
             .SetEase(Ease.Linear)
             .OnComplete(() =>
@@ -165,5 +175,30 @@ public class MapMoveController : MonoBehaviour
                     //break;
             //}
         }
+    }
+
+    /// <summary>
+    /// 現在のコンディションの状態の残り時間を更新
+    /// </summary>
+    private void UpdateConditionsDuration() {
+        for (int i = 0; i< conditionsList.Count; i++) {
+            conditionsList[i].CalcDuration();
+        }
+    }
+
+    /// <summary>
+    /// コンディションを追加
+    /// </summary>
+    /// <param name="playerCondition"></param>
+    public void AddConditionsList(PlayerConditionBase playerCondition) {
+        conditionsList.Add(playerCondition);
+    }
+
+    /// <summary>
+    /// コンディションを削除
+    /// </summary>
+    public void RemoveConditionsList(PlayerConditionBase playerCondition) {
+        conditionsList.Remove(playerCondition);
+        Destroy(playerCondition);
     }
 }
