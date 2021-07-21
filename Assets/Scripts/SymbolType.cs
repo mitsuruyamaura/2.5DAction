@@ -8,5 +8,6 @@ public enum SymbolType
     Stamina,
     Life,
     Orb,
-    Random
+    Random,
+    Condition,
 }

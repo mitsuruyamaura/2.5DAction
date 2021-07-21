@@ -16,7 +16,7 @@ public class OrbSymbol : SymbolBase {
             .SetLoops(-1, LoopType.Restart);
     }
 
-    public override void TriggerAppearEffect() {
+    public override void TriggerAppearEffect(MapMoveController mapMoveController) {
 
         GameData.instance.orbs[no] = true;
 
@@ -30,6 +30,6 @@ public class OrbSymbol : SymbolBase {
 
         transform.DOScale(0, 0.5f).SetEase(Ease.InQuart);
 
-        base.TriggerAppearEffect();
+        base.TriggerAppearEffect(mapMoveController);
     }
 }

@@ -23,7 +23,7 @@ public class SymbolBase : MonoBehaviour
     /// <summary>
     /// 侵入判定時のエフェクト生成用
     /// </summary>
-    public virtual void TriggerAppearEffect() {
+    public virtual void TriggerAppearEffect(MapMoveController mapMoveController) {
 
         if (isSymbolTriggerd) {
             return;
