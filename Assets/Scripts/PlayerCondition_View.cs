@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerCondition_View : PlayerConditionBase
 {
@@ -8,16 +9,18 @@ public class PlayerCondition_View : PlayerConditionBase
     private Transform spriteMaskTran;
 
     private float originScale;
+    private float viewAnimeDuration = 0.5f;
 
     protected override IEnumerator OnEnterCondition() {
+                        
+        // マスクの情報を取得
+        spriteMaskTran = DataBaseManager.instance.GetSpriteMaskTransform();
 
-        // 獲得時の演出
-
-        spriteMaskTran = Camera.main.transform.GetChild(0).transform;
-
+        // 現在のマスクのサイズを保持
         originScale = spriteMaskTran.localScale.x;
 
-        spriteMaskTran.localScale = Vector3.one * conditionValue;
+        // マスクのスケールを操作して、視界のサイズを変更
+        spriteMaskTran.DOScale(Vector3.one * conditionValue, viewAnimeDuration).SetEase(Ease.InBack);
 
         return base.OnEnterCondition();
     }
@@ -37,7 +40,8 @@ public class PlayerCondition_View : PlayerConditionBase
         // 終了時の演出
 
 
-        spriteMaskTran.localScale = Vector3.one * originScale;
+        // マスクのスケールを操作して、視界のサイズを変更
+        spriteMaskTran.DOScale(Vector3.one * originScale, viewAnimeDuration).SetEase(Ease.InBack);
 
         return base.OnExitCondition();
     }
