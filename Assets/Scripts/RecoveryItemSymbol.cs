@@ -29,7 +29,7 @@ public class RecoveryItemSymbol : SymbolBase
         }     
     }
 
-    public override void TriggerAppearEffect() {
+    public override void TriggerAppearEffect(MapMoveController mapMoveController) {
 
         GameObject effectPrefab = null;
 
@@ -50,6 +50,6 @@ public class RecoveryItemSymbol : SymbolBase
 
         transform.DOScale(0, 0.5f).SetEase(Ease.InQuart);
 
-        base.TriggerAppearEffect();
+        base.TriggerAppearEffect(mapMoveController);
     }
 }

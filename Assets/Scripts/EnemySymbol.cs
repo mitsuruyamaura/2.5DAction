@@ -6,9 +6,9 @@ using DG.Tweening;
 public class EnemySymbol : SymbolBase
 {
 
-    public override void TriggerAppearEffect() {
+    public override void TriggerAppearEffect(MapMoveController mapMoveController) {
 
-        base.TriggerAppearEffect();
+        base.TriggerAppearEffect(mapMoveController);
 
         Debug.Log("ˆÚ“®æ‚Å“G‚ÉÚG");
 

@@ -159,7 +159,7 @@ public class MapMoveController : MonoBehaviour
 
             if (!symbolBase.isSymbolTriggerd) {
                 Debug.Log("ˆÚ“®æ‚ÅƒVƒ“ƒ{ƒ‹‚ÉÚG : " + symbolBase.symbolType.ToString());
-                symbolBase.TriggerAppearEffect();
+                symbolBase.TriggerAppearEffect(this);
             }
 
                     //break;
