@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1144797422582530980}
   - component: {fileID: 1144797422582530982}
   m_Layer: 0
-  m_Name: ViewItemSymbol_SightUp
+  m_Name: ItemSymbol_ViewUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,6 +76,7 @@ MonoBehaviour:
   symbolType: 6
   no: 0
   effectTran: {fileID: 5527257339174087828}
+  spriteSymbol: {fileID: 1144797423341432948}
   isSymbolTriggerd: 0
   conditionType: 2
   duration: 5
@@ -91,7 +92,7 @@ GameObject:
   - component: {fileID: 1144797423341432949}
   - component: {fileID: 1144797423341432948}
   m_Layer: 0
-  m_Name: imgSymbol
+  m_Name: spriteSymbol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

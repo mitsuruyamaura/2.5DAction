@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 2662936939243133679}
   - component: {fileID: 2662936939243133678}
   m_Layer: 0
-  m_Name: imgSymbol
+  m_Name: spriteSymbol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -292,6 +292,8 @@ MonoBehaviour:
   symbolType: 2
   no: 0
   effectTran: {fileID: 7467891198962845198}
+  spriteSymbol: {fileID: 2662936939243133678}
+  isSymbolTriggerd: 0
   recoveryPoint: 10
   txtRecoveryPoint: {fileID: 8670598606063322631}
 --- !u!1 &6289921061675001253

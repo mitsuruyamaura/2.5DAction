@@ -13,8 +13,8 @@ public class RecoveryItemSymbol : SymbolBase
     private Text txtRecoveryPoint;
 
 
-    public override void OnEnterSymbol() {
-        base.OnEnterSymbol();
+    public override void OnEnterSymbol(SymbolManager symbolManager) {
+        base.OnEnterSymbol(symbolManager);
 
         txtRecoveryPoint.text = recoveryPoint.ToString();
 

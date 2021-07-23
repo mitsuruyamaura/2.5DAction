@@ -8,7 +8,7 @@ public class PlayerCondition_View : PlayerConditionBase
     [SerializeField]
     private Transform spriteMaskTran;
 
-    private float originScale;
+    private float originScale = 4.5f;            // マスクの初期サイズ
     private float viewAnimeDuration = 0.5f;
 
     protected override IEnumerator OnEnterCondition() {
@@ -16,23 +16,10 @@ public class PlayerCondition_View : PlayerConditionBase
         // マスクの情報を取得
         spriteMaskTran = DataBaseManager.instance.GetSpriteMaskTransform();
 
-        // 現在のマスクのサイズを保持
-        originScale = spriteMaskTran.localScale.x;
-
         // マスクのスケールを操作して、視界のサイズを変更
         spriteMaskTran.DOScale(Vector3.one * conditionValue, viewAnimeDuration).SetEase(Ease.InBack);
 
         return base.OnEnterCondition();
-    }
-
-    /// <summary>
-    /// コンディションの残り時間の更新
-    /// </summary>
-    public override void CalcDuration() {
-
-        conditionDuration--;
-
-        base.CalcDuration();
     }
 
     protected override IEnumerator OnExitCondition() {
@@ -40,7 +27,7 @@ public class PlayerCondition_View : PlayerConditionBase
         // 終了時の演出
 
 
-        // マスクのスケールを操作して、視界のサイズを変更
+        // マスクのスケールを操作して、視界のサイズを元のサイズに変更
         spriteMaskTran.DOScale(Vector3.one * originScale, viewAnimeDuration).SetEase(Ease.InBack);
 
         return base.OnExitCondition();

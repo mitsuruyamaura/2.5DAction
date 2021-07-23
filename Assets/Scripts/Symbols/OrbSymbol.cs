@@ -8,8 +8,8 @@ public class OrbSymbol : SymbolBase {
     [SerializeField]
     private int bonusStaminaPoint;
 
-    public override void OnEnterSymbol() {
-        base.OnEnterSymbol();
+    public override void OnEnterSymbol(SymbolManager symbolManager) {
+        base.OnEnterSymbol(symbolManager);
 
         tween = transform.DORotate(new Vector3(0, 360, 0), 3.0f, RotateMode.FastBeyond360)
             .SetEase(Ease.Linear)
