@@ -14,20 +14,29 @@ public class PlayerConditionBase : MonoBehaviour
     protected float conditionValue;
 
     protected MapMoveController mapMoveController;
+    protected SymbolManager symbolManager;
+
+    protected ConditionType conditionType;
 
     /// <summary>
     /// コンディションをセットする際に呼び出す
     /// </summary>
     /// <param name="duration"></param>
     /// <param name="value"></param>
-    public void AddCondition(float duration, float value, MapMoveController mapMoveController) {
+    public void AddCondition(ConditionType conditionType, float duration, float value, MapMoveController mapMoveController, SymbolManager symbolManager) {
+        this.conditionType = conditionType;
         conditionDuration = duration;
         conditionValue = value;
         this.mapMoveController = mapMoveController;
+        this.symbolManager = symbolManager;
 
         StartCoroutine(OnEnterCondition());
     }
 
+    /// <summary>
+    /// コンディションの効果を適用
+    /// </summary>
+    /// <returns></returns>
     protected virtual IEnumerator OnEnterCondition() {
         yield return null;
 
@@ -55,11 +64,35 @@ public class PlayerConditionBase : MonoBehaviour
     /// </summary>
     public virtual void CalcDuration() {
 
+        // 持続時間を減少
+        conditionDuration--;
+
         // コンディションの残り時間がなくなったら
         if (conditionDuration <= 0) {
 
             // コンディションを削除して終了する
             RemoveCondition();
         }
+    }
+
+    /// <summary>
+    /// 設定されているコンディションの種類を取得
+    /// </summary>
+    /// <returns></returns>
+    public ConditionType GetConditionType() {
+        return conditionType;
+    }
+
+    /// <summary>
+    /// 持続時間の延長と効果の上書き
+    /// </summary>
+    /// <param name="duration"></param>
+    /// <param name="value"></param>
+    public void ExtentionCondition(float duration, float value) {
+        conditionDuration += duration;
+        conditionValue = value;
+
+        // コンディションの効果を適用
+        StartCoroutine(OnEnterCondition());
     }
 }
