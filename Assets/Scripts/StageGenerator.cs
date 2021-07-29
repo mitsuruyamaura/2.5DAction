@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Linq;
+using System;
 
 public enum StageType {
     Field,
@@ -34,6 +35,7 @@ public class StageGenerator : MonoBehaviour
 
     // シンボル生成用のデータリスト
     [SerializeField] private List<SymbolGenerateData> symbolGenerateDatasList = new List<SymbolGenerateData>();
+    [SerializeField] private List<SymbolGenerateData> specialSymbolGenerateDatasList = new List<SymbolGenerateData>();
 
     [SerializeField, Header("シンボルの生成率"), Range(0, 100)] private int generateSymbolRate;
 
@@ -88,10 +90,10 @@ public class StageGenerator : MonoBehaviour
                 }
 
                 // 生成値用のランダム値を取得
-                int maxRandomRange = Random.Range(30, 80);
+                int maxRandomRange = UnityEngine.Random.Range(30, 80);
 
                 // 生成値を加算
-                generateValue += Random.Range(0, maxRandomRange);
+                generateValue += UnityEngine.Random.Range(0, maxRandomRange);
 
                 // 生成値が生成目標値(仮)を超えていない場合
                 if (generateValue <= 100) {
@@ -100,12 +102,12 @@ public class StageGenerator : MonoBehaviour
                 }
 
                 // Walk か Collision か決める(仮に、20 % の確率で Collision) 
-                if (Random.Range(0, 100) <= 20) {
+                if (UnityEngine.Random.Range(0, 100) <= 20) {
                     // Collision 用のタイルの中でランダムにタイルを決める
-                    tileMapCollision.SetTile(new Vector3Int(i, j, 0), fieldCollisionTiles[Random.Range(0, fieldCollisionTiles.Length)]);
+                    tileMapCollision.SetTile(new Vector3Int(i, j, 0), fieldCollisionTiles[UnityEngine.Random.Range(0, fieldCollisionTiles.Length)]);
                 } else {
                     // Walk 用のタイルの中でランダムにタイルを決める
-                    tileMapWalk.SetTile(new Vector3Int(i, j, 0), fieldWalkTiles[Random.Range(0, fieldWalkTiles.Length)]);
+                    tileMapWalk.SetTile(new Vector3Int(i, j, 0), fieldWalkTiles[UnityEngine.Random.Range(0, fieldWalkTiles.Length)]);
                 }
              
                 // タイルを生成したので生成値をリセット
@@ -145,13 +147,13 @@ public class StageGenerator : MonoBehaviour
                     continue;
                 }
 
-                // 80 % はシンボルなし => 大体35～55個シンボルが出来る
-                if (Random.Range(0, 100) < generateSymbolRate) {
+                // 80 % はシンボルなし => 264 マスの場合、大体35～55個シンボルが出来る
+                if (UnityEngine.Random.Range(0, 100) > generateSymbolRate) {
                     continue;
                 }
 
                 int index = 0;
-                int value = Random.Range(0, totalWeight);
+                int value = UnityEngine.Random.Range(0, totalWeight);
 
                 // 重みづけから生成するシンボルを確認
                 for (int x = 0; x < symbolGenerateDatasList.Count; x++) {
@@ -182,9 +184,23 @@ public class StageGenerator : MonoBehaviour
         return symbolsList;
     }
 
+    /// <summary>
+    /// ４つの特殊シンボルをランダムな順番に作成
+    /// </summary>
+    /// <returns></returns>
+    public List<SymbolBase> GenerateSpecialSymbols() {
 
-    // ４つの特殊シンボルを作る
+        List<SymbolBase> symbolsList = new List<SymbolBase>();
 
+        List<SymbolGenerateData> randomSymbolsList = new List<SymbolGenerateData>(specialSymbolGenerateDatasList);
+        randomSymbolsList =  randomSymbolsList.OrderBy(x => Guid.NewGuid()).ToList();
+
+        int index = 0;
+        for (int i = 0; i < randomSymbolsList.Count; i++) {
+            symbolsList.Add(Instantiate(randomSymbolsList[i].symbolBasePrefab, new Vector3(1, i, 0), Quaternion.identity));
+        }
+        return symbolsList;
+    }
 
     // ランダムに並び替える
 

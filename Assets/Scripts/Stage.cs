@@ -48,12 +48,12 @@ public class Stage : MonoBehaviour
         // ステージのランダム作成
         stageGenerator.GenerateStageFromRandomTiles();
 
-        // 通常のシンボルのランダム作成
+        // 通常のシンボルのランダム作成して List に追加
         symbolManager.AllClearSymbolsList();
         symbolManager.SymbolsList =  stageGenerator.GenerateSymbols(-1);
 
-        // TODO 特殊シンボルのランダム作成
-
+        // 特殊シンボルのランダム作成して List に追加
+        symbolManager.SymbolsList.AddRange(stageGenerator.GenerateSpecialSymbols());
 
         // 全シンボルの設定
         symbolManager.SetUpAllSymbos();

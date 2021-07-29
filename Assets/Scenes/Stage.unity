@@ -2906,6 +2906,15 @@ MonoBehaviour:
     symbolWeight: 50
   - symbolBasePrefab: {fileID: 739012728, guid: 5a33ea28859f4274aace2dfd956abf09, type: 3}
     symbolWeight: 70
+  specialSymbolGenerateDatasList:
+  - symbolBasePrefab: {fileID: 2596277188211296371, guid: 10603dfca157d05429b3c50983adc7d7, type: 3}
+    symbolWeight: 100
+  - symbolBasePrefab: {fileID: 2596277188211296371, guid: 16d009039de4b7e4d9fe99e88349f1ca, type: 3}
+    symbolWeight: 100
+  - symbolBasePrefab: {fileID: 2596277188211296371, guid: d345db3fd5fe9c7448e70785c0f451bf, type: 3}
+    symbolWeight: 100
+  - symbolBasePrefab: {fileID: 2596277188211296371, guid: 689b170fd5b340d4b85688cac937a165, type: 3}
+    symbolWeight: 100
   generateSymbolRate: 20
 --- !u!4 &983143795
 Transform:
