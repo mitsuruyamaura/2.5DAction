@@ -70,6 +70,7 @@ public class StageGenerator : MonoBehaviour
                     // 何も行わずに次の処理へ
                     continue;
                 }
+
                 // 生成値用のランダム値を取得
                 int maxRandomRange = Random.Range(30, 80);
 
@@ -84,10 +85,10 @@ public class StageGenerator : MonoBehaviour
 
                 // Walk か Collision か決める(仮に、20 % の確率で Collision) 
                 if (Random.Range(0, 100) <= 20) {
-                    // 決まった中でランダムにタイルを決める
+                    // Collision 用のタイルの中でランダムにタイルを決める
                     tileMapCollision.SetTile(new Vector3Int(i, j, 0), fieldCollisionTiles[Random.Range(0, fieldCollisionTiles.Length)]);
-
                 } else {
+                    // Walk 用のタイルの中でランダムにタイルを決める
                     tileMapWalk.SetTile(new Vector3Int(i, j, 0), fieldWalkTiles[Random.Range(0, fieldWalkTiles.Length)]);
                 }
              
