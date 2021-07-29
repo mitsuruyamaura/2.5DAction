@@ -32,12 +32,32 @@ public class Stage : MonoBehaviour
     [SerializeField]
     private Slider sliderExp;
 
+    [SerializeField]
+    private StageGenerator stageGenerator;
+
+    [SerializeField]
+    private SymbolManager symbolManager;
+
     private float sliderAnimeDuration = 0.5f;
 
     int levelupCount;
 
+
     void Start()
     {
+        // ステージのランダム作成
+        stageGenerator.GenerateStageFromRandomTiles();
+
+        // 通常のシンボルのランダム作成
+        symbolManager.AllClearSymbolsList();
+        symbolManager.SymbolsList =  stageGenerator.GenerateSymbols(-1);
+
+        // TODO 特殊シンボルのランダム作成
+
+
+        // 全シンボルの設定
+        symbolManager.SetUpAllSymbos();
+
         // スタミナの値の購読開始
         GameData.instance.staminaPoint.Subscribe(_ => UpdateDisplayStaminaPoint());
         

@@ -12,17 +12,24 @@ public class SymbolManager : MonoBehaviour
     [SerializeField]
     private List<SymbolBase> symbolsList = new List<SymbolBase>();
 
-
-    void Start() {
-        // Debug
-        SetUpAllSymbos();
+    public List<SymbolBase> SymbolsList
+    {
+        set => symbolsList = value;
+        get => symbolsList;
     }
+
+
+    //void Start() {
+    //    // Debug
+    //    SetUpAllSymbos();
+    //}
 
     /// <summary>
     /// すべてのシンボルの初期設定
     /// </summary>
-    private void SetUpAllSymbos() {
+    public void SetUpAllSymbos() {
         for (int i = 0; i < symbolsList.Count; i++) {
+            symbolsList[i].transform.SetParent(this.transform);
             symbolsList[i].OnEnterSymbol(this);
         }
     }
@@ -68,5 +75,12 @@ public class SymbolManager : MonoBehaviour
     /// <param name="symbol"></param>
     public void RemoveSymbolsList(SymbolBase symbol) {
         symbolsList.Remove(symbol);
+    }
+
+    /// <summary>
+    /// List からすべてのシンボルを削除
+    /// </summary>
+    public void AllClearSymbolsList() {
+        symbolsList.Clear();
     }
 }
