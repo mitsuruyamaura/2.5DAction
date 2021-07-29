@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: -1806269213
   m_SortingLayer: 4
   m_SortingOrder: 1
-  m_Sprite: {fileID: -6925737382748334869, guid: 025efb0ba94d2914fb4c1053fe62d306, type: 3}
+  m_Sprite: {fileID: -451546867780355519, guid: 025efb0ba94d2914fb4c1053fe62d306, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 2030681773761902110}
   - component: {fileID: 2596277188211296371}
   m_Layer: 0
-  m_Name: ItemSymbol_Orb
+  m_Name: ItemSymbol_Orb 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
