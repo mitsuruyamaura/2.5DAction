@@ -2,32 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using System.Linq;
 
 public enum StageType {
     Field,
     Dungeon,
 }
 
+[System.Serializable]
+public struct SymbolGenerateData {
+    // 生成するシンボルのプレファブを登録
+    public SymbolBase symbolBasePrefab;
+    public int symbolWeight;
+}
+
 public class StageGenerator : MonoBehaviour
 {
     // StageType.Field 用のタイル群
-    public Tile[] fieldBaseTiles;
-    public Tile[] fieldWalkTiles;
-    public Tile[] fieldCollisionTiles;
+    [SerializeField] private Tile[] fieldBaseTiles;
+    [SerializeField] private Tile[] fieldWalkTiles;
+    [SerializeField] private Tile[] fieldCollisionTiles;
 
     // タイルを配置するタイルマップ
-    public Tilemap tileMapBase;
-    public Tilemap tileMapWalk;
-    public Tilemap tileMapCollision;
+    [SerializeField] private Tilemap tileMapBase;
+    [SerializeField] private Tilemap tileMapWalk;
+    [SerializeField] private Tilemap tileMapCollision;
 
     // 並べる数
-    public int row;      // 行/ 水平(横)方向
-    public int column;   // 列/ 垂直(縦)方向
+    [SerializeField] private int row;      // 行/ 水平(横)方向
+    [SerializeField] private int column;   // 列/ 垂直(縦)方向
+
+    // シンボル生成用のデータリスト
+    public List<SymbolGenerateData> symbolGenerateDatasList = new List<SymbolGenerateData>();
 
 
     void Start()
     {
-        GenerateStageFromRandomTiles();    
+        GenerateStageFromRandomTiles();
+        GenerateSymbols(20);
     }
 
     /// <summary>
@@ -96,11 +108,72 @@ public class StageGenerator : MonoBehaviour
                 generateValue = 0;
             }
         }
-
     }
 
-    // シンボルを作る
+    // 通常のシンボルを作る
+
+    public List<SymbolBase> GenerateSymbols(int generateSymbolCount) {
+        // List に登録する
+
+        List<SymbolBase> symbolsList = new List<SymbolBase>();
+
+        // 重み付けの合計値を算出
+        int totalWeight = symbolGenerateDatasList.Select(x => x.symbolWeight).Sum();
+
+        for (int i = -row +1; i < row -1; i++) {
+            for (int j = -column +1; j < column -1; j++) {
+
+                // プレイヤーのスタート地点の場合
+                if (i == 0 && j == 0) {
+                    // 何も行わずに次の処理へ
+                    continue;
+                }
+
+                // 70 % はシンボルなし
+                if (Random.Range(0, 100) > 30) {
+                    continue;
+                }
+               
+                // タイルマップの座標に変換
+                Vector3Int tilePos = tileMapCollision.WorldToCell(new Vector3(i, j, 0));
+
+                // タイルの ColliderType が Grid ではないか確認
+                if (tileMapCollision.GetColliderType(tilePos) == Tile.ColliderType.Grid) {
+                    // Grid の場合には配置しないので、何も行わずに次の処理へ
+                    continue;
+                }
+
+                int index = 0;
+                int value = Random.Range(0, totalWeight);
+                // 重みづけから生成するシンボルを確認
+                for (int x = 0; x < symbolGenerateDatasList.Count; x++) {
+                    if (value <= symbolGenerateDatasList[x].symbolWeight) {
+                        index = x;
+                        break;
+                    }
+                    value -= symbolGenerateDatasList[x].symbolWeight;
+                }
+
+                symbolsList.Add(Instantiate(symbolGenerateDatasList[index].symbolBasePrefab, new Vector3(i, j, 0), Quaternion.identity));
+                generateSymbolCount--;
+
+                //if (generateSymbolCount <= 0) {
+                //    break;
+                //}
+
+            }
+
+
+        }
+
+        return symbolsList;
+    }
+
+
+    // ４つの特殊シンボルを作る
+
+
+    // ランダムに並び替える
 
     // List に登録する
-
 }
