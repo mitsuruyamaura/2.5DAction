@@ -17,8 +17,8 @@ MonoBehaviour:
     minExp: 0
     maxExp: 2
   - level: 2
-    minExp: 0
+    minExp: 2
     maxExp: 4
   - level: 3
-    minExp: 0
+    minExp: 4
     maxExp: 7

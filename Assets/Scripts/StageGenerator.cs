@@ -60,7 +60,41 @@ public class StageGenerator : MonoBehaviour
             }
         }
 
+        // Grid_Walk と Grid_Collider を配置
+        int generateValue = 0;
 
+        for (int i = -row; i < row; i++) {
+            for (int j = -column; j < column; j++) {
+                // 一番外側の場合とプレイヤーのスタート地点の場合
+                if (i == -row || i == row - 1 || j == -column || j == column - 1 || (i == 0 && j == 0)) {
+                    // 何も行わずに次の処理へ
+                    continue;
+                }
+                // 生成値用のランダム値を取得
+                int maxRandomRange = Random.Range(30, 80);
+
+                // 生成値を加算
+                generateValue += Random.Range(0, maxRandomRange);
+
+                // 生成値が生成目標値(仮)を超えていない場合
+                if (generateValue <= 100) {
+                    // 何も行わずに次の処理へ
+                    continue;
+                }
+
+                // Walk か Collision か決める(仮に、20 % の確率で Collision) 
+                if (Random.Range(0, 100) <= 20) {
+                    // 決まった中でランダムにタイルを決める
+                    tileMapCollision.SetTile(new Vector3Int(i, j, 0), fieldCollisionTiles[Random.Range(0, fieldCollisionTiles.Length)]);
+
+                } else {
+                    tileMapWalk.SetTile(new Vector3Int(i, j, 0), fieldWalkTiles[Random.Range(0, fieldWalkTiles.Length)]);
+                }
+             
+                // タイルを生成したので生成値をリセット
+                generateValue = 0;
+            }
+        }
 
     }
 
