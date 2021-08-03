@@ -18,6 +18,8 @@ public class SymbolManager : MonoBehaviour
         get => symbolsList;
     }
 
+    [SerializeField]　　// Debug 用
+    private List<EnemySymbol> enemiesList = new List<EnemySymbol>();
 
     //void Start() {
     //    // Debug
@@ -32,6 +34,9 @@ public class SymbolManager : MonoBehaviour
             symbolsList[i].transform.SetParent(this.transform);
             symbolsList[i].OnEnterSymbol(this);
         }
+
+        // Enemy の種類だけを抽出して List に代入
+        enemiesList = GetListSimbolTypeFromSymbolsList(SymbolType.Enemy);
     }
 
     /// <summary>
@@ -82,5 +87,43 @@ public class SymbolManager : MonoBehaviour
     /// </summary>
     public void AllClearSymbolsList() {
         symbolsList.Clear();
+    }
+
+    /// <summary>
+    /// SymbolList から引数で指定した種類のみを抽出する
+    /// </summary>
+    private List<EnemySymbol> GetListSimbolTypeFromSymbolsList(SymbolType getSymbolType) {
+        return symbolsList.Where(x => x.symbolType == getSymbolType).Select(x => x.GetComponent<EnemySymbol>()).ToList();
+    }
+
+    /// <summary>
+    /// 全エネミーのシンボルの移動処理
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator EnemisMove() {
+
+        for (int i = 0; i < enemiesList.Count; i++) {
+            enemiesList[i].EnemyMove();
+            yield return new WaitForSeconds(0.05f);
+            Debug.Log("敵の移動 :" + i + " 体目");
+        }
+    }
+
+    /// <summary>
+    /// エネミーの List から情報の削除
+    /// </summary>
+    /// <param name="enemySymbol"></param>
+    public void RemoveEnemySymbol(EnemySymbol enemySymbol) {
+        enemiesList.Remove(enemySymbol);
+    }
+
+    /// <summary>
+    /// すべてのエネミーのコライダーを制御
+    /// </summary>
+    /// <param name="isSwitch"></param>
+    public void SwitchEnemyCollider(bool isSwitch) {
+        for (int i = 0; i < enemiesList.Count; i++) {
+            enemiesList[i].SwtichCollider(isSwitch);
+        }
     }
 }

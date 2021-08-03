@@ -353,7 +353,7 @@ GameObject:
   - component: {fileID: 7441185091463428034}
   - component: {fileID: 7441185091463428037}
   - component: {fileID: 7441185091463428039}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ItemSymbol_Untouchable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
