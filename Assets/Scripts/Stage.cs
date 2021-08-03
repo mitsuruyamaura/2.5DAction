@@ -5,6 +5,7 @@ using UniRx;
 using UnityEngine.UI;
 using Coffee.UIExtensions;
 using DG.Tweening;
+using UnityEngine.Tilemaps;
 
 public class Stage : MonoBehaviour
 {
@@ -38,9 +39,29 @@ public class Stage : MonoBehaviour
     [SerializeField]
     private SymbolManager symbolManager;
 
+    [SerializeField]
+    private InputButtonManager inputButtonManager;
+
+    [SerializeField]
+    private MapMoveController mapMoveController;
+
     private float sliderAnimeDuration = 0.5f;
 
     int levelupCount;
+
+    public enum TurnState {
+        None,
+        Player,
+        Enemy
+    }
+
+    private TurnState currentTurnState = TurnState.None;
+
+    public TurnState CurrentTurnState
+    {
+        set => currentTurnState = value;
+        get => currentTurnState;
+    }
 
 
     void Start()
@@ -71,11 +92,38 @@ public class Stage : MonoBehaviour
         //GameData.instance.maxHp = GameData.instance.hp;
 
         // Hp表示更新
-        StartCoroutine(UpdateDisplayHp());
+        //StartCoroutine(UpdateDisplayHp());
 
         // プレイヤーレベルと経験値の表示更新
         UpdateDisplayPlayerLevel();
         UpdateDisplayExp(true);
+
+        // プレイヤーの設定
+        mapMoveController.SetUpMapMoveController(this);
+        inputButtonManager.SetUpInputButtonManager(mapMoveController);
+
+        CurrentTurnState = TurnState.Player;
+
+        // プレイヤーの移動の監視
+        StartCoroutine(ObserveEnemyTurnState());
+
+        symbolManager.SwitchEnemyCollider(true);
+    }
+
+    private IEnumerator ObserveEnemyTurnState() {
+        while (CurrentTurnState != TurnState.None) {    // あとで GameState に変える
+
+            if (CurrentTurnState == TurnState.Enemy) {
+
+                Debug.Log("敵の移動　開始");
+                yield return StartCoroutine(symbolManager.EnemisMove());
+
+                Debug.Log("完了");
+                CurrentTurnState = TurnState.Player;              
+            }
+
+            yield return null;
+        }
     }
 
     /// <summary>
@@ -151,6 +199,15 @@ public class Stage : MonoBehaviour
             // レベルアップのボーナス
 
         }
+
+        //// バトルから戻った場合
+        //if (CurrentTurnState == TurnState.Enemy) {
+        //    // プレイヤーの番にする
+        //    CurrentTurnState = TurnState.Player;
+        //}
+
+        // プレイヤーの移動の監視再開
+        StartCoroutine(ObserveEnemyTurnState());
     }
 
     /// <summary>

@@ -195,7 +195,6 @@ public class StageGenerator : MonoBehaviour
         List<SymbolGenerateData> randomSymbolsList = new List<SymbolGenerateData>(specialSymbolGenerateDatasList);
         randomSymbolsList =  randomSymbolsList.OrderBy(x => Guid.NewGuid()).ToList();
 
-        int index = 0;
         for (int i = 0; i < randomSymbolsList.Count; i++) {
             symbolsList.Add(Instantiate(randomSymbolsList[i].symbolBasePrefab, new Vector3(1, i, 0), Quaternion.identity));
         }
