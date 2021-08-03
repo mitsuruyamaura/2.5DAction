@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 8578627562830087763}
   - component: {fileID: 8578627562830087764}
   - component: {fileID: 6051095553609441042}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RecoveryItemSymbol_Life
   m_TagString: Untagged
   m_Icon: {fileID: 0}

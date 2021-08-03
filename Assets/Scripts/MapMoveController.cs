@@ -8,7 +8,10 @@ using DG.Tweening;
 public class MapMoveController : MonoBehaviour
 {
     private Vector3 movePos;
-    private float moveDuration = 0.5f;
+    private float moveDuration = 0.35f;
+
+    public float MoveDuration { get => moveDuration; }
+
     //private float moveTilePanel = 8.0f;
     //private Rigidbody2D rb;
     //Vector2 velocity;
@@ -19,15 +22,24 @@ public class MapMoveController : MonoBehaviour
     [SerializeField]
     private Tilemap tilemapCollider;
 
-    [SerializeField, HideInInspector]  // Debug用
+    [SerializeField]  // Debug用
     private bool isMoving;
+
+    public bool IsMoving { get => isMoving; }
 
     [SerializeField]
     private List<PlayerConditionBase> conditionsList = new List<PlayerConditionBase>();
 
+    private Stage stage;
+
     //void Start() {
     //    transform.GetChild(0).TryGetComponent(out rb);    
     //}
+
+    public void SetUpMapMoveController(Stage stage) {
+        this.stage = stage;
+        tilemapCollider = DataBaseManager.instance.tilemapCollider;
+    }
 
     /// <summary>
     /// 移動の入力判定
@@ -84,7 +96,7 @@ public class MapMoveController : MonoBehaviour
         // タイルマップの座標に変換
         Vector3Int tilePos = tilemapCollider.WorldToCell(transform.position + movePos);
 
-        //Debug.Log(tilemapWalk.GetColliderType(tilePos));
+        //Debug.Log(tilePos);
         //Debug.Log(tilemapCollider.GetColliderType(tilePos));
 
         // Grid のコライダーの場合
@@ -125,6 +137,43 @@ public class MapMoveController : MonoBehaviour
     }
 
     /// <summary>
+    /// 移動できるタイルか判定
+    /// </summary>
+    public void CheckMoveTile(Vector2 nextPos) {
+
+        // プレイヤーの番でなければ処理しない
+        if (stage.CurrentTurnState != Stage.TurnState.Player) {
+            return;
+        }
+
+        isMoving = true;
+
+        movePos = nextPos;
+
+        // タイルマップの座標に変換
+        Vector3Int tilePos = tilemapCollider.WorldToCell(transform.position + movePos);
+
+        //Debug.Log(tilePos);
+        //Debug.Log(tilemapCollider.GetColliderType(tilePos));
+
+        // Grid のコライダーの場合
+        if (tilemapCollider.GetColliderType(tilePos) == Tile.ColliderType.Grid) {
+
+            // 移動しないで終了
+            isMoving = false;
+            //    //break;
+
+            //// Grid 以外の場合
+        } else {
+            //if (tilemapWalk.GetColliderType(tilePos) == Tile.ColliderType.None) {   // tilemapCollider.GetColliderType(tilePos) != Tile.ColliderType.Grid) {
+
+            // 移動させる
+            Move(transform.position + movePos);
+            //break;
+        }
+    }
+
+    /// <summary>
     /// 移動
     /// </summary>
     /// <param name="destination"></param>
@@ -149,7 +198,8 @@ public class MapMoveController : MonoBehaviour
             .SetEase(Ease.Linear)
             .OnComplete(() =>
             {
-                isMoving = false;                
+                isMoving = false;
+                stage.CurrentTurnState = Stage.TurnState.Enemy;
             });        
     }
 
@@ -166,6 +216,13 @@ public class MapMoveController : MonoBehaviour
             //case SymbolType.Stamina:
             //case SymbolType.Life:
             //case SymbolType.Orb:
+
+            // エネミーのシンボルに接触した際、プレイヤーに Walk_Through のコンディションが付与されている場合
+            // symbolBase.symbolType == SymbolType.Enemy && conditionsList.Exists(x => x.GetConditionType() == ConditionType.Walk_through)
+            if (symbolBase.symbolType == SymbolType.Enemy && TryGetComponent(out PlayerCondition_WalkThrough walkThrough)) {
+                // エネミーに接触しても戦闘を開始しない
+                return;
+            }
 
             if (!symbolBase.isSymbolTriggerd) {
                 Debug.Log("移動先でシンボルに接触 : " + symbolBase.symbolType.ToString());
@@ -200,5 +257,13 @@ public class MapMoveController : MonoBehaviour
     public void RemoveConditionsList(PlayerConditionBase playerCondition) {
         conditionsList.Remove(playerCondition);
         Destroy(playerCondition);
+    }
+
+    /// <summary>
+    /// コンディションの List を取得
+    /// </summary>
+    /// <returns></returns>
+    public List<PlayerConditionBase> GetConditionsList() {
+        return conditionsList;
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class DataBaseManager : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class DataBaseManager : MonoBehaviour
 
     [SerializeField]
     private Transform spriteMaskTran;
+
+    public Tilemap tilemapCollider;
+
 
     void Awake() {
         if (instance == null) {

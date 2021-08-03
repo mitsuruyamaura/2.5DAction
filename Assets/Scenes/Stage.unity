@@ -458,6 +458,53 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!1 &250334793
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 250334794}
+  - component: {fileID: 250334795}
+  m_Layer: 0
+  m_Name: InputButtonManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &250334794
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250334793}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1594420608}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &250334795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250334793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88fd8c381d650ce458f6cdeec5349ab6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  btnUp: {fileID: 556295939}
+  btnDown: {fileID: 1254807036}
+  btnLeft: {fileID: 1367734557}
+  btnRight: {fileID: 1128057455}
 --- !u!1 &276092400
 GameObject:
   m_ObjectHideFlags: 0
@@ -622,6 +669,7 @@ MonoBehaviour:
   - {fileID: 5790343712472805867}
   - {fileID: 57674156}
   - {fileID: 8935083710537485097}
+  enemiesList: []
 --- !u!212 &298270345 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 1144797423341432948, guid: 0b9db4349246fcb41ba5519d8c85ca21, type: 3}
@@ -2373,6 +2421,7 @@ MonoBehaviour:
   enemyMoveEventDataSO: {fileID: 11400000, guid: 4336fc092ce914a43a12d2b21ced7f90, type: 2}
   expTableSO: {fileID: 11400000, guid: 56e379c00098b8e4a87d4fb3376afe75, type: 2}
   spriteMaskTran: {fileID: 1638652407}
+  tilemapCollider: {fileID: 175135994}
 --- !u!4 &878749739
 Transform:
   m_ObjectHideFlags: 0
@@ -9134,6 +9183,7 @@ Transform:
   - {fileID: 1159802220}
   - {fileID: 290609296}
   - {fileID: 983143795}
+  - {fileID: 250334794}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9163,6 +9213,8 @@ MonoBehaviour:
   sliderExp: {fileID: 1762519644}
   stageGenerator: {fileID: 983143794}
   symbolManager: {fileID: 290609297}
+  inputButtonManager: {fileID: 250334795}
+  mapMoveController: {fileID: 476839431}
 --- !u!1 &1638652406
 GameObject:
   m_ObjectHideFlags: 0

@@ -127,7 +127,7 @@ public class StageGenerator : MonoBehaviour
 
         // 重み付けの合計値を算出
         int totalWeight = symbolGenerateDatasList.Select(x => x.symbolWeight).Sum();
-        Debug.Log(totalWeight);
+        //Debug.Log(totalWeight);
 
         for (int i = -row +1; i < row -1; i++) {
             for (int j = -column +1; j < column -1; j++) {
@@ -159,7 +159,7 @@ public class StageGenerator : MonoBehaviour
                 for (int x = 0; x < symbolGenerateDatasList.Count; x++) {
                     if (value <= symbolGenerateDatasList[x].symbolWeight) {
                         index = x;
-                        Debug.Log(index + " value : " + value);
+                        //Debug.Log(index + " value : " + value);
                         break;
                     }
                     value -= symbolGenerateDatasList[x].symbolWeight;
@@ -195,7 +195,6 @@ public class StageGenerator : MonoBehaviour
         List<SymbolGenerateData> randomSymbolsList = new List<SymbolGenerateData>(specialSymbolGenerateDatasList);
         randomSymbolsList =  randomSymbolsList.OrderBy(x => Guid.NewGuid()).ToList();
 
-        int index = 0;
         for (int i = 0; i < randomSymbolsList.Count; i++) {
             symbolsList.Add(Instantiate(randomSymbolsList[i].symbolBasePrefab, new Vector3(1, i, 0), Quaternion.identity));
         }
