@@ -65,7 +65,7 @@ public class EnemySymbol : SymbolBase
 
         // TODO ƒV[ƒ“‘JˆÚ
 
-        SceneStateManager.instance.LoadBattleScene();
+        SceneStateManager.instance.PreparateBattleScene();
     }
 
     public void EnemyMove() {
