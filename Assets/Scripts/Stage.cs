@@ -181,6 +181,8 @@ public class Stage : MonoBehaviour
     }
 
     private void OnEnable() {
+        // TODO トランジション処理
+
 
         // バトル前の Hp からアニメして表示するために待機時間を作る
         StartCoroutine(UpdateDisplayHp(1.0f));
