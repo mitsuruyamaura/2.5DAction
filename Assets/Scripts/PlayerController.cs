@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -67,6 +68,12 @@ public class PlayerController : MonoBehaviour
 
     private Battle battle;
 
+    [SerializeField]
+    private Joystick joystick;
+
+    [SerializeField]
+    private Button btnAction;
+
 
     void Start()
     {
@@ -81,17 +88,22 @@ public class PlayerController : MonoBehaviour
 
         maxHp = hp;
 
+        btnAction.onClick.AddListener(Action);
+
         //DamageEffect();
     }
 
 
-    void Update()
-    {
+    void Update() {
         if (battle != null && battle.currentBattleState != BattleState.Play) {
             return;
         }
 
         InputMove();
+
+        if (Input.GetButtonDown("Jump")) {
+            Action();
+        }
     }
 
     /// <summary>
@@ -100,6 +112,9 @@ public class PlayerController : MonoBehaviour
     private void InputMove() {
         x = Input.GetAxis("Horizontal");
         z = Input.GetAxis("Vertical");
+        
+        x = joystick.Horizontal;
+        z = joystick.Vertical;
     }
 
     private void FixedUpdate() {
@@ -108,8 +123,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        Move();
-        Action();
+        Move();     
     }
 
     /// <summary>
@@ -117,7 +131,9 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void Move() {
         if (x != 0 || z != 0) {
-            rb.velocity = new Vector3(x * moveSpeed, rb.velocity.y, z * moveSpeed);
+            Vector3 dir = new Vector3(x, rb.velocity.y, z).normalized;
+
+            rb.velocity = dir * moveSpeed;
             
         } else {
             rb.velocity = Vector3.zero;
@@ -144,32 +160,29 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void Action() {
 
-        if (Input.GetButtonDown("Jump")) {
+        Vector3 dashX = transform.right * (x * dashPower);
+        Vector3 dashZ = transform.forward * (z * dashPower);
 
-            Vector3 dashX = transform.right * (x * dashPower);
-            Vector3 dashZ = transform.forward * (z * dashPower);
+        rb.AddForce(dashX + dashZ, ForceMode.Impulse);
+        //Debug.Log(dashX + dashZ);
 
-            rb.AddForce(dashX + dashZ, ForceMode.Impulse);
-            //Debug.Log(dashX + dashZ);
+        // ステート確認
+        if (currentPlayerState == PlayerState.Ready) {
+            currentPlayerState = PlayerState.Attack;
+            anim.SetTrigger("Attack");
 
-            // ステート確認
-            if (currentPlayerState == PlayerState.Ready) {
-                currentPlayerState = PlayerState.Attack;
-                anim.SetTrigger("Attack");
+            //Debug.Log(timingGaugeController.CheckCritial());
 
-                //Debug.Log(timingGaugeController.CheckCritial());
+            StartCoroutine(timingGaugeController.PausePointer());
 
-                StartCoroutine(timingGaugeController.PausePointer());
-
-                StartCoroutine(ActionInterval(attackIntervalTime));
-            } else if (currentPlayerState == PlayerState.Wait) {
-                currentPlayerState = PlayerState.DashAvoid;
-                anim.SetTrigger("Dash");
-                // 親の Scale を参照するので、向きも自動で変わる
-                GameObject dashEffect = Instantiate(EffectManager.instance.dashWindPrefab, dashEffectTran);
-                Destroy(dashEffect, 0.5f);
-                StartCoroutine(ActionInterval(dashAvoidIntervalTime));
-            }
+            StartCoroutine(ActionInterval(attackIntervalTime));
+        } else if (currentPlayerState == PlayerState.Wait) {
+            currentPlayerState = PlayerState.DashAvoid;
+            anim.SetTrigger("Dash");
+            // 親の Scale を参照するので、向きも自動で変わる
+            GameObject dashEffect = Instantiate(EffectManager.instance.dashWindPrefab, dashEffectTran);
+            Destroy(dashEffect, 0.5f);
+            StartCoroutine(ActionInterval(dashAvoidIntervalTime));
         }
     }
 
