@@ -192,16 +192,20 @@ public class StageGenerator : MonoBehaviour
 
         List<SymbolBase> symbolsList = new List<SymbolBase>();
 
+        // ƒ‰ƒ“ƒ_ƒ€‚É•À‚Ñ‘Ö‚¦‚é
         List<SymbolGenerateData> randomSymbolsList = new List<SymbolGenerateData>(specialSymbolGenerateDatasList);
         randomSymbolsList =  randomSymbolsList.OrderBy(x => Guid.NewGuid()).ToList();
 
-        for (int i = 0; i < randomSymbolsList.Count; i++) {
-            symbolsList.Add(Instantiate(randomSymbolsList[i].symbolBasePrefab, new Vector3(1, i, 0), Quaternion.identity));
+        int index = 0;
+
+        // Å‰‚ÍƒLƒƒƒ‰‚Ì‚»‚Î‚É¶¬
+        for (int x = -1; x < 2; x += 2) {
+            for (int y = -1; y < 2; y += 2) {
+                symbolsList.Add(Instantiate(randomSymbolsList[index].symbolBasePrefab, new Vector3(x, y, 0), Quaternion.identity));
+                index++;
+            }
         }
+        // List ‚É“o˜^‚·‚é
         return symbolsList;
-    }
-
-    // ƒ‰ƒ“ƒ_ƒ€‚É•À‚Ñ‘Ö‚¦‚é
-
-    // List ‚É“o˜^‚·‚é
+    }    
 }
