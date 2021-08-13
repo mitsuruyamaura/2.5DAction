@@ -30,13 +30,26 @@ public class SymbolManager : MonoBehaviour
     /// すべてのシンボルの初期設定
     /// </summary>
     public void SetUpAllSymbos() {
+
+        List<SymbolBase> specialSymbols = new List<SymbolBase>();
+
         for (int i = 0; i < symbolsList.Count; i++) {
             symbolsList[i].transform.SetParent(this.transform);
             symbolsList[i].OnEnterSymbol(this);
+
+            if (symbolsList[i].symbolType == SymbolType.Orb) {
+                specialSymbols.Add(symbolsList[i]);
+            }
         }
 
         // Enemy の種類だけを抽出して List に代入
         enemiesList = GetListSimbolTypeFromSymbolsList(SymbolType.Enemy);
+
+        // 各オーブをエネミーの上に配置
+        int randomIndex = Mathf.FloorToInt(enemiesList.Count / specialSymbols.Count);
+        for (int i = 0; i < specialSymbols.Count; i++) {
+            specialSymbols[i].GetComponent<OrbSymbol>().SetPositionOrbSymbol(enemiesList[randomIndex * (i + 1)].transform.position);
+        }
     }
 
     /// <summary>

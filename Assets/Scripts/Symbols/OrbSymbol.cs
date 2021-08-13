@@ -32,4 +32,15 @@ public class OrbSymbol : SymbolBase {
 
         base.TriggerAppearEffect(mapMoveController);
     }
+
+    /// <summary>
+    /// エネミーの上に配置のための移動
+    /// </summary>
+    /// <param name="newPos"></param>
+    public void SetPositionOrbSymbol(Vector3 newPos) {
+        // 配置移動中はキャラが取れないようにする
+        BoxCollider2D boxCol = GetComponent<BoxCollider2D>();
+        boxCol.enabled = false;
+        transform.DOMove(newPos, 1.0f).SetEase(Ease.InQuart).OnComplete(() => { boxCol.enabled = true; });
+    }
 }
