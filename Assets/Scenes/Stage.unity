@@ -2956,7 +2956,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   staminaPoint:
-    value: 30
+    value: 5
   hp: 5
   maxHp: 10
   isDebugOn: 0

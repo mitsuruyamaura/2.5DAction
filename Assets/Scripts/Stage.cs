@@ -52,7 +52,8 @@ public class Stage : MonoBehaviour
     public enum TurnState {
         None,
         Player,
-        Enemy
+        Enemy,
+        Boss
     }
 
     private TurnState currentTurnState = TurnState.None;
@@ -114,12 +115,26 @@ public class Stage : MonoBehaviour
         while (CurrentTurnState != TurnState.None) {    // あとで GameState に変える
 
             if (CurrentTurnState == TurnState.Enemy) {
-
                 Debug.Log("敵の移動　開始");
                 yield return StartCoroutine(symbolManager.EnemisMove());
 
                 Debug.Log("完了");
-                CurrentTurnState = TurnState.Player;              
+
+                // ターンの状態を確認
+                CheckTurn();
+
+                if (CurrentTurnState == TurnState.Boss) {
+
+                    // ボスの出現
+                    Debug.Log("Boss 出現");
+
+
+                    // TODO 演出
+
+
+                    // TODO シーン遷移
+
+                }
             }
 
             yield return null;
@@ -136,9 +151,9 @@ public class Stage : MonoBehaviour
             Debug.Log("ボス戦");
 
             // 購読停止
-            GameData.instance.staminaPoint.Dispose();
+            //GameData.instance.staminaPoint.Dispose();
 
-            GameData.instance.orbs.Dispose();
+            //GameData.instance.orbs.Dispose();
 
 
             // 移動禁止
@@ -208,8 +223,25 @@ public class Stage : MonoBehaviour
         //    CurrentTurnState = TurnState.Player;
         //}
 
-        // プレイヤーの移動の監視再開
-        StartCoroutine(ObserveEnemyTurnState());
+        // ターンの確認
+        CheckTurn();
+
+        if (CurrentTurnState == TurnState.Player) {
+
+            // プレイヤーの移動の監視再開
+            StartCoroutine(ObserveEnemyTurnState());
+        } else if (CurrentTurnState == TurnState.Boss){
+
+            // ボスの出現
+            Debug.Log("Boss 出現");
+
+
+            // TODO 演出
+
+
+            // TODO シーン遷移
+
+        }
     }
 
     /// <summary>
@@ -262,6 +294,17 @@ public class Stage : MonoBehaviour
         if (isSliderOn) {
             // ゲージ更新
             sliderExp.DOValue((float)GameData.instance.totalExp / DataBaseManager.instance.CalcNextLevelExp(GameData.instance.playerLevel - 1), 1.0f).SetEase(Ease.Linear);
+        }
+    }
+
+    /// <summary>
+    /// ターンの確認
+    /// </summary>
+    private void CheckTurn() {
+        if (GameData.instance.staminaPoint.Value <= 0) {
+            CurrentTurnState = TurnState.Boss;
+        } else {
+            CurrentTurnState = TurnState.Player;
         }
     }
 }
