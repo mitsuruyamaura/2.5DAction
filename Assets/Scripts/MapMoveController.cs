@@ -49,6 +49,10 @@ public class MapMoveController : MonoBehaviour
 
         // TODO 移動禁止なら処理しない
 
+        // 自分のターン以外は処理しない
+        if (stage.CurrentTurnState != Stage.TurnState.Player) {
+            return;
+        }
 
         // 移動中には処理しない
         if (isMoving) {
@@ -196,11 +200,12 @@ public class MapMoveController : MonoBehaviour
         // 移動
         transform.DOMove(destination, moveDuration)
             .SetEase(Ease.Linear)
-            .OnComplete(() =>
-            {
+            .OnComplete(() => {
                 isMoving = false;
+
+                // エネミーの番になり、エネミーの移動処理を行う
                 stage.CurrentTurnState = Stage.TurnState.Enemy;
-            });        
+            });
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {

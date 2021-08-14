@@ -48,6 +48,9 @@ public class SymbolManager : MonoBehaviour
         // 各オーブをエネミーの上に配置
         int randomIndex = Mathf.FloorToInt(enemiesList.Count / specialSymbols.Count);
         for (int i = 0; i < specialSymbols.Count; i++) {
+            if (i == 3 && enemiesList.Count % specialSymbols.Count == 0) {
+                randomIndex = 0;
+            }
             specialSymbols[i].GetComponent<OrbSymbol>().SetPositionOrbSymbol(enemiesList[randomIndex * (i + 1)].transform.position);
         }
     }
@@ -74,7 +77,6 @@ public class SymbolManager : MonoBehaviour
     /// 指定された以外のシンボルのゲームオブジェクトの表示/非表示
     /// </summary>
     public void SwitchActivateExceptSymbols(bool isSwitch, int exceptSymbolTypeNo) {
-
 
         //for (int i = 0; i < symbolsList.Count; i++) {
         //    if (symbolsList[i].symbolType != exceptSymbolType) {
