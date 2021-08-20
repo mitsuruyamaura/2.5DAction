@@ -8449,7 +8449,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &435611631
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9158,6 +9158,7 @@ MonoBehaviour:
   hp: 0
   joystick: {fileID: 780759251}
   btnAction: {fileID: 1669098258}
+  imgCutin: {fileID: 435611633}
 --- !u!136 &500076302
 CapsuleCollider:
   m_ObjectHideFlags: 0
