@@ -74,6 +74,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Button btnAction;
 
+    [SerializeField]
+    private Image imgCutin;
+
+    private IEnumerator actionCoroutine;
+
 
     void Start()
     {
@@ -90,6 +95,8 @@ public class PlayerController : MonoBehaviour
 
         btnAction.onClick.AddListener(Action);
 
+        imgCutin.gameObject.SetActive(false);
+
         //DamageEffect();
     }
 
@@ -103,6 +110,16 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump")) {
             Action();
+        }
+
+        if (Input.GetKeyDown(KeyCode.K) && actionCoroutine == null) {
+
+            // カットイン再生
+            actionCoroutine = SpecialAttackEffect();
+            StartCoroutine(actionCoroutine);
+
+            // TODO 特殊攻撃
+
         }
     }
 
@@ -311,5 +328,17 @@ public class PlayerController : MonoBehaviour
 
             Destroy(other.gameObject);
         }
+    }
+
+    /// <summary>
+    /// カットイン
+    /// </summary>
+    public IEnumerator SpecialAttackEffect() {
+        imgCutin.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(2.0f);
+
+        actionCoroutine = null;
+        imgCutin.gameObject.SetActive(false);
     }
 }
