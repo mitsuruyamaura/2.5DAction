@@ -140,4 +140,8 @@ public class SceneStateManager : MonoBehaviour {
             fade.FadeOut(fadeDuration);
         }
     }
+
+    public Scene GetScene(SceneName nextLoadSceneName) {
+        return SceneManager.GetSceneByName(nextLoadSceneName.ToString());
+    }
 }

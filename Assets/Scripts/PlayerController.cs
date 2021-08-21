@@ -16,29 +16,29 @@ public class PlayerController : MonoBehaviour
 
     private CinemachineImpulseSource cinemachineImpulseSource;
 
-    [SerializeField]
-    private float moveSpeed;
+    //[SerializeField]
+    //private float moveSpeed;
 
-    [SerializeField]
-    private float dashPower;
+    //[SerializeField]
+    //private float dashPower;
 
-    [SerializeField]
-    private int chargePower;
+    //[SerializeField]
+    //private int chargePower;
 
-    [SerializeField]
+    //[SerializeField]
     private int chargePoint;
 
-    [SerializeField]
-    private int maxChargePoint;
+    //[SerializeField]
+    //private int maxChargePoint;
 
-    [SerializeField]
-    private int attackPower;
+    //[SerializeField]
+    //private int attackPower;
 
-    [SerializeField]
-    private float attackIntervalTime;
+    //[SerializeField]
+    //private float attackIntervalTime;
 
-    [SerializeField]
-    private float dashAvoidIntervalTime;
+    //[SerializeField]
+    //private float dashAvoidIntervalTime;
 
     [SerializeField]
     private Transform dashEffectTran;
@@ -61,10 +61,10 @@ public class PlayerController : MonoBehaviour
 
     public PlayerState currentPlayerState;
 
-    [SerializeField]
-    private int hp;
+    //[SerializeField]
+    //private int hp;
 
-    private int maxHp;
+    //private int maxHp;
 
     private Battle battle;
 
@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator actionCoroutine;
 
 
-    void Start()
+    void Start()  // TODO SetUp メソッドに移す
     {
         TryGetComponent(out rb);
         anim = transform.GetComponentInChildren<Animator>();
@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
 
         StartCoroutine(ChargeAttackGauge());
 
-        maxHp = hp;
+        //maxHp = hp;
 
         btnAction.onClick.AddListener(Action);
 
@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
         if (x != 0 || z != 0) {
             Vector3 dir = new Vector3(x, rb.velocity.y, z).normalized;
 
-            rb.velocity = dir * moveSpeed;
+            rb.velocity = dir * GameData.instance.currentCharaData.moveSpeed;
             
         } else {
             rb.velocity = Vector3.zero;
@@ -177,8 +177,8 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void Action() {
 
-        Vector3 dashX = transform.right * (x * dashPower);
-        Vector3 dashZ = transform.forward * (z * dashPower);
+        Vector3 dashX = transform.right * (x * GameData.instance.currentCharaData.dashPower);
+        Vector3 dashZ = transform.forward * (z * GameData.instance.currentCharaData.dashPower);
 
         rb.AddForce(dashX + dashZ, ForceMode.Impulse);
         //Debug.Log(dashX + dashZ);
@@ -192,14 +192,14 @@ public class PlayerController : MonoBehaviour
 
             StartCoroutine(timingGaugeController.PausePointer());
 
-            StartCoroutine(ActionInterval(attackIntervalTime));
+            StartCoroutine(ActionInterval(GameData.instance.currentCharaData.attackIntervalTime));
         } else if (currentPlayerState == PlayerState.Wait) {
             currentPlayerState = PlayerState.DashAvoid;
             anim.SetTrigger("Dash");
             // 親の Scale を参照するので、向きも自動で変わる
             GameObject dashEffect = Instantiate(EffectManager.instance.dashWindPrefab, dashEffectTran);
             Destroy(dashEffect, 0.5f);
-            StartCoroutine(ActionInterval(dashAvoidIntervalTime));
+            StartCoroutine(ActionInterval(GameData.instance.currentCharaData.dashAvoidIntervalTime));
         }
     }
 
@@ -240,7 +240,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log(attackCount);
 
             // ダメージ計算
-            StartCoroutine(enemyController.CalcDamage(attackPower, attackCount));
+            StartCoroutine(enemyController.CalcDamage(GameData.instance.currentCharaData.attackPower, attackCount));
 
             if (attackCount >= maxAttackCount) {
                 attackCount = 1;
@@ -253,14 +253,14 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void CalcHp(int damage) {　　　// 敵の情報をもらう
 
-        hp = Mathf.Clamp(hp += damage, 0, maxHp);
+        GameData.instance.hp = Mathf.Clamp(GameData.instance.hp += damage, 0, GameData.instance.maxHp);
 
         // TODO エフェクト
 
 
         Debug.Log("amount : " + damage);
 
-        if (hp <= 0) {
+        if (GameData.instance.hp <= 0) {
             Debug.Log("Game Over");
         }
     }
@@ -273,11 +273,11 @@ public class PlayerController : MonoBehaviour
 
         while (currentPlayerState == PlayerState.Wait) {
 
-            chargePoint += chargePower;
+            chargePoint += GameData.instance.currentCharaData.chargePower;
 
             // TODO UI 連動
 
-            if (chargePoint >= maxChargePoint) {
+            if (chargePoint >= GameData.instance.currentCharaData.maxChargePoint) {
                 chargePoint = 0;
 
                 currentPlayerState = PlayerState.Ready;

@@ -21,6 +21,7 @@ public class GameData : MonoBehaviour
 
     public int totalExp;
 
+    public CharacterData currentCharaData;
 
     void Awake() {
         if (instance == null) {
@@ -28,6 +29,17 @@ public class GameData : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         } else {
             Destroy(gameObject);
+        }
+
+        InitialzeGameData();
+
+        void InitialzeGameData() {
+            maxHp = currentCharaData.maxHp;
+            hp = maxHp;
+
+            playerLevel = 1;
+
+            totalExp = 0;
         }
     }
 }

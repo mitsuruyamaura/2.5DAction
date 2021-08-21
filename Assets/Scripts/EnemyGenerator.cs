@@ -20,7 +20,7 @@ public class EnemyGenerator : MonoBehaviour
 
         this.battle = battle;
 
-        yield return null;   // ‚±‚ê‚ª‚È‚¢‚Æ Stage ‚É“G‚ª¶¬‚³‚ê‚é
+        //yield return null;   // ‚±‚ê‚ª‚È‚¢‚Æ Stage ‚É“G‚ª¶¬‚³‚ê‚é
 
         for (int i = 0; i < battle.maxEnemyCount; i++) {
 
