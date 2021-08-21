@@ -73,11 +73,12 @@ public class Battle : MonoBehaviour
 
         Debug.Log("バトル開始時の処理");
 
+        yield return new WaitUntil(() => SceneStateManager.instance.GetScene(SceneName.Battle).isLoaded);
+
         currentBattleState = BattleState.Wait;
 
         // Hp表示更新
         UpdateDisplayHp();
-
 
         // 敵の生成と List への登録
         yield return StartCoroutine(enemyGenerator.GenerateEnemies(this));

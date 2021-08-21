@@ -2927,11 +2927,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   staminaPoint:
     value: 5
-  hp: 5
-  maxHp: 10
+  hp: 0
+  maxHp: 0
   isDebugOn: 0
-  playerLevel: 1
+  playerLevel: 0
   totalExp: 0
+  currentCharaData:
+    maxHp: 20
+    attackPower: 1
+    moveSpeed: 3
+    dashPower: 5
+    chargePower: 1
+    maxChargePoint: 100
+    attackIntervalTime: 1
+    dashAvoidIntervalTime: 1
 --- !u!4 &941425069
 Transform:
   m_ObjectHideFlags: 0
