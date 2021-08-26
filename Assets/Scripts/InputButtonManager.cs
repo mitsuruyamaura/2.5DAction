@@ -19,8 +19,12 @@ public class InputButtonManager : MonoBehaviour
     [SerializeField]
     private Button btnRight;
 
+    [SerializeField]
+    private Button btnStepping;
+
     //[SerializeField]
     private MapMoveController mapMoveController;
+
 
     public void SetUpInputButtonManager(MapMoveController mapMoveController) {
         this.mapMoveController = mapMoveController;
@@ -63,6 +67,8 @@ public class InputButtonManager : MonoBehaviour
         //btnDown.onClick.AddListener(() => InputMoveButton(new Vector2(0, -1)));
         //btnLeft.onClick.AddListener(() => InputMoveButton(new Vector2(-1, 0)));
         //btnRight.onClick.AddListener(() => InputMoveButton(new Vector2(1, 0)));
+
+        btnStepping.onClick.AddListener(InputSteppingButton);
     }
 
     /// <summary>
@@ -70,6 +76,26 @@ public class InputButtonManager : MonoBehaviour
     /// </summary>
     /// <param name="pos"></param>
     private void InputMoveButton(Vector2 pos) {
+        SwitchActivateAllButtons(false);
         mapMoveController.CheckMoveTile(pos);
+        
+    }
+
+
+    private void InputSteppingButton() {
+        mapMoveController.Stepping();
+        SwitchActivateAllButtons(false);
+    }
+
+    /// <summary>
+    /// ƒ{ƒ^ƒ“‚ÌŠˆ«‰»/”ñŠˆ«‰»‚ÌØ‚è‘Ö‚¦
+    /// </summary>
+    /// <param name="isSwitch"></param>
+    public void SwitchActivateAllButtons(bool isSwitch) {
+        btnDown.interactable = isSwitch;
+        btnLeft.interactable = isSwitch;
+        btnRight.interactable = isSwitch;
+        btnUp.interactable = isSwitch;
+        btnStepping.interactable = isSwitch;
     }
 }

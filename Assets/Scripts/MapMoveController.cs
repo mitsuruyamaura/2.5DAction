@@ -32,6 +32,9 @@ public class MapMoveController : MonoBehaviour
 
     private Stage stage;
 
+    private int steppingRecoveryPoint = 3;
+
+
     //void Start() {
     //    transform.GetChild(0).TryGetComponent(out rb);    
     //}
@@ -270,5 +273,31 @@ public class MapMoveController : MonoBehaviour
     /// <returns></returns>
     public List<PlayerConditionBase> GetConditionsList() {
         return conditionsList;
+    }
+
+    /// <summary>
+    /// 足踏み
+    /// </summary>
+    public void Stepping() {
+        // プレイヤーの番でなければ処理しない
+        if (stage.CurrentTurnState != Stage.TurnState.Player) {
+            return;
+        }
+
+        GameData.instance.staminaPoint.Value--;
+
+        // コンディションが付与されている場合、持続時間を更新
+        if (conditionsList.Count > 0) {
+            // 現在のコンディションの状態の残り時間を更新
+            UpdateConditionsDuration();
+        }
+
+        // 足踏みしてHP回復
+        GameData.instance.hp = Mathf.Clamp(GameData.instance.hp += steppingRecoveryPoint, 0, GameData.instance.maxHp);
+
+        StartCoroutine(stage.UpdateDisplayHp(1.0f));
+
+        // エネミーの番になり、エネミーの移動処理を行う
+        stage.CurrentTurnState = Stage.TurnState.Enemy;
     }
 }

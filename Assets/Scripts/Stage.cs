@@ -305,6 +305,8 @@ public class Stage : MonoBehaviour
             CurrentTurnState = TurnState.Boss;
         } else {
             CurrentTurnState = TurnState.Player;
+
+            inputButtonManager.SwitchActivateAllButtons(true);
         }
     }
 }
