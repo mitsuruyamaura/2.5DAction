@@ -76,12 +76,13 @@ public class InputButtonManager : MonoBehaviour
     /// </summary>
     /// <param name="pos"></param>
     private void InputMoveButton(Vector2 pos) {
-        SwitchActivateAllButtons(false);
         mapMoveController.CheckMoveTile(pos);
-        
+        SwitchActivateAllButtons(false);
     }
 
-
+    /// <summary>
+    /// ‘«“¥‚İƒ{ƒ^ƒ“‚Ìˆ—
+    /// </summary>
     private void InputSteppingButton() {
         mapMoveController.Stepping();
         SwitchActivateAllButtons(false);

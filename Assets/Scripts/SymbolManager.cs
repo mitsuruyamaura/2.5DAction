@@ -120,7 +120,7 @@ public class SymbolManager : MonoBehaviour
         for (int i = 0; i < enemiesList.Count; i++) {
             enemiesList[i].EnemyMove();
             yield return new WaitForSeconds(0.05f);
-            Debug.Log("“G‚ÌˆÚ“® :" + i + " ‘Ì–Ú");
+            //Debug.Log("“G‚ÌˆÚ“® :" + i + " ‘Ì–Ú");
         }
     }
 

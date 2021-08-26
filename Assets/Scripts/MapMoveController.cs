@@ -50,6 +50,8 @@ public class MapMoveController : MonoBehaviour
     /// <param name="context"></param>
     public void OnInputMove(InputAction.CallbackContext context) {
 
+        return;
+
         // TODO ˆÚ“®‹Ö~‚È‚çˆ—‚µ‚È‚¢
 
         // ©•ª‚Ìƒ^[ƒ“ˆÈŠO‚Íˆ—‚µ‚È‚¢
