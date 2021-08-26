@@ -111,6 +111,10 @@ public class Stage : MonoBehaviour
         symbolManager.SwitchEnemyCollider(true);
     }
 
+    /// <summary>
+    /// エネミーのターン経過監視処理
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator ObserveEnemyTurnState() {
         while (CurrentTurnState != TurnState.None) {    // あとで GameState に変える
 
@@ -118,7 +122,7 @@ public class Stage : MonoBehaviour
                 Debug.Log("敵の移動　開始");
                 yield return StartCoroutine(symbolManager.EnemisMove());
 
-                Debug.Log("完了");
+                Debug.Log("すべての敵の移動 完了");
 
                 // ターンの状態を確認
                 CheckTurn();
@@ -305,6 +309,8 @@ public class Stage : MonoBehaviour
             CurrentTurnState = TurnState.Boss;
         } else {
             CurrentTurnState = TurnState.Player;
+
+            inputButtonManager.SwitchActivateAllButtons(true);
         }
     }
 }

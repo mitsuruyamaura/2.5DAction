@@ -40,7 +40,7 @@ public class RecoveryItemSymbol : SymbolBase
         } else if (symbolType == SymbolType.Life) {
             effectPrefab = EffectManager.instance.recoveryLifeEffectPrefab;
 
-            GameData.instance.hp += recoveryPoint;
+            GameData.instance.hp = Mathf.Clamp(GameData.instance.hp += recoveryPoint, 0, GameData.instance.maxHp);
         }
 
         GameObject effect = Instantiate(effectPrefab, effectTran);
