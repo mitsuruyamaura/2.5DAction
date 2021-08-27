@@ -48,6 +48,18 @@ public class Stage : MonoBehaviour
     [SerializeField]
     private Button btnPlayerLevel;
 
+    [SerializeField]
+    private GameObject maskFieldObj;
+
+    [SerializeField]
+    private SelectAbilityPopUp selectAbilityPopUpPrefab;
+
+    [SerializeField]
+    private Transform canvasTran;
+
+    private SelectAbilityPopUp selectAbilityPopUp;
+
+
     private float sliderAnimeDuration = 0.5f;
 
     int levelupCount;
@@ -112,6 +124,9 @@ public class Stage : MonoBehaviour
         StartCoroutine(ObserveEnemyTurnState());
 
         symbolManager.SwitchEnemyCollider(true);
+
+        // アビリティ選択用ウインドウの生成
+        CreateSelectAbilityPopUp();
 
         btnPlayerLevel.onClick.AddListener(OnClickPlayerLevel);
     }
@@ -323,6 +338,27 @@ public class Stage : MonoBehaviour
     /// プレイヤーレベルのボタンを押下した際の処理
     /// </summary>
     private void OnClickPlayerLevel() {
-        Debug.Log("Level");
+        //Debug.Log("Show SelectAbilityPopUp");
+
+        // フィールドを隠す
+        SwitchMaskField(false);
+
+        selectAbilityPopUp.ShowPopUp();
+    }
+
+    /// <summary>
+    /// マスクで切り抜いて表示しているフィールドの表示/非表示の切り替え
+    /// </summary>
+    /// <param name="isSwitch"></param>
+    public void SwitchMaskField(bool isSwitch) {
+        maskFieldObj.SetActive(isSwitch);
+    }
+
+    /// <summary>
+    /// アビリティ選択用ウインドウの生成と初期設定
+    /// </summary>
+    private void CreateSelectAbilityPopUp() {
+        selectAbilityPopUp = Instantiate(selectAbilityPopUpPrefab,canvasTran);
+        selectAbilityPopUp.SetUpSelectAbilityPopUp(this);
     }
 }
