@@ -23,6 +23,10 @@ public class GameData : MonoBehaviour
 
     public CharacterData currentCharaData;
 
+    public int abilityPoint;
+
+    public int maxAbilityPoint;
+
     void Awake() {
         if (instance == null) {
             instance = this;
@@ -40,6 +44,9 @@ public class GameData : MonoBehaviour
             playerLevel = 1;
 
             totalExp = 0;
+
+            abilityPoint = 0;
+            maxAbilityPoint += playerLevel;
         }
     }
 }
