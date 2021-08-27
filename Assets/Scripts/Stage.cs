@@ -45,6 +45,9 @@ public class Stage : MonoBehaviour
     [SerializeField]
     private MapMoveController mapMoveController;
 
+    [SerializeField]
+    private Button btnPlayerLevel;
+
     private float sliderAnimeDuration = 0.5f;
 
     int levelupCount;
@@ -109,6 +112,8 @@ public class Stage : MonoBehaviour
         StartCoroutine(ObserveEnemyTurnState());
 
         symbolManager.SwitchEnemyCollider(true);
+
+        btnPlayerLevel.onClick.AddListener(OnClickPlayerLevel);
     }
 
     /// <summary>
@@ -312,5 +317,12 @@ public class Stage : MonoBehaviour
 
             inputButtonManager.SwitchActivateAllButtons(true);
         }
+    }
+
+    /// <summary>
+    /// プレイヤーレベルのボタンを押下した際の処理
+    /// </summary>
+    private void OnClickPlayerLevel() {
+        Debug.Log("Level");
     }
 }
