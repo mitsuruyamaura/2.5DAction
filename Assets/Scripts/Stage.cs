@@ -361,4 +361,18 @@ public class Stage : MonoBehaviour
         selectAbilityPopUp = Instantiate(selectAbilityPopUpPrefab,canvasTran);
         selectAbilityPopUp.SetUpSelectAbilityPopUp(this);
     }
+
+    /// <summary>
+    /// アビリティ強化時のエフェクトをプレイヤー上で再生
+    /// </summary>
+    public IEnumerator PlayAbilityPowerUpEffect() {
+        GameObject effect_1 = Instantiate(EffectManager.instance.abilityPowerUpPrefab_1, mapMoveController.transform.position, EffectManager.instance.abilityPowerUpPrefab_1.transform.rotation);
+        Destroy(effect_1, 1.5f);
+
+        yield return new WaitForSeconds(1.0f);
+
+        GameObject effect_2 = Instantiate(EffectManager.instance.abilityPowerUpPrefab_2, mapMoveController.transform.position, EffectManager.instance.abilityPowerUpPrefab_2.transform.rotation);
+        effect_2.transform.position = new Vector3(effect_2.transform.position.x, effect_2.transform.position.y - 0.5f, effect_2.transform.position.z);
+        Destroy(effect_2, 1.5f);
+    }
 }

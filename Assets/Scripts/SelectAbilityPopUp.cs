@@ -34,7 +34,9 @@ public class SelectAbilityPopUp : MonoBehaviour
     // 選択しているアビリティの保持
     private AbilityDetail currentAbilityDetail;
 
+    // AbilityDetail の管理用
     public List<AbilityDetail[]> abilityDetailsList;
+
 
     /// <summary>
     /// 
@@ -142,7 +144,13 @@ public class SelectAbilityPopUp : MonoBehaviour
         }
 
         // 強化に必要なコストを支払う
-        GameData.instance.abilityPoint -= currentAbilityDetail.abilityData.abilityTable.abilityCost;
+        int startValue = GameData.instance.abilityPoint;
+
+        // アニメーションさせて AbilityPoint の表示を更新
+        txtAbilityPoint.DOCounter(startValue, GameData.instance.abilityPoint -= currentAbilityDetail.abilityData.abilityTable.abilityCost, 1.0f).SetEase(Ease.InQuart);
+
+        // エフェクト
+         StartCoroutine(stage.PlayAbilityPowerUpEffect());
 
         // 初期値に戻す
         Initialize();
@@ -168,10 +176,9 @@ public class SelectAbilityPopUp : MonoBehaviour
         if (currentAbilityDetail == null) {
             txtDescription.text = "アビリティを選択してください";
         } else {
-            txtDescription.text = currentAbilityDetail.abilityData.abilityTable.abilityLevel.ToString();
-            txtDescription.text += "/n" + currentAbilityDetail.abilityData.abilityTable.abilityName;
-            txtDescription.text += "/n" + currentAbilityDetail.abilityData.abilityType.ToString();
-            txtDescription.text += "/n" + "強化 : + " + currentAbilityDetail.abilityData.abilityTable.powerUpValue.ToString();
+            txtDescription.text = "強化レベル : " + currentAbilityDetail.abilityData.abilityTable.abilityLevel.ToString() + "\n";
+            txtDescription.text += currentAbilityDetail.abilityData.abilityTable.abilityName + "\n";
+            txtDescription.text += currentAbilityDetail.abilityData.abilityType + " : + " + currentAbilityDetail.abilityData.abilityTable.powerUpValue;
         }
     }
 
