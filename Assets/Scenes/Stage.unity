@@ -2713,6 +2713,9 @@ MonoBehaviour:
   expTableSO: {fileID: 11400000, guid: 56e379c00098b8e4a87d4fb3376afe75, type: 2}
   spriteMaskTran: {fileID: 1638652407}
   tilemapCollider: {fileID: 175135994}
+  abilityPointTableSOList:
+  - {fileID: 11400000, guid: 58d10d67aa371264ba5c7064f2065321, type: 2}
+  - {fileID: 11400000, guid: 58d10d67aa371264ba5c7064f2065321, type: 2}
 --- !u!4 &878749739
 Transform:
   m_ObjectHideFlags: 0
@@ -3104,12 +3107,11 @@ MonoBehaviour:
     attackPower: 1
     moveSpeed: 4
     dashPower: 5
-    chargePower: 10
+    chargeSpeed: 0
     maxChargePoint: 1000
     attackIntervalTime: 1
     dashAvoidIntervalTime: 1
-  abilityPoint: 0
-  maxAbilityPoint: 0
+  abilityPoint: 100
 --- !u!4 &941425069
 Transform:
   m_ObjectHideFlags: 0

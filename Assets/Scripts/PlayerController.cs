@@ -273,7 +273,7 @@ public class PlayerController : MonoBehaviour
 
         while (currentPlayerState == PlayerState.Wait) {
 
-            chargePoint += GameData.instance.currentCharaData.chargePower;
+            chargePoint += GameData.instance.currentCharaData.chargeSpeed;
 
             // TODO UI ˜A“®
 
