@@ -7,7 +7,7 @@ public class CharacterData
     public float moveSpeed;
     public float dashPower;
 
-    public int chargePower;
+    public int chargeSpeed;
 
     public int maxChargePoint;
 

@@ -10,6 +10,8 @@ public class EffectManager : MonoBehaviour
     public GameObject recoveryStaminaEffectPrefab;
     public GameObject recoveryLifeEffectPrefab;
     public GameObject orbGetEffectPrefab;
+    public GameObject abilityPowerUpPrefab_1;
+    public GameObject abilityPowerUpPrefab_2;
 
     // Enemy ‘¤
     public GameObject enemyHitEffectPrefab;
