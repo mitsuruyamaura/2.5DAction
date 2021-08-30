@@ -35,8 +35,6 @@ public class SymbolBase : MonoBehaviour
         }
 
         isSymbolTriggerd = true;
-
-        OnExitSymbol();
     }
 
     /// <summary>
@@ -55,7 +53,7 @@ public class SymbolBase : MonoBehaviour
         // List ‚©‚çƒVƒ“ƒ{ƒ‹‚ğíœ
         symbolManager.RemoveSymbolsList(this);
 
-        Destroy(gameObject, 1.25f);
+        Destroy(gameObject);
     }
 
     /// <summary>

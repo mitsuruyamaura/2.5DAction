@@ -120,8 +120,8 @@ public class Stage : MonoBehaviour
 
         CurrentTurnState = TurnState.Player;
 
-        // プレイヤーの移動の監視
-        StartCoroutine(ObserveEnemyTurnState());
+        // プレイヤーの移動の監視(OnEnable でやっている)
+        //StartCoroutine(ObserveEnemyTurnState());
 
         symbolManager.SwitchEnemyCollider(true);
 
@@ -143,6 +143,9 @@ public class Stage : MonoBehaviour
                 yield return StartCoroutine(symbolManager.EnemisMove());
 
                 Debug.Log("すべての敵の移動 完了");
+
+                // シンボルのイベントを発生させる
+                mapMoveController.CallBackEnemySymbolTriggerEvent();
 
                 // ターンの状態を確認
                 CheckTurn();
@@ -331,9 +334,6 @@ public class Stage : MonoBehaviour
         if (GameData.instance.staminaPoint.Value <= 0) {
             CurrentTurnState = TurnState.Boss;
         } else {
-            // シンボルのイベントを発生させる
-            mapMoveController.CallBackEnemySymbolTriggerEvent();
-
             CurrentTurnState = TurnState.Player;
 
             ActivateInputButtons();

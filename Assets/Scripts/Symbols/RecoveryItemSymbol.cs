@@ -31,6 +31,8 @@ public class RecoveryItemSymbol : SymbolBase
 
     public override void TriggerAppearEffect(MapMoveController mapMoveController) {
 
+        base.TriggerAppearEffect(mapMoveController);
+
         GameObject effectPrefab = null;
 
         if (symbolType == SymbolType.Stamina) {
@@ -48,8 +50,6 @@ public class RecoveryItemSymbol : SymbolBase
 
         Destroy(effect, 1.5f);
 
-        transform.DOScale(0, 0.5f).SetEase(Ease.InQuart);
-
-        base.TriggerAppearEffect(mapMoveController);
+        transform.DOScale(0, 0.5f).SetEase(Ease.InQuart).OnComplete(() => { base.OnExitSymbol(); });
     }
 }
