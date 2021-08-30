@@ -35,8 +35,10 @@ public class MapMoveController : MonoBehaviour
 
     private int steppingRecoveryPoint = 3;
 
-    private UnityAction<MapMoveController> enemySymbolTriggerEvent;
-    private UnityAction<MapMoveController> orbSymbolTriggerEvent;
+    //private UnityAction<MapMoveController> enemySymbolTriggerEvent;
+    //private UnityAction<MapMoveController> orbSymbolTriggerEvent;
+    private UnityEvent<MapMoveController> enemySymbolTriggerEvent;
+    private UnityEvent<MapMoveController> orbSymbolTriggerEvent;
 
 
     //void Start() {
@@ -258,16 +260,23 @@ public class MapMoveController : MonoBehaviour
                     return;
                 }
 
+                symbolBase.isSymbolTriggerd = true;
+
                 // シンボルのイベントを登録して予約し、すべてのエネミーの移動が終了してから実行
-                enemySymbolTriggerEvent = (x) =>  symbolBase.TriggerAppearEffect(this);
+                //enemySymbolTriggerEvent = (x) =>  symbolBase.TriggerAppearEffect(this);
+                enemySymbolTriggerEvent = new UnityEvent<MapMoveController>();
+                enemySymbolTriggerEvent.AddListener(symbolBase.TriggerAppearEffect);
+
+                Debug.Log("登録");
             }
 
             // オーブの場合
             if (symbolBase.symbolType == SymbolType.Orb) {
                 // シンボルのイベントを登録して予約し、バトル後 Stage に戻ってきてから実行
-                orbSymbolTriggerEvent = _ => symbolBase.TriggerAppearEffect(this);
-
-            } else {
+                //orbSymbolTriggerEvent = _ => symbolBase.TriggerAppearEffect(this);
+                orbSymbolTriggerEvent = new UnityEvent<MapMoveController>();
+                orbSymbolTriggerEvent.AddListener(symbolBase.TriggerAppearEffect);
+            } else if (symbolBase.symbolType != SymbolType.Enemy) {
                 // それ以外のシンボルはすぐに実行
                 symbolBase.TriggerAppearEffect(this);
             }
@@ -340,11 +349,14 @@ public class MapMoveController : MonoBehaviour
     /// </summary>
     public void CallBackEnemySymbolTriggerEvent() {
 
-        // イベントがあるときだけ実行する
-        enemySymbolTriggerEvent?.Invoke(this);
+        if (enemySymbolTriggerEvent != null) {
+            // イベントがあるときだけ実行する
+            enemySymbolTriggerEvent?.Invoke(this);
 
-        // イベントをクリア
-        enemySymbolTriggerEvent = null;
+            // イベントをクリア
+            enemySymbolTriggerEvent?.RemoveAllListeners();
+            enemySymbolTriggerEvent = null;
+        }
     }
 
     /// <summary>
@@ -352,10 +364,13 @@ public class MapMoveController : MonoBehaviour
     /// </summary>
     public void CallBackOrbSymbolTriggerEvent() {
 
-        // イベントがあるときだけ実行する
-        orbSymbolTriggerEvent?.Invoke(this);
+        if (orbSymbolTriggerEvent != null) {
+            // イベントがあるときだけ実行する
+            orbSymbolTriggerEvent?.Invoke(this);
 
-        // イベントをクリア
-        orbSymbolTriggerEvent = null;
+            // イベントをクリア
+            orbSymbolTriggerEvent?.RemoveAllListeners();
+            orbSymbolTriggerEvent = null;
+        }
     }
 }

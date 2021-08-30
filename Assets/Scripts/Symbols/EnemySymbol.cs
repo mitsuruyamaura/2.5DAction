@@ -33,7 +33,7 @@ public class EnemySymbol : SymbolBase
 
         tween = transform.DOShakeScale(0.75f, 1.0f)
             .SetEase(Ease.OutQuart)
-            .OnComplete(() => { PreparateBattle(); } );
+            .OnComplete(() => { OnExitSymbol(); } );
     }
 
     protected override void OnExitSymbol() {
@@ -42,6 +42,9 @@ public class EnemySymbol : SymbolBase
         symbolManager.RemoveEnemySymbol(this);
 
         base.OnExitSymbol();
+
+        // ƒoƒgƒ‹‚Ì€”õ
+        PreparateBattle();
     }
 
     /// <summary>

@@ -25,6 +25,8 @@ public class ConditionItemSymbol : SymbolBase {
 
     public override void TriggerAppearEffect(MapMoveController mapMoveController) {
 
+        base.TriggerAppearEffect(mapMoveController);
+
         // 獲得時のエフェクト演出
 
 
@@ -56,6 +58,6 @@ public class ConditionItemSymbol : SymbolBase {
         // コンディション用の List に追加
         mapMoveController.AddConditionsList(playerCondition);
 
-        base.TriggerAppearEffect(mapMoveController);
+        base.OnExitSymbol();
     }
 }

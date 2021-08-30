@@ -18,6 +18,10 @@ public class OrbSymbol : SymbolBase {
 
     public override void TriggerAppearEffect(MapMoveController mapMoveController) {
 
+        tween.Kill();
+
+        base.TriggerAppearEffect(mapMoveController);
+
         GameData.instance.orbs[no] = true;
 
         // TODO ボーナス
@@ -28,9 +32,7 @@ public class OrbSymbol : SymbolBase {
 
         Destroy(effect, 1.5f);
 
-        transform.DOScale(0, 0.5f).SetEase(Ease.InQuart);
-
-        base.TriggerAppearEffect(mapMoveController);
+        tween = transform.DOScale(0, 0.5f).SetEase(Ease.InQuart).OnComplete(() => { base.OnExitSymbol(); });        
     }
 
     /// <summary>
