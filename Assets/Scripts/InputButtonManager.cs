@@ -25,7 +25,10 @@ public class InputButtonManager : MonoBehaviour
     //[SerializeField]
     private MapMoveController mapMoveController;
 
-
+    /// <summary>
+    /// インプット用のボタンの設定
+    /// </summary>
+    /// <param name="mapMoveController"></param>
     public void SetUpInputButtonManager(MapMoveController mapMoveController) {
         this.mapMoveController = mapMoveController;
 
@@ -76,16 +79,18 @@ public class InputButtonManager : MonoBehaviour
     /// </summary>
     /// <param name="pos"></param>
     private void InputMoveButton(Vector2 pos) {
-        mapMoveController.CheckMoveTile(pos);
         SwitchActivateAllButtons(false);
+        mapMoveController.CheckMoveTile(pos);
     }
 
     /// <summary>
     /// 足踏みボタンの処理
     /// </summary>
     private void InputSteppingButton() {
-        mapMoveController.Stepping();
         SwitchActivateAllButtons(false);
+        mapMoveController.Stepping();
+
+        //Debug.Log("Input Stepping");
     }
 
     /// <summary>
@@ -93,6 +98,7 @@ public class InputButtonManager : MonoBehaviour
     /// </summary>
     /// <param name="isSwitch"></param>
     public void SwitchActivateAllButtons(bool isSwitch) {
+        //Debug.Log(isSwitch);
         btnDown.interactable = isSwitch;
         btnLeft.interactable = isSwitch;
         btnRight.interactable = isSwitch;

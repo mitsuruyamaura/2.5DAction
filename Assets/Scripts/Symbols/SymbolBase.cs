@@ -55,7 +55,7 @@ public class SymbolBase : MonoBehaviour
         // List ‚©‚çƒVƒ“ƒ{ƒ‹‚ğíœ
         symbolManager.RemoveSymbolsList(this);
 
-        Destroy(gameObject, 1.0f);
+        Destroy(gameObject, 1.25f);
     }
 
     /// <summary>

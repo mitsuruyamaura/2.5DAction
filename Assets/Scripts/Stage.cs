@@ -250,6 +250,9 @@ public class Stage : MonoBehaviour
         // ターンの確認
         CheckTurn();
 
+        // オーブを獲得している場合は獲得処理を実行
+        CheckOrb();
+
         if (CurrentTurnState == TurnState.Player) {
 
             // プレイヤーの移動の監視再開
@@ -328,10 +331,20 @@ public class Stage : MonoBehaviour
         if (GameData.instance.staminaPoint.Value <= 0) {
             CurrentTurnState = TurnState.Boss;
         } else {
+            // シンボルのイベントを発生させる
+            mapMoveController.CallBackEnemySymbolTriggerEvent();
+
             CurrentTurnState = TurnState.Player;
 
-            inputButtonManager.SwitchActivateAllButtons(true);
+            ActivateInputButtons();
         }
+    }
+
+    /// <summary>
+    /// オーブのイベントが登録されているか確認して、登録されている場合には実行
+    /// </summary>
+    private void CheckOrb() {
+        mapMoveController.CallBackOrbSymbolTriggerEvent();
     }
 
     /// <summary>
@@ -367,12 +380,20 @@ public class Stage : MonoBehaviour
     /// </summary>
     public IEnumerator PlayAbilityPowerUpEffect() {
         GameObject effect_1 = Instantiate(EffectManager.instance.abilityPowerUpPrefab_1, mapMoveController.transform.position, EffectManager.instance.abilityPowerUpPrefab_1.transform.rotation);
+        effect_1.transform.position = new Vector3(effect_1.transform.position.x, effect_1.transform.position.y - 0.35f, effect_1.transform.position.z);
         Destroy(effect_1, 1.5f);
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(1.5f);
 
         GameObject effect_2 = Instantiate(EffectManager.instance.abilityPowerUpPrefab_2, mapMoveController.transform.position, EffectManager.instance.abilityPowerUpPrefab_2.transform.rotation);
-        effect_2.transform.position = new Vector3(effect_2.transform.position.x, effect_2.transform.position.y - 0.5f, effect_2.transform.position.z);
-        Destroy(effect_2, 1.5f);
+        //effect_2.transform.position = new Vector3(effect_2.transform.position.x, effect_2.transform.position.y - 0.5f, effect_2.transform.position.z);
+        Destroy(effect_2, 1.0f);
+    }
+
+    /// <summary>
+    /// 移動の入力を可能にする
+    /// </summary>
+    public void ActivateInputButtons() {
+        inputButtonManager.SwitchActivateAllButtons(true);
     }
 }
