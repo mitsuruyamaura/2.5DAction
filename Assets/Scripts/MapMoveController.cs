@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 using DG.Tweening;
+using UnityEngine.Events;
 
 public class MapMoveController : MonoBehaviour
 {
@@ -33,6 +34,9 @@ public class MapMoveController : MonoBehaviour
     private Stage stage;
 
     private int steppingRecoveryPoint = 3;
+
+    private UnityAction<MapMoveController> enemySymbolTriggerEvent;
+    private UnityAction<MapMoveController> orbSymbolTriggerEvent;
 
 
     //void Start() {
@@ -170,9 +174,14 @@ public class MapMoveController : MonoBehaviour
 
             // 移動しないで終了
             isMoving = false;
+
+            // ボタンを押せるようにする
+            stage.ActivateInputButtons();
             //    //break;
 
-            //// Grid 以外の場合
+            //Debug.Log("Grid");
+            
+            // Grid 以外の場合
         } else {
             //if (tilemapWalk.GetColliderType(tilePos) == Tile.ColliderType.None) {   // tilemapCollider.GetColliderType(tilePos) != Tile.ColliderType.Grid) {
 
@@ -234,11 +243,34 @@ public class MapMoveController : MonoBehaviour
                 return;
             }
 
-            if (!symbolBase.isSymbolTriggerd) {
-                Debug.Log("移動先でシンボルに接触 : " + symbolBase.symbolType.ToString());
-                symbolBase.TriggerAppearEffect(this);
+            // 同じシンボルに接触した場合は処理しない
+            if (symbolBase.isSymbolTriggerd) {
+                return;
             }
 
+            Debug.Log("移動先でシンボルに接触 : " + symbolBase.symbolType.ToString());
+
+            // エネミーのシンボルの場合
+            if (symbolBase.symbolType == SymbolType.Enemy) {
+
+                // エネミーのシンボルのイベントの重複登録はしない
+                if (enemySymbolTriggerEvent != null) {
+                    return;
+                }
+
+                // シンボルのイベントを登録して予約し、すべてのエネミーの移動が終了してから実行
+                enemySymbolTriggerEvent = (x) =>  symbolBase.TriggerAppearEffect(this);
+            }
+
+            // オーブの場合
+            if (symbolBase.symbolType == SymbolType.Orb) {
+                // シンボルのイベントを登録して予約し、バトル後 Stage に戻ってきてから実行
+                orbSymbolTriggerEvent = _ => symbolBase.TriggerAppearEffect(this);
+
+            } else {
+                // それ以外のシンボルはすぐに実行
+                symbolBase.TriggerAppearEffect(this);
+            }
                     //break;
             //}
         }
@@ -301,5 +333,29 @@ public class MapMoveController : MonoBehaviour
 
         // エネミーの番になり、エネミーの移動処理を行う
         stage.CurrentTurnState = Stage.TurnState.Enemy;
+    }
+
+    /// <summary>
+    /// 登録されているエネミーシンボルのイベント(エネミーとのバトル)を実行
+    /// </summary>
+    public void CallBackEnemySymbolTriggerEvent() {
+
+        // イベントがあるときだけ実行する
+        enemySymbolTriggerEvent?.Invoke(this);
+
+        // イベントをクリア
+        enemySymbolTriggerEvent = null;
+    }
+
+    /// <summary>
+    /// 登録されているオーブシンボルのイベントを実行
+    /// </summary>
+    public void CallBackOrbSymbolTriggerEvent() {
+
+        // イベントがあるときだけ実行する
+        orbSymbolTriggerEvent?.Invoke(this);
+
+        // イベントをクリア
+        orbSymbolTriggerEvent = null;
     }
 }

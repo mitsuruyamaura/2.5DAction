@@ -41,8 +41,7 @@ public class StageGenerator : MonoBehaviour
 
 
 
-    //void Start()
-    //{
+    //void Start() {
     //    // Debug —p
     //    GenerateStageFromRandomTiles();
     //    GenerateSymbols(-1);

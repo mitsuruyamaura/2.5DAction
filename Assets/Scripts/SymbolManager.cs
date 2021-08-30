@@ -118,6 +118,12 @@ public class SymbolManager : MonoBehaviour
     public IEnumerator EnemisMove() {
 
         for (int i = 0; i < enemiesList.Count; i++) {
+
+            // プレイヤーと接触しているエネミーは移動させない
+            if (enemiesList[i].isSymbolTriggerd) {
+                continue;
+            }
+
             enemiesList[i].EnemyMove();
             yield return new WaitForSeconds(0.05f);
             //Debug.Log("敵の移動 :" + i + " 体目");
