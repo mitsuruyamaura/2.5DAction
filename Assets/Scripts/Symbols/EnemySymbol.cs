@@ -31,7 +31,7 @@ public class EnemySymbol : SymbolBase
 
         Debug.Log("ˆÚ“®æ‚Å“G‚ÉÚG");
 
-        transform.DOShakeScale(0.75f, 1.0f)
+        tween = transform.DOShakeScale(0.75f, 1.0f)
             .SetEase(Ease.OutQuart)
             .OnComplete(() => { PreparateBattle(); } );
     }
