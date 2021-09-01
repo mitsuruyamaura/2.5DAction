@@ -47,4 +47,11 @@ public class GameData : MonoBehaviour
             abilityPoint += playerLevel;
         }
     }
+
+    /// <summary>
+    /// アビリティポイントの加算
+    /// </summary>
+    public void AddAbilityPoint() {
+        abilityPoint += playerLevel;
+    }
 }
