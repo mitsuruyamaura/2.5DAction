@@ -26,7 +26,7 @@ public class MapMoveController : MonoBehaviour
     [SerializeField]  // Debug用
     private bool isMoving;
 
-    public bool IsMoving { get => isMoving; }
+    public bool IsMoving { set => isMoving = value;  get => isMoving; }
 
     [SerializeField]
     private List<PlayerConditionBase> conditionsList = new List<PlayerConditionBase>();
@@ -217,10 +217,13 @@ public class MapMoveController : MonoBehaviour
         transform.DOMove(destination, moveDuration)
             .SetEase(Ease.Linear)
             .OnComplete(() => {
-                isMoving = false;
+                //isMoving = false;
 
                 // エネミーの番になり、エネミーの移動処理を行う
-                stage.CurrentTurnState = Stage.TurnState.Enemy;
+                //stage.CurrentTurnState = Stage.TurnState.Enemy;
+
+                // 敵のターン開始
+                StartCoroutine(stage.ObserveEnemyTurnState());
             });
     }
 
@@ -280,7 +283,7 @@ public class MapMoveController : MonoBehaviour
                 // それ以外のシンボルはすぐに実行
                 symbolBase.TriggerAppearEffect(this);
             }
-                    //break;
+            //break;
             //}
         }
     }
@@ -340,14 +343,17 @@ public class MapMoveController : MonoBehaviour
 
         StartCoroutine(stage.UpdateDisplayHp(1.0f));
 
-        // エネミーの番になり、エネミーの移動処理を行う
-        stage.CurrentTurnState = Stage.TurnState.Enemy;
+        //// エネミーの番になり、エネミーの移動処理を行う
+        //stage.CurrentTurnState = Stage.TurnState.Enemy;
+
+        // 敵のターン開始
+        StartCoroutine(stage.ObserveEnemyTurnState());
     }
 
     /// <summary>
     /// 登録されているエネミーシンボルのイベント(エネミーとのバトル)を実行
     /// </summary>
-    public void CallBackEnemySymbolTriggerEvent() {
+    public bool CallBackEnemySymbolTriggerEvent() {
 
         if (enemySymbolTriggerEvent != null) {
             // イベントがあるときだけ実行する
@@ -356,7 +362,10 @@ public class MapMoveController : MonoBehaviour
             // イベントをクリア
             enemySymbolTriggerEvent?.RemoveAllListeners();
             enemySymbolTriggerEvent = null;
+
+            return true;
         }
+        return false;
     }
 
     /// <summary>

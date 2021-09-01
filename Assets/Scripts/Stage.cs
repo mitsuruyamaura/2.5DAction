@@ -7,8 +7,7 @@ using Coffee.UIExtensions;
 using DG.Tweening;
 using UnityEngine.Tilemaps;
 
-public class Stage : MonoBehaviour
-{
+public class Stage : MonoBehaviour {
     [SerializeField]
     private Text txtStaminaPoint;
 
@@ -80,14 +79,13 @@ public class Stage : MonoBehaviour
     }
 
 
-    void Start()
-    {
+    void Start() {
         // ステージのランダム作成
         stageGenerator.GenerateStageFromRandomTiles();
 
         // 通常のシンボルのランダム作成して List に追加
         symbolManager.AllClearSymbolsList();
-        symbolManager.SymbolsList =  stageGenerator.GenerateSymbols(-1);
+        symbolManager.SymbolsList = stageGenerator.GenerateSymbols(-1);
 
         // 特殊シンボルのランダム作成して List に追加
         symbolManager.SymbolsList.AddRange(stageGenerator.GenerateSpecialSymbols());
@@ -97,7 +95,7 @@ public class Stage : MonoBehaviour
 
         // スタミナの値の購読開始
         GameData.instance.staminaPoint.Subscribe(_ => UpdateDisplayStaminaPoint());
-        
+
         // オーブの情報作成
         for (int i = 0; i < imgOrbs.Length; i++) {
             GameData.instance.orbs.Add(i, false);
@@ -135,37 +133,39 @@ public class Stage : MonoBehaviour
     /// エネミーのターン経過監視処理
     /// </summary>
     /// <returns></returns>
-    private IEnumerator ObserveEnemyTurnState() {
-        while (CurrentTurnState != TurnState.None) {    // あとで GameState に変える
+    public IEnumerator ObserveEnemyTurnState() {
+        //while (CurrentTurnState == TurnState.Enemy) {    // あとで GameState に変える
 
-            if (CurrentTurnState == TurnState.Enemy) {
-                Debug.Log("敵の移動　開始");
-                yield return StartCoroutine(symbolManager.EnemisMove());
+        //if (CurrentTurnState == TurnState.Enemy) {
+        Debug.Log("敵の移動　開始");
+        yield return StartCoroutine(symbolManager.EnemisMove());
 
-                Debug.Log("すべての敵の移動 完了");
+        Debug.Log("すべての敵の移動 完了");
 
-                // シンボルのイベントを発生させる
-                mapMoveController.CallBackEnemySymbolTriggerEvent();
+        // シンボルのイベントを発生させる
+        bool isEnemyTriggerEvent = mapMoveController.CallBackEnemySymbolTriggerEvent();
 
-                // ターンの状態を確認
-                CheckTurn();
+        Debug.Log(isEnemyTriggerEvent);
 
-                if (CurrentTurnState == TurnState.Boss) {
+        // ターンの状態を確認
+        if (!isEnemyTriggerEvent) CheckTurn();
 
-                    // ボスの出現
-                    Debug.Log("Boss 出現");
+        if (CurrentTurnState == TurnState.Boss) {
+
+            // ボスの出現
+            Debug.Log("Boss 出現");
 
 
-                    // TODO 演出
+            // TODO 演出
 
 
-                    // TODO シーン遷移
+            // TODO シーン遷移
 
-                }
-            }
-
-            yield return null;
         }
+        //}
+
+        //yield return null;
+        //}
     }
 
     /// <summary>
@@ -223,6 +223,8 @@ public class Stage : MonoBehaviour
     }
 
     private void OnEnable() {
+        Debug.Log("OnEneble");
+
         // TODO トランジション処理
 
 
@@ -231,7 +233,7 @@ public class Stage : MonoBehaviour
 
         // バトル後にレベルアップした時のカウントの初期化
         levelupCount = 0;
-     
+
         // レベルアップするか確認
         CheckExpNextLevel();
 
@@ -256,11 +258,12 @@ public class Stage : MonoBehaviour
         // オーブを獲得している場合は獲得処理を実行
         CheckOrb();
 
-        if (CurrentTurnState == TurnState.Player) {
+        //if (CurrentTurnState == TurnState.Player) {
 
-            // プレイヤーの移動の監視再開
-            StartCoroutine(ObserveEnemyTurnState());
-        } else if (CurrentTurnState == TurnState.Boss){
+        //    // プレイヤーの移動の監視再開
+        //    StartCoroutine(ObserveEnemyTurnState());
+        //} else
+        if (CurrentTurnState == TurnState.Boss) {
 
             // ボスの出現
             Debug.Log("Boss 出現");
@@ -280,7 +283,7 @@ public class Stage : MonoBehaviour
     public void CheckExpNextLevel() {
 
         // 現在の経験値と次のレベルに必要な経験値を比べて、レベルが上がるか確認
-        if (GameData.instance.totalExp < DataBaseManager.instance.CalcNextLevelExp(GameData.instance.playerLevel -1)) {
+        if (GameData.instance.totalExp < DataBaseManager.instance.CalcNextLevelExp(GameData.instance.playerLevel - 1)) {
             // 達していない場合には経験値とゲージ更新
             UpdateDisplayExp(true);
 
@@ -340,7 +343,13 @@ public class Stage : MonoBehaviour
             CurrentTurnState = TurnState.Player;
 
             ActivateInputButtons();
+
+            mapMoveController.IsMoving = false;
+
+            // プレイヤーの移動の監視再開
+            //StartCoroutine(ObserveEnemyTurnState());
         }
+        Debug.Log(CurrentTurnState);
     }
 
     /// <summary>
@@ -374,7 +383,7 @@ public class Stage : MonoBehaviour
     /// アビリティ選択用ウインドウの生成と初期設定
     /// </summary>
     private void CreateSelectAbilityPopUp() {
-        selectAbilityPopUp = Instantiate(selectAbilityPopUpPrefab,canvasTran);
+        selectAbilityPopUp = Instantiate(selectAbilityPopUpPrefab, canvasTran);
         selectAbilityPopUp.SetUpSelectAbilityPopUp(this);
     }
 
