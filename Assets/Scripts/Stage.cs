@@ -291,6 +291,9 @@ public class Stage : MonoBehaviour
             GameData.instance.playerLevel++;
             levelupCount++;
 
+            // アビリティポイント加算
+            GameData.instance.AddAbilityPoint();
+
             Debug.Log("レベルアップ！ 現在のレベル : " + GameData.instance.playerLevel);
 
             // レベルアップ演出
