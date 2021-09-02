@@ -5,4 +5,5 @@ public enum EnemyMoveType {
 
     Archer,
     Defender,
+    Assasin,
 }

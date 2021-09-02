@@ -12,7 +12,7 @@ public class EnemyMoveEventDataSO : ScriptableObject
         return enemyMoveType switch {
             EnemyMoveType.Archer => MoveTypeArcher,
             EnemyMoveType.Defender => MoveTypeDefender,
-
+            EnemyMoveType.Assasin => MoveTypeAssasin,
             _ => MoveTypeArcher
         };
     }
@@ -29,13 +29,22 @@ public class EnemyMoveEventDataSO : ScriptableObject
     }
 
     /// <summary>
-    /// 
+    /// ディフェンダータイプの移動
     /// </summary>
     /// <param name="tran"></param>
     /// <param name="duration"></param>
     public void MoveTypeDefender(Transform tran, float duration) {
         Debug.Log("ディフェンダータイプの移動");
 
-        tran.DOMoveX(tran.position.z + Random.Range(-15.0f, 15.0f), duration).SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo);
+        tran.DOMoveZ(tran.position.z + Random.Range(-5.0f, 5.0f), duration).SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo);
+    }
+
+    /// <summary>
+    /// アサシンタイプの移動
+    /// </summary>
+    /// <param name="tran"></param>
+    /// <param name="duration"></param>
+    public void MoveTypeAssasin(Transform tran, float duration) {
+        //tran.DOMove(tran.position, duration).SetEase(Ease.InOutQuart);
     }
 }
