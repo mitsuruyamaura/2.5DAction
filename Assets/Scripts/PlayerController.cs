@@ -255,13 +255,23 @@ public class PlayerController : MonoBehaviour
 
         GameData.instance.hp = Mathf.Clamp(GameData.instance.hp += damage, 0, GameData.instance.maxHp);
 
+        // 表示更新
+        battle.UpdateDisplayHp();
+
         // TODO エフェクト
+
+        DamageEffect();
+
+        // TODO ダメージアニメ再生
 
 
         Debug.Log("amount : " + damage);
 
+        // Hp が残っているか判定
         if (GameData.instance.hp <= 0) {
             Debug.Log("Game Over");
+
+            battle.currentBattleState = BattleState.GameUp;
         }
     }
 
@@ -311,22 +321,16 @@ public class PlayerController : MonoBehaviour
         if (other.TryGetComponent(out BulletController bullet)) {
             Debug.Log("被弾");
 
-            GameData.instance.hp -= bullet.bulletPower;
-
-            battle.UpdateDisplayHp();
-
-            // Hp が残っているか判定
-            if (GameData.instance.hp <= 0) {
-                Debug.Log("Game Over");
-
-                battle.currentBattleState = BattleState.GameUp;
-            }
-
-            // TODO ダメージアニメ再生
-
-            // TODO 演出
+            CalcHp(-bullet.bulletPower);
 
             Destroy(other.gameObject);
+        }
+
+        if (other.TryGetComponent(out EnemyController enemy)) {
+            if (enemy.currentEnemyState == EnemyController.EnemyState.Attack) {
+                // ダメージ
+                CalcHp(enemy.attackPower);
+            }
         }
     }
 

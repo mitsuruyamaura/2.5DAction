@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Events;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour 
 {
     [SerializeField]
     private int hp;
@@ -15,8 +15,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private int attackIntervalTime;
 
-    [SerializeField]
-    private int attackPower;
+    public int attackPower;
 
     [SerializeField]
     private Transform floatingMessageTran;
@@ -25,7 +24,7 @@ public class EnemyController : MonoBehaviour
 
     public bool IsDamaged {
         set { isDamaged = value; }
-        get { return isDamaged; }  
+        get { return isDamaged; }
     }
 
     private PlayerController playerController;
@@ -47,9 +46,20 @@ public class EnemyController : MonoBehaviour
     private float moveDuraiton;
 
     private UnityAction<Transform, float> moveEvent;
+    private System.Func<Transform, float> moveFunc;
 
     [SerializeField]
     private int exp;
+
+    private Tween tween;
+
+
+    public enum EnemyState{
+        Attack,
+        Move,
+        Wait
+    }
+    public EnemyState currentEnemyState;
 
     /// <summary>
     /// ダメージ計算
@@ -171,9 +181,30 @@ public class EnemyController : MonoBehaviour
 
             if (timer > attackIntervalTime) {
                 timer = 0;
-                Attack();
+
+                if (enemyMoveType == EnemyMoveType.Assasin) {
+                    while (currentEnemyState == EnemyState.Wait) {
+                        // 70% 攻撃
+                        if (Random.Range(0, 100) <= 70) {
+                            Vector3 targetPos = new Vector3(playerController.transform.position.x, transform.position.y, playerController.transform.position.z);
+                            currentEnemyState = EnemyState.Attack;
+
+                            // 移動攻撃
+                            tween = transform.DOMove(targetPos, Random.Range(1.0f, 2.0f)).SetEase(Ease.InOutQuart).OnComplete(() => { Attack(); });
+                        } else {
+                            Vector3 direction = new Vector3(transform.position.x + Random.Range(3, 5), transform.position.y, transform.position.z + Random.Range(3, 5));
+                            currentEnemyState = EnemyState.Move;
+
+                            // 移動する
+                            tween = transform.DOMove(direction, Random.Range(2.0f, 3.0f)).SetEase(Ease.Linear).OnComplete(() => { currentEnemyState = EnemyState.Wait; });
+                        }
+                    }
+                } else {
+
+                    Attack();
+                }
+                yield return null;
             }
-            yield return null;
         }
 
         Debug.Log("攻撃終了");
@@ -188,6 +219,10 @@ public class EnemyController : MonoBehaviour
     /// 攻撃
     /// </summary>
     private void Attack() {
+
+        currentEnemyState = EnemyState.Wait;
+        tween = null;
+
         Debug.Log("攻撃");
 
         // TODO アニメーション
@@ -207,9 +242,13 @@ public class EnemyController : MonoBehaviour
         }
         transform.localScale = temp;
 
-        BulletController bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        // アーチャーの場合、弾を発射
+        if (enemyMoveType == EnemyMoveType.Archer) {
+            BulletController bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
 
-        bullet.Shoot(GetBulletDirection(), bulletSpeed, attackPower, temp.x);
+            bullet.Shoot(GetBulletDirection(), bulletSpeed, attackPower, temp.x);
+        }
+
 
         //playerController.CalcHp(-attackPower);
     }
