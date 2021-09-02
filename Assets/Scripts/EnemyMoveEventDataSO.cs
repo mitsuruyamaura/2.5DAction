@@ -45,6 +45,6 @@ public class EnemyMoveEventDataSO : ScriptableObject
     /// <param name="tran"></param>
     /// <param name="duration"></param>
     public void MoveTypeAssasin(Transform tran, float duration) {
-        tran.DOMove(tran.position, duration).SetEase(Ease.InOutQuart);
+        //tran.DOMove(tran.position, duration).SetEase(Ease.InOutQuart);
     }
 }

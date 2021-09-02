@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyGenerator : MonoBehaviour
 {
     [SerializeField]
-    private EnemyController enemyPrefab;
+    private EnemyController[] enemyPrefabs;
 
     [SerializeField]
     private Transform[] enemyGenerateTrans;
@@ -24,8 +24,10 @@ public class EnemyGenerator : MonoBehaviour
 
         for (int i = 0; i < battle.maxEnemyCount; i++) {
 
+            int index = Random.Range(0, enemyPrefabs.Length);
+
             // “G‚Ì¶¬
-            EnemyController enemyController = Instantiate(enemyPrefab, GetRandomEnemyPos(), Quaternion.identity);
+            EnemyController enemyController = Instantiate(enemyPrefabs[index], GetRandomEnemyPos(index), Quaternion.identity);
 
             // “G‚Ì‰ŠúÝ’è
             enemyController.SetUpEnemy(battle);
@@ -44,7 +46,7 @@ public class EnemyGenerator : MonoBehaviour
     /// ƒ‰ƒ“ƒ_ƒ€‚È“G‚Ì¶¬ˆÊ’u‚ÌŽæ“¾
     /// </summary>
     /// <returns></returns>
-    private Vector3 GetRandomEnemyPos() {
-        return new Vector3(Random.Range(enemyGenerateTrans[0].position.x, enemyGenerateTrans[1].position.x), -3.25f, Random.Range(enemyGenerateTrans[0].position.z, enemyGenerateTrans[1].position.z));
+    private Vector3 GetRandomEnemyPos(int index) {
+        return new Vector3(Random.Range(enemyGenerateTrans[0].position.x, enemyGenerateTrans[1].position.x), enemyPrefabs[index].transform.position.y, Random.Range(enemyGenerateTrans[0].position.z, enemyGenerateTrans[1].position.z));
     }
 }

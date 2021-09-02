@@ -30,6 +30,7 @@ public class EnemyController : MonoBehaviour
     private PlayerController playerController;
     private bool isAttack;
 
+    [SerializeField]
     private Animator anim;
     private Battle battle;
 
@@ -61,6 +62,9 @@ public class EnemyController : MonoBehaviour
     }
     public EnemyState currentEnemyState;
 
+    [SerializeField]
+    private Transform effectPos;
+
     /// <summary>
     /// ダメージ計算
     /// </summary>
@@ -69,7 +73,7 @@ public class EnemyController : MonoBehaviour
         
         isDamaged = true;
 
-        anim.SetTrigger("Hit");
+        //anim.SetTrigger("Hit");
 
         for (int i = 0; i < attackCount; i++) {
             hp -= damage;
@@ -125,6 +129,10 @@ public class EnemyController : MonoBehaviour
             battle.RemoveEnemyFromEnemiesList(this);
 
             GameObject destroyEffect = Instantiate(EffectManager.instance.destroyEffectPrefab, transform.position, EffectManager.instance.destroyEffectPrefab.transform.rotation);
+
+            if (effectPos != null) {
+                destroyEffect.transform.position = effectPos.position;
+            }
             Destroy(destroyEffect, 1.0f);
 
             // Exp 加算　あとで上限値の制限つける
@@ -203,15 +211,15 @@ public class EnemyController : MonoBehaviour
 
                     Attack();
                 }
-                yield return null;
             }
+            yield return null;
         }
 
         Debug.Log("攻撃終了");
     }
 
     void Start() {
-        transform.GetChild(0).TryGetComponent(out anim);
+        transform.GetChild(0).TryGetComponent(out anim); 
         //StartCoroutine(PreparateAttack());    
     }
 

@@ -69,11 +69,41 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4074606051530777648}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 6.76, z: -1.5}
+  m_LocalPosition: {x: 0, y: 3.66, z: -1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9202919269283908416}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7587029615625953801
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1742073925063516150}
+  m_Layer: 0
+  m_Name: EffectPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1742073925063516150
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7587029615625953801}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.12, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9202919269283908416}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9203930661303787602
 GameObject:
@@ -979,8 +1009,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9203930663438669246}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.01, y: 2.41, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_Children:
   - {fileID: 9202919265392033116}
   - {fileID: 9202919266902290742}
@@ -1505,9 +1535,9 @@ GameObject:
   - component: {fileID: 9202919269283908416}
   - component: {fileID: 9144807187460879774}
   - component: {fileID: 7208587337261326852}
-  - component: {fileID: 4174990374426463979}
   - component: {fileID: 1458318548233567103}
   - component: {fileID: 90945892959594011}
+  - component: {fileID: 4786642208169487202}
   m_Layer: 0
   m_Name: Rogue_06
   m_TagString: Untagged
@@ -1523,12 +1553,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9203930664571483452}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.65, y: -4.95, z: 10.91}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalPosition: {x: 0, y: -7.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9202919266834868070}
   - {fileID: 336301232134796608}
   - {fileID: 5751489770645330038}
+  - {fileID: 1742073925063516150}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1567,20 +1598,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!136 &4174990374426463979
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9203930664571483452}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.92224884
-  m_Height: 3.0038614
-  m_Direction: 1
-  m_Center: {x: 0, y: -0.45599174, z: 0.0039157867}
 --- !u!114 &1458318548233567103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1598,12 +1615,14 @@ MonoBehaviour:
   attackIntervalTime: 500
   attackPower: 1
   floatingMessageTran: {fileID: 336301232134796608}
+  anim: {fileID: 9144807187460879774}
   bulletPrefab: {fileID: 0}
   bulletSpeed: 100
   enemyMoveType: 2
   moveDuraiton: 10
   exp: 2
   currentEnemyState: 2
+  effectPos: {fileID: 1742073925063516150}
 --- !u!65 &90945892959594011
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1615,8 +1634,22 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.3999469, y: 2.6675415, z: 1.7281361}
-  m_Center: {x: -0.19997346, y: -0.70467186, z: -0.28534126}
+  m_Size: {x: 1, y: 1.1664093, z: 1}
+  m_Center: {x: 0, y: 2.648954, z: 0}
+--- !u!136 &4786642208169487202
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9203930664571483452}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.2624221
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.6612065, z: 0}
 --- !u!1 &9203930664830187286
 GameObject:
   m_ObjectHideFlags: 0

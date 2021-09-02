@@ -260,7 +260,6 @@ public class PlayerController : MonoBehaviour
 
         // TODO エフェクト
 
-        DamageEffect();
 
         // TODO ダメージアニメ再生
 
@@ -329,7 +328,7 @@ public class PlayerController : MonoBehaviour
         if (other.TryGetComponent(out EnemyController enemy)) {
             if (enemy.currentEnemyState == EnemyController.EnemyState.Attack) {
                 // ダメージ
-                CalcHp(enemy.attackPower);
+                CalcHp(-enemy.attackPower);
             }
         }
     }
