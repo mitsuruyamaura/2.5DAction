@@ -82,6 +82,8 @@ public class AbilityDetail : MonoBehaviour
         // このアビリティのタイプと同じアビリティタイプのみを抽出
         List<InventryAbilityItemData> checkList = GameData.instance.abilityItemDatasList.Where(x => x.abilityType == abilityData.abilityType).ToList();
 
+        //Debug.Log(checkList.Count);
+
         // チェックリスト内のアビリティアイテムとこのアビリティの番号が合致したら、所持していると判定
         if(checkList.Exists(x => x.abilityNo == abilityData.abilityTable.abitilyNo)) {
             // 取得した情報を使ってアンロック設定
