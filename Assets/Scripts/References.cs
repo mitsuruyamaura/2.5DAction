@@ -30,9 +30,12 @@ public class References
     //https://www.ac-illust.com/main/detail.php?id=2006590&word=%E3%82%AF%E3%83%AA%E3%82%B9%E3%82%BF%E3%83%AB%E6%8E%A1%E6%8E%98%E5%A0%B4&searchId=
     //https://www.ac-illust.com/main/detail.php?id=1981619&word=%E8%A2%8B%E3%81%AB%E5%85%A5%E3%81%A3%E3%81%9F%E5%AE%9D%E7%9F%B3&searchId=
 
+    // はてなアイコン
+    //https://sozaikoujou.com/28790
+
     // Sprite Grow
     //https://baba-s.hatenablog.com/entry/2018/01/15/090100
-    　
+
     // Tilemap　ドット絵世界
     //http://yms.main.jp/
 }

@@ -12,55 +12,75 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5723a402db4f0824f8b8b535a20fcb9c, type: 3}
   m_Name: AbilityPointTableSO_AttackPower
   m_EditorClassIdentifier: 
-  abilityType: 0
+  abilityType: 1
   abilityTablesList:
+  - abilityLevel: 1
+    abilityCost: 6
+    powerUpValue: 3
+    abilityName: uu
+    abilitySprite: {fileID: 21300000, guid: e480585590b117443974744d58ee2162, type: 3}
+    rarity: 0
+    abitilyNo: 0
   - abilityLevel: 0
     abilityCost: 0
     powerUpValue: 0
     abilityName: 
     abilitySprite: {fileID: 0}
+    rarity: 0
+    abitilyNo: 1
   - abilityLevel: 0
     abilityCost: 0
     powerUpValue: 0
     abilityName: 
     abilitySprite: {fileID: 0}
+    rarity: 0
+    abitilyNo: 2
   - abilityLevel: 0
     abilityCost: 0
     powerUpValue: 0
     abilityName: 
     abilitySprite: {fileID: 0}
+    rarity: 0
+    abitilyNo: 3
   - abilityLevel: 0
     abilityCost: 0
     powerUpValue: 0
     abilityName: 
     abilitySprite: {fileID: 0}
+    rarity: 0
+    abitilyNo: 0
   - abilityLevel: 0
     abilityCost: 0
     powerUpValue: 0
     abilityName: 
     abilitySprite: {fileID: 0}
+    rarity: 0
+    abitilyNo: 0
   - abilityLevel: 0
     abilityCost: 0
     powerUpValue: 0
     abilityName: 
     abilitySprite: {fileID: 0}
+    rarity: 0
+    abitilyNo: 0
   - abilityLevel: 0
     abilityCost: 0
     powerUpValue: 0
     abilityName: 
     abilitySprite: {fileID: 0}
+    rarity: 0
+    abitilyNo: 0
   - abilityLevel: 0
     abilityCost: 0
     powerUpValue: 0
     abilityName: 
     abilitySprite: {fileID: 0}
+    rarity: 0
+    abitilyNo: 0
   - abilityLevel: 0
     abilityCost: 0
     powerUpValue: 0
     abilityName: 
     abilitySprite: {fileID: 0}
-  - abilityLevel: 0
-    abilityCost: 0
-    powerUpValue: 0
-    abilityName: 
-    abilitySprite: {fileID: 0}
+    rarity: 0
+    abitilyNo: 0

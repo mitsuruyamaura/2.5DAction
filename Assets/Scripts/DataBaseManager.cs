@@ -16,7 +16,7 @@ public class DataBaseManager : MonoBehaviour
 
     public Tilemap tilemapCollider;
 
-    public List<AbilityPointTableSO> abilityPointTableSOList;
+    public List<AbilityItemDataSO> abilityItemDataSOList;
 
 
     void Awake() {
@@ -49,7 +49,7 @@ public class DataBaseManager : MonoBehaviour
     /// ƒŒƒxƒ‹‚Æ AbilityType ‚É‚æ‚é AbilityPointTable ‚ÌŽæ“¾
     /// </summary>
     /// <returns></returns>
-    public AbilityPointTableSO.AbilityTable GetAbilityPointTable(int level, AbilityType abilityType) {
-        return abilityPointTableSOList[(int)abilityType].abilityTablesList.Find(x => x.abilityLevel == level);
+    public AbilityItemDataSO.AbilityItemData GetAbilityPointTable(int level, AbilityType abilityType) {
+        return abilityItemDataSOList[(int)abilityType].abilityItemDatasList.Find(x => x.abilityLevel == level);
     }
 }

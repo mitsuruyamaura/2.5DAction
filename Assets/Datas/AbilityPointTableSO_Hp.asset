@@ -19,48 +19,68 @@ MonoBehaviour:
     powerUpValue: 5
     abilityName: "\u76AE\u93A7"
     abilitySprite: {fileID: 21300016, guid: 31e24ed712cbf3b4595a8dbc9b18aa9c, type: 3}
+    rarity: 0
+    abitilyNo: 0
   - abilityLevel: 2
     abilityCost: 5
     powerUpValue: 5
     abilityName: "\u304F\u3055\u308A\u304B\u305F\u3073\u3089"
     abilitySprite: {fileID: 21300018, guid: 31e24ed712cbf3b4595a8dbc9b18aa9c, type: 3}
+    rarity: 0
+    abitilyNo: 1
   - abilityLevel: 3
     abilityCost: 8
     powerUpValue: 5
     abilityName: "\u9244\u306E\u80F8\u5F53\u3066"
     abilitySprite: {fileID: 21300020, guid: 31e24ed712cbf3b4595a8dbc9b18aa9c, type: 3}
+    rarity: 0
+    abitilyNo: 2
   - abilityLevel: 4
     abilityCost: 14
     powerUpValue: 5
     abilityName: "\u30D7\u30EC\u30FC\u30C8\u30E1\u30A4\u30EB"
     abilitySprite: {fileID: 21300022, guid: 31e24ed712cbf3b4595a8dbc9b18aa9c, type: 3}
+    rarity: 0
+    abitilyNo: 3
   - abilityLevel: 5
     abilityCost: 20
     powerUpValue: 5
     abilityName: "\u5927\u5730\u306E\u93A7"
     abilitySprite: {fileID: 21300024, guid: 31e24ed712cbf3b4595a8dbc9b18aa9c, type: 3}
+    rarity: 0
+    abitilyNo: 4
   - abilityLevel: 6
     abilityCost: 27
     powerUpValue: 5
     abilityName: "\u30C9\u30E9\u30B4\u30F3\u30E1\u30A4\u30EB"
     abilitySprite: {fileID: 21300000, guid: e9d4143c19529834981ac6821a04aecd, type: 3}
+    rarity: 0
+    abitilyNo: 5
   - abilityLevel: 7
     abilityCost: 35
     powerUpValue: 5
     abilityName: "\u7CBE\u970A\u306E\u8863"
     abilitySprite: {fileID: 21300008, guid: c568092d7452f4cf9b5a6e629a61dcd2, type: 3}
+    rarity: 0
+    abitilyNo: 6
   - abilityLevel: 8
     abilityCost: 44
     powerUpValue: 5
     abilityName: "\u5149\u8F2A\u306E\u93A7"
     abilitySprite: {fileID: 21300000, guid: e480585590b117443974744d58ee2162, type: 3}
+    rarity: 0
+    abitilyNo: 7
   - abilityLevel: 9
     abilityCost: 54
     powerUpValue: 5
     abilityName: "\u5973\u795E\u306E\u80F8\u5F53\u3066"
     abilitySprite: {fileID: 21300000, guid: a8a81f7163fa29442b63b47d751d64dd, type: 3}
+    rarity: 0
+    abitilyNo: 8
   - abilityLevel: 10
     abilityCost: 65
     powerUpValue: 5
     abilityName: "\u541B\u4E3B\u306E\u8056\u8863"
     abilitySprite: {fileID: 21300000, guid: 98451d2a04ae2b54a9ec0ff4bc429fa3, type: 3}
+    rarity: 0
+    abitilyNo: 9

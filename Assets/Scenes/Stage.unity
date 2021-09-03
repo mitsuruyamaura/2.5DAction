@@ -2753,7 +2753,7 @@ MonoBehaviour:
   tilemapCollider: {fileID: 175135994}
   abilityPointTableSOList:
   - {fileID: 11400000, guid: 58d10d67aa371264ba5c7064f2065321, type: 2}
-  - {fileID: 11400000, guid: 58d10d67aa371264ba5c7064f2065321, type: 2}
+  - {fileID: 11400000, guid: 385ca3e57db00f94ca5cd6f5fbddb9dc, type: 2}
 --- !u!4 &878749739
 Transform:
   m_ObjectHideFlags: 0
@@ -3150,6 +3150,9 @@ MonoBehaviour:
     attackIntervalTime: 1
     dashAvoidIntervalTime: 1
   abilityPoint: 100
+  abilityItemDatasList:
+  - abilityType: 1
+    abilityNo: 0
 --- !u!4 &941425069
 Transform:
   m_ObjectHideFlags: 0

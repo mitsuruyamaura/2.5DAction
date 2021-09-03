@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
+[System.Serializable]
+public struct InventryAbilityItemData {
+    public AbilityType abilityType;
+    public int abilityNo;
+} 
+
 public class GameData : MonoBehaviour
 {
     public static GameData instance;
@@ -24,6 +30,9 @@ public class GameData : MonoBehaviour
     public CharacterData currentCharaData;
 
     public int abilityPoint;
+
+    // アビリティアイテムのリスト
+    public List<InventryAbilityItemData> abilityItemDatasList = new List<InventryAbilityItemData>();
 
 
     void Awake() {

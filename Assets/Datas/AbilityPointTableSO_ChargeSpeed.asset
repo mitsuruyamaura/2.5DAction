@@ -12,55 +12,75 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5723a402db4f0824f8b8b535a20fcb9c, type: 3}
   m_Name: AbilityPointTableSO_ChargeSpeed
   m_EditorClassIdentifier: 
-  abilityType: 0
+  abilityType: 3
   abilityTablesList:
   - abilityLevel: 0
     abilityCost: 0
     powerUpValue: 0
     abilityName: 
     abilitySprite: {fileID: 0}
+    rarity: 0
+    abitilyNo: 0
   - abilityLevel: 0
     abilityCost: 0
     powerUpValue: 0
     abilityName: 
     abilitySprite: {fileID: 0}
+    rarity: 0
+    abitilyNo: 0
   - abilityLevel: 0
     abilityCost: 0
     powerUpValue: 0
     abilityName: 
     abilitySprite: {fileID: 0}
+    rarity: 0
+    abitilyNo: 0
   - abilityLevel: 0
     abilityCost: 0
     powerUpValue: 0
     abilityName: 
     abilitySprite: {fileID: 0}
+    rarity: 0
+    abitilyNo: 0
   - abilityLevel: 0
     abilityCost: 0
     powerUpValue: 0
     abilityName: 
     abilitySprite: {fileID: 0}
+    rarity: 0
+    abitilyNo: 0
   - abilityLevel: 0
     abilityCost: 0
     powerUpValue: 0
     abilityName: 
     abilitySprite: {fileID: 0}
+    rarity: 0
+    abitilyNo: 0
   - abilityLevel: 0
     abilityCost: 0
     powerUpValue: 0
     abilityName: 
     abilitySprite: {fileID: 0}
+    rarity: 0
+    abitilyNo: 0
   - abilityLevel: 0
     abilityCost: 0
     powerUpValue: 0
     abilityName: 
     abilitySprite: {fileID: 0}
+    rarity: 0
+    abitilyNo: 0
   - abilityLevel: 0
     abilityCost: 0
     powerUpValue: 0
     abilityName: 
     abilitySprite: {fileID: 0}
+    rarity: 0
+    abitilyNo: 0
   - abilityLevel: 0
     abilityCost: 0
     powerUpValue: 0
     abilityName: 
     abilitySprite: {fileID: 0}
+    rarity: 0
+    abitilyNo: 0
