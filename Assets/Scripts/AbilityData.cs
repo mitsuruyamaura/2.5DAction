@@ -2,5 +2,5 @@
 public class AbilityData
 {
     public AbilityType abilityType;
-    public AbilityPointTableSO.AbilityTable abilityTable;
+    public AbilityItemDataSO.AbilityItemData abilityTable;
 }

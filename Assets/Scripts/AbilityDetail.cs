@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System.Linq;
 
 [System.Serializable]
 public class AbilityDetail : MonoBehaviour
@@ -20,6 +21,7 @@ public class AbilityDetail : MonoBehaviour
 
     private SelectAbilityPopUp selectAbilityPopUp;
 
+    private bool haveAbility = false;
 
     /// <summary>
     /// AbilityButtonDetail の設定
@@ -33,10 +35,6 @@ public class AbilityDetail : MonoBehaviour
 
         // AbilityLevel と AbilityType から AbilityTable を取得
         abilityData.abilityTable = DataBaseManager.instance.GetAbilityPointTable(level, abilityType);
-
-        // 取得した情報を使って設定
-        imgAbility.sprite = abilityData.abilityTable.abilitySprite;
-        txtAbilityCost.text = abilityData.abilityTable.abilityCost.ToString();
 
         btnAbility.onClick.AddListener(OnClickAbilityDetail);
     }
@@ -56,8 +54,46 @@ public class AbilityDetail : MonoBehaviour
     public void JudgeAbilityCost() {
         btnAbility.interactable = false;
 
+        // 対応するアビリティアイテムを所持しているか判定
+        CheckHaveAbilityItem();
+
+        // 所持していない場合
+        if (!haveAbility) {
+            return;
+        }
+
+        // アビリティのコストが支払えるかどうかを判定
         if (GameData.instance.abilityPoint >= abilityData.abilityTable.abilityCost) {
             btnAbility.interactable = true;
+        }
+    }
+
+    /// <summary>
+    /// 対応するアビリティアイテムを所持しているか判定
+    /// </summary>
+    private void CheckHaveAbilityItem() {
+
+        // アビリティアイテムをすでに所持している場合
+        if (haveAbility) {
+            // チェック不要
+            return;
+        }
+
+        // このアビリティのタイプと同じアビリティタイプのみを抽出
+        List<InventryAbilityItemData> checkList = GameData.instance.abilityItemDatasList.Where(x => x.abilityType == abilityData.abilityType).ToList();
+
+        //Debug.Log(checkList.Count);
+
+        // チェックリスト内のアビリティアイテムとこのアビリティの番号が合致したら、所持していると判定
+        if(checkList.Exists(x => x.abilityNo == abilityData.abilityTable.abitilyNo)) {
+            // 取得した情報を使ってアンロック設定
+            imgAbility.sprite = abilityData.abilityTable.abilitySprite;
+            txtAbilityCost.text = abilityData.abilityTable.abilityCost.ToString();
+
+            haveAbility = true;
+        } else {
+            // ロック設定
+            txtAbilityCost.text = "";
         }
     }
 }

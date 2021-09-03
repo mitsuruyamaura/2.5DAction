@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "AbilityPointTableSO", menuName = "Create AbilityPointTableSO")]
-public class AbilityPointTableSO : ScriptableObject
+public class AbilityItemDataSO : ScriptableObject
 {
     public AbilityType abilityType;
-    public List<AbilityTable> abilityTablesList;
+    public List<AbilityItemData> abilityItemDatasList;
 
     [System.Serializable]
-    public class AbilityTable {
+    public class AbilityItemData {
         public int abilityLevel;
         public int abilityCost;
         public float powerUpValue;
         public string abilityName;
         public Sprite abilitySprite;
+        public int rarity;
+        public int abitilyNo;
     }
 }
