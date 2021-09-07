@@ -94,7 +94,7 @@ public class InputButtonManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ボタンの活性化/非活性化の切り替え
+    /// 全ボタンの活性化/非活性化の切り替え
     /// </summary>
     /// <param name="isSwitch"></param>
     public void SwitchActivateAllButtons(bool isSwitch) {
@@ -104,5 +104,24 @@ public class InputButtonManager : MonoBehaviour
         btnRight.interactable = isSwitch;
         btnUp.interactable = isSwitch;
         btnStepping.interactable = isSwitch;
+    }
+
+    /// <summary>
+    /// 足踏みボタンの活性化/非活性化の切り替え
+    /// </summary>
+    /// <param name="isSwitch"></param>
+    public void SwitchActivateSteppingButton(bool isSwitch) {
+        btnStepping.interactable = isSwitch;
+    }
+
+    /// <summary>
+    /// 移動用のボタンの活性化/非活性化の切り替え
+    /// </summary>
+    /// <param name="isSwitch"></param>
+    public void SwitchActivateMoveButtons(bool isSwitch) {
+        btnDown.interactable = isSwitch;
+        btnLeft.interactable = isSwitch;
+        btnRight.interactable = isSwitch;
+        btnUp.interactable = isSwitch;
     }
 }

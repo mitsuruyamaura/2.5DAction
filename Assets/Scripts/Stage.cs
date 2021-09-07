@@ -342,8 +342,15 @@ public class Stage : MonoBehaviour {
         } else {
             CurrentTurnState = TurnState.Player;
 
+            // コンディションの残り時間の更新(いまは MapController 内の２箇所でやっているので、ここで一本化する)
+            mapMoveController.UpdateConditionsDuration();
+
+            // 移動ボタンと足踏みボタンを押せる状態にする
             ActivateInputButtons();
 
+            // コンディションの効果を適用
+            ApplyEffectConditions();
+            
             mapMoveController.IsMoving = false;
 
             // プレイヤーの移動の監視再開
@@ -407,5 +414,50 @@ public class Stage : MonoBehaviour {
     /// </summary>
     public void ActivateInputButtons() {
         inputButtonManager.SwitchActivateAllButtons(true);
+    }
+
+    /// <summary>
+    /// コンディションの効果を適用
+    /// </summary>
+    private void ApplyEffectConditions() {
+        foreach (PlayerConditionBase condition in mapMoveController.GetConditionsList()) {
+
+            condition.ApplyEffect();
+
+            //// 睡眠(移動不可)の場合
+            //if (condition.GetConditionType() == ConditionType.Sleep) {
+            //    // 足踏みしか出来ないように入力制限する 
+            //    inputButtonManager.SwitchActivateMoveButtons(false);
+            //}
+            //// 混乱(停止不可)の場合
+            //if (condition.GetConditionType() == ConditionType.Confusion) {
+            //    // 足踏み不可
+            //    inputButtonManager.SwitchActivateSteppingButton(false);
+
+            //    // ランダムな移動しか出来ないように入力制限する => Map側で制御
+
+            //}
+            //// 毒の場合
+            //if (condition.GetConditionType() == ConditionType.Poison) {
+
+            //    // 体力を減らす
+            //    condition.ApplyEffect();
+
+            //    // 表示更新
+            //    StartCoroutine(UpdateDisplayHp(1.0f));
+            //}
+        }
+
+        // 疲労の場合は攻撃力が半減(これはコンディションでの効果)
+
+        // 病気の場合は移動速度が半減(これはコンディションでの効果)
+
+        // 呪い(アイテム取得不可)の場合はエネミーのシンボルのみのエンカウント(これは MapController )
+
+    }
+
+
+    public InputButtonManager GetInputManager() {
+        return inputButtonManager;
     }
 }

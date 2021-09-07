@@ -42,7 +42,7 @@ public class MapMoveController : MonoBehaviour
 
 
     //void Start() {
-    //    transform.GetChild(0).TryGetComponent(out rb);    
+    //    transform.GetChild(0).TryGetComponent(out rb);
     //}
 
     public void SetUpMapMoveController(Stage stage) {
@@ -291,7 +291,7 @@ public class MapMoveController : MonoBehaviour
     /// <summary>
     /// 現在のコンディションの状態の残り時間を更新
     /// </summary>
-    private void UpdateConditionsDuration() {
+    public void UpdateConditionsDuration() {
         for (int i = 0; i< conditionsList.Count; i++) {
             conditionsList[i].CalcDuration();
         }
@@ -381,5 +381,10 @@ public class MapMoveController : MonoBehaviour
             orbSymbolTriggerEvent?.RemoveAllListeners();
             orbSymbolTriggerEvent = null;
         }
+    }
+
+
+    public Stage GetStage() {
+        return stage;
     }
 }
