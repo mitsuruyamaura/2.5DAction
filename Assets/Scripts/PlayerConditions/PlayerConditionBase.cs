@@ -95,4 +95,23 @@ public class PlayerConditionBase : MonoBehaviour
         // コンディションの効果を適用
         StartCoroutine(OnEnterCondition());
     }
+
+    /// <summary>
+    /// コンディションの効果値を取得
+    /// </summary>
+    /// <returns></returns>
+    public float GetConditionValue() {
+        return conditionValue;
+    }
+
+    /// <summary>
+    /// コンディションの効果を適用
+    /// </summary>
+    public virtual void ApplyEffect() {
+
+        // 毒のダメージ、攻撃力半減、移動速度半減などを適用する
+
+        // 値を変化させる効果の場合は、持続時間経過後に OnExitCondition() を上書きして元の値に戻すこと
+
+    }
 }
