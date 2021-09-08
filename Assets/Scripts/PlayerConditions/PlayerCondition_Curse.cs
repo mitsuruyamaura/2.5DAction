@@ -7,23 +7,18 @@ public class PlayerCondition_Curse : PlayerConditionBase
 {
     Tween tween; 
 
-    protected override IEnumerator OnEnterCondition() {
+    protected override void OnEnterCondition() {
 
         base.OnEnterCondition();
 
-        tween = conditionEffect.transform.DOLocalMoveY(0.5f, 0.25f).SetEase(Ease.InQuart).SetLoops(-1, LoopType.Yoyo);
-
-        yield break;
+        tween = conditionEffect.transform.DOLocalMoveY(0.25f, 01.5f).SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo);
     }
 
 
-    protected override IEnumerator OnExitCondition() {
+    protected override void OnExitCondition() {
 
         tween.Kill();
 
-        // エフェクト破棄
-        Destroy(conditionEffect);
-
-        return base.OnExitCondition();
+        base.OnExitCondition();
     }
 }

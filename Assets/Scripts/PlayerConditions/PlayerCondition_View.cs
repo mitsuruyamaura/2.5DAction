@@ -11,7 +11,7 @@ public class PlayerCondition_View : PlayerConditionBase
     private float originScale = 4.5f;            // マスクの初期サイズ
     private float viewAnimeDuration = 0.5f;
 
-    protected override IEnumerator OnEnterCondition() {
+    protected override void OnEnterCondition() {
                         
         // マスクの情報を取得
         spriteMaskTran = DataBaseManager.instance.GetSpriteMaskTransform();
@@ -19,10 +19,10 @@ public class PlayerCondition_View : PlayerConditionBase
         // マスクのスケールを操作して、視界のサイズを変更
         spriteMaskTran.DOScale(Vector3.one * conditionValue, viewAnimeDuration).SetEase(Ease.InBack);
 
-        return base.OnEnterCondition();
+        base.OnEnterCondition();
     }
 
-    protected override IEnumerator OnExitCondition() {
+    protected override void OnExitCondition() {
 
         // 終了時の演出
 
@@ -30,6 +30,6 @@ public class PlayerCondition_View : PlayerConditionBase
         // マスクのスケールを操作して、視界のサイズを元のサイズに変更
         spriteMaskTran.DOScale(Vector3.one * originScale, viewAnimeDuration).SetEase(Ease.InBack);
 
-        return base.OnExitCondition();
+        base.OnExitCondition();
     }
 }

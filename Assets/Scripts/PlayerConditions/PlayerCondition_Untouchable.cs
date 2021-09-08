@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class PlayerCondition_Untouchable : PlayerConditionBase
 {
-    protected override IEnumerator OnEnterCondition() {
+    protected override void OnEnterCondition() {
 
         // 指定された以外のシンボルを非表示にする
         symbolManager.SwitchActivateExceptSymbols(false, (int)conditionValue);
 
-        return base.OnEnterCondition();
+        base.OnEnterCondition();
     }
 
-    protected override IEnumerator OnExitCondition() {
+    protected override void OnExitCondition() {
 
         // 終了時の演出
 
         // シンボルを表示する
         symbolManager.SwitchActivateExceptSymbols(true, (int)conditionValue);
 
-        return base.OnExitCondition();
+        base.OnExitCondition();
     }
 }

@@ -32,15 +32,14 @@ public class PlayerConditionBase : MonoBehaviour
         this.mapMoveController = mapMoveController;
         this.symbolManager = symbolManager;
 
-        StartCoroutine(OnEnterCondition());
+        OnEnterCondition();
     }
 
     /// <summary>
     /// コンディションの効果を適用
     /// </summary>
     /// <returns></returns>
-    protected virtual IEnumerator OnEnterCondition() {
-        yield return null;
+    protected virtual void OnEnterCondition() {
 
         // 生成するエフェクトのプレファブを取得
         ConditionEffect conditionEffectPrefab = ConditionEffectManager.instance.GetConditionEffect(conditionType);
@@ -61,11 +60,10 @@ public class PlayerConditionBase : MonoBehaviour
     /// コンディションが終了するときに呼び出す
     /// </summary>
     public void RemoveCondition() {
-        StartCoroutine(OnExitCondition());
+        OnExitCondition();
     }
 
-    protected virtual IEnumerator OnExitCondition() {
-        yield return null;
+    protected virtual void OnExitCondition() {
 
         if (conditionEffect != null) {
             // エフェクト破棄
@@ -112,7 +110,7 @@ public class PlayerConditionBase : MonoBehaviour
         conditionValue = value;
 
         // コンディションの効果を適用
-        StartCoroutine(OnEnterCondition());
+        OnEnterCondition();
     }
 
     /// <summary>

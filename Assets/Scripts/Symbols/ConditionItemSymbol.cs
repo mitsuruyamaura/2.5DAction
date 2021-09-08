@@ -56,6 +56,7 @@ public class ConditionItemSymbol : SymbolBase {
             ConditionType.Walk_through => mapMoveController.gameObject.AddComponent<PlayerCondition_WalkThrough>(),
             ConditionType.Sleep => mapMoveController.gameObject.AddComponent<PlayerCondition_Sleep>(),
             ConditionType.Confusion => mapMoveController.gameObject.AddComponent<PlayerCondition_Confusion>(),
+            ConditionType.Curse => mapMoveController.gameObject.AddComponent<PlayerCondition_Curse>(),
             _ => null
         };
 

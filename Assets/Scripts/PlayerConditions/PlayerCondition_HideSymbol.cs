@@ -5,21 +5,21 @@ using DG.Tweening;
 
 public class PlayerCondition_HideSymbol : PlayerConditionBase
 {
-    protected override IEnumerator OnEnterCondition() {
+    protected override void OnEnterCondition() {
 
         // シンボルの画像を非表示にする
         symbolManager.SwitchDisplayAllSymbols(false);
  
-        return base.OnEnterCondition();
+        base.OnEnterCondition();
     }
 
-    protected override IEnumerator OnExitCondition() {
+    protected override void OnExitCondition() {
 
         // 終了時の演出
 
         // シンボルの画像を表示する
         symbolManager.SwitchDisplayAllSymbols(true);
 
-        return base.OnExitCondition();
+        base.OnExitCondition();
     }
 }

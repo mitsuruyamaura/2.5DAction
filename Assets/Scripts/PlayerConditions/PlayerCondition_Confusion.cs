@@ -17,17 +17,4 @@ public class PlayerCondition_Confusion : PlayerConditionBase
 
         Debug.Log("Confusion");
     }
-
-    protected override IEnumerator OnEnterCondition() {
-
-        yield return base.OnEnterCondition();
-
-
-    }
-
-
-    protected override IEnumerator OnExitCondition() {
-
-        return base.OnExitCondition();
-    }
 }

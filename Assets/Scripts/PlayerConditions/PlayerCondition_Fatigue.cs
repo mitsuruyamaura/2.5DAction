@@ -10,7 +10,7 @@ public class PlayerCondition_Fatigue : PlayerConditionBase
     /// UŒ‚—Í”¼Œ¸
     /// </summary>
     /// <returns></returns>
-    protected override IEnumerator OnEnterCondition() {
+    protected override void OnEnterCondition() {
         conditionValue = 0.5f;
 
         // Œ³‚É–ß‚·‚½‚ß‚É•Û
@@ -19,18 +19,18 @@ public class PlayerCondition_Fatigue : PlayerConditionBase
         // ƒoƒgƒ‹‚ÌUŒ‚—Í‚ğ”¼Œ¸
         GameData.instance.currentCharaData.attackPower = Mathf.FloorToInt(GameData.instance.currentCharaData.attackPower * conditionValue);
 
-        return base.OnEnterCondition();
+        base.OnEnterCondition();
     }
 
     /// <summary>
     /// UŒ‚—Í‚ğ–ß‚·
     /// </summary>
     /// <returns></returns>
-    protected override IEnumerator OnExitCondition() {
+    protected override void OnExitCondition() {
 
         // UŒ‚—Í‚ğŒ³‚Ì’l‚É–ß‚·
         GameData.instance.currentCharaData.attackPower = originValue;
 
-        return base.OnExitCondition();
+        base.OnExitCondition();
     }
 }

@@ -18,18 +18,18 @@ public class PlayerCondition_Sleep : PlayerConditionBase
         Debug.Log("Sleep");
     }
 
-    protected override IEnumerator OnEnterCondition() {
+    protected override void OnEnterCondition() {
 
-        yield return base.OnEnterCondition();
+        base.OnEnterCondition();
 
         tween = conditionEffect.transform.DOLocalMoveY(0.25f, 0.5f).SetEase(Ease.InQuart).SetLoops(-1, LoopType.Yoyo);
     }
 
 
-    protected override IEnumerator OnExitCondition() {
+    protected override void OnExitCondition() {
 
         tween.Kill();
 
-        return base.OnExitCondition();
+        base.OnExitCondition();
     }
 }
