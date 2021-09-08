@@ -168,10 +168,12 @@ public class MapMoveController : MonoBehaviour
 
         // 混乱状態のコンディションの確認
         if (JudgeConditionType(ConditionType.Confusion)) {
-            // 混乱状態の場合は移動先を乱数化
-            movePos = new Vector2(Random.Range(-1, 2), Random.Range(-1, 2));
+            // 混乱状態の場合は移動先を乱数化(斜め移動はさせない)
+            int x = Random.Range(-1, 2);
+            int y = Mathf.Abs(x) == 1 ? 0 : Random.Range(-1, 2);
+            movePos = new Vector2(x, y);
         } else {
-
+            // キー入力をそのまま適用
             movePos = nextPos;
         }
 

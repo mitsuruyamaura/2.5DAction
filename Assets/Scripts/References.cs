@@ -38,4 +38,12 @@ public class References
 
     // Tilemap　ドット絵世界
     //http://yms.main.jp/
+
+
+    // 睡眠アイコン
+    //https://commons.nicovideo.jp/material/nc205449
+    // ?アイコン
+    // https://illustimage.com/?id=5254
+
+
 }

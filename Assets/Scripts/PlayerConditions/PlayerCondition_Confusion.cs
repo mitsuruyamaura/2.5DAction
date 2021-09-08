@@ -1,13 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerCondition_Confusion : PlayerConditionBase 
 {
-    [SerializeField]
-    private GameObject confusionEffectPrefab;
-
-    private GameObject confusionEffect;
+    Tween tween;
 
     /// <summary>
     /// 混乱によるランダム移動と足踏み不可の効果のうち、足踏み不可の効果
@@ -21,18 +19,14 @@ public class PlayerCondition_Confusion : PlayerConditionBase
     }
 
     protected override IEnumerator OnEnterCondition() {
-        // エフェクト生成
 
-        Debug.Log("混乱用のエフェクト　生成");
+        yield return base.OnEnterCondition();
 
-        return base.OnEnterCondition();
+
     }
 
 
     protected override IEnumerator OnExitCondition() {
-
-        // エフェクト破棄
-        Destroy(confusionEffect);
 
         return base.OnExitCondition();
     }

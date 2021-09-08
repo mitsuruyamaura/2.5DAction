@@ -39,6 +39,11 @@ public class ConditionItemSymbol : SymbolBase {
             return;
         }
 
+        // 付与するコンディションが睡眠かつ、すでに混乱のコンディションが付与されているときには、睡眠のコンディションは無視する(操作不能になるため)
+        if (conditionType == ConditionType.Sleep &&  mapMoveController.GetConditionsList().Exists(x => x.GetConditionType() == ConditionType.Confusion)) {
+            return;
+        }
+
         // 付与されていないコンディションの場合は、付与する準備する
         PlayerConditionBase playerCondition;
 
@@ -50,6 +55,7 @@ public class ConditionItemSymbol : SymbolBase {
             ConditionType.Untouchable => mapMoveController.gameObject.AddComponent<PlayerCondition_Untouchable>(),
             ConditionType.Walk_through => mapMoveController.gameObject.AddComponent<PlayerCondition_WalkThrough>(),
             ConditionType.Sleep => mapMoveController.gameObject.AddComponent<PlayerCondition_Sleep>(),
+            ConditionType.Confusion => mapMoveController.gameObject.AddComponent<PlayerCondition_Confusion>(),
             _ => null
         };
 
