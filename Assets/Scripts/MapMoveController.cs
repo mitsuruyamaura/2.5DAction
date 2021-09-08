@@ -40,6 +40,9 @@ public class MapMoveController : MonoBehaviour
     private UnityEvent<MapMoveController> enemySymbolTriggerEvent;
     private UnityEvent<MapMoveController> orbSymbolTriggerEvent;
 
+    [SerializeField]
+    private Transform conditionEffectTran;
+
 
     //void Start() {
     //    transform.GetChild(0).TryGetComponent(out rb);
@@ -163,7 +166,14 @@ public class MapMoveController : MonoBehaviour
 
         isMoving = true;
 
-        movePos = nextPos;
+        // 混乱状態のコンディションの確認
+        if (JudgeConditionType(ConditionType.Confusion)) {
+            // 混乱状態の場合は移動先を乱数化
+            movePos = new Vector2(Random.Range(-1, 2), Random.Range(-1, 2));
+        } else {
+
+            movePos = nextPos;
+        }
 
         // タイルマップの座標に変換
         Vector3Int tilePos = tilemapCollider.WorldToCell(transform.position + movePos);
@@ -280,6 +290,14 @@ public class MapMoveController : MonoBehaviour
                 orbSymbolTriggerEvent = new UnityEvent<MapMoveController>();
                 orbSymbolTriggerEvent.AddListener(symbolBase.TriggerAppearEffect);
             } else if (symbolBase.symbolType != SymbolType.Enemy) {
+
+                // 呪いのコンディションの確認
+                if (JudgeConditionType(ConditionType.Curse)) {
+
+                    // 呪い状態である場合は、シンボルのイベントを発生させない
+                    return;
+                }
+
                 // それ以外のシンボルはすぐに実行
                 symbolBase.TriggerAppearEffect(this);
             }
@@ -383,8 +401,28 @@ public class MapMoveController : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Stage の情報を取得
+    /// </summary>
+    /// <returns></returns>
     public Stage GetStage() {
         return stage;
+    }
+
+    /// <summary>
+    /// 引数に指定されたコンディションが付与されているか確認
+    /// </summary>
+    /// <param name="conditionType"></param>
+    /// <returns></returns>
+    public bool JudgeConditionType(ConditionType conditionType) {
+        return conditionsList.Find(x => x.GetConditionType() == conditionType);
+    }
+
+    /// <summary>
+    /// コンディション用のエフェクト生成位置の取得
+    /// </summary>
+    /// <returns></returns>
+    public Transform GetConditionEffectTran() {
+        return conditionEffectTran;
     }
 }
