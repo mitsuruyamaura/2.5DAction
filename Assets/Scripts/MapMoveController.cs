@@ -217,11 +217,11 @@ public class MapMoveController : MonoBehaviour
 
         GameData.instance.staminaPoint.Value--;
 
-        // コンディションが付与されている場合、持続時間を更新
-        if (conditionsList.Count > 0) {
-            // 現在のコンディションの状態の残り時間を更新
-            UpdateConditionsDuration();
-        }
+        //// コンディションが付与されている場合、持続時間を更新
+        //if (conditionsList.Count > 0) {
+        //    // 現在のコンディションの状態の残り時間を更新
+        //    UpdateConditionsDuration();
+        //}
 
         // 移動
         transform.DOMove(destination, moveDuration)
@@ -350,11 +350,11 @@ public class MapMoveController : MonoBehaviour
 
         GameData.instance.staminaPoint.Value--;
 
-        // コンディションが付与されている場合、持続時間を更新
-        if (conditionsList.Count > 0) {
-            // 現在のコンディションの状態の残り時間を更新
-            UpdateConditionsDuration();
-        }
+        //// コンディションが付与されている場合、持続時間を更新
+        //if (conditionsList.Count > 0) {
+        //    // 現在のコンディションの状態の残り時間を更新
+        //    UpdateConditionsDuration();
+        //}
 
         // 足踏みしてHP回復
         GameData.instance.hp = Mathf.Clamp(GameData.instance.hp += steppingRecoveryPoint, 0, GameData.instance.maxHp);

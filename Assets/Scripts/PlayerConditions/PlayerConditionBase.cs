@@ -13,6 +13,8 @@ public class PlayerConditionBase : MonoBehaviour
     [SerializeField]  // Debug
     protected float conditionValue;
 
+    protected ConditionEffect conditionEffect;
+
     protected MapMoveController mapMoveController;
     protected SymbolManager symbolManager;
 
@@ -40,6 +42,18 @@ public class PlayerConditionBase : MonoBehaviour
     protected virtual IEnumerator OnEnterCondition() {
         yield return null;
 
+        // 生成するエフェクトのプレファブを取得
+        ConditionEffect conditionEffectPrefab = ConditionEffectManager.instance.GetConditionEffect(conditionType);
+        Debug.Log(conditionEffectPrefab);
+
+        // プレファブが取得できたら
+        if (conditionEffectPrefab != null) {
+            // エフェクト生成
+            conditionEffect = Instantiate(conditionEffectPrefab, mapMoveController.GetConditionEffectTran());
+
+            Debug.Log("エフェクト生成 : " + conditionType.ToString());
+        }
+
         Debug.Log("コンディション付与");
     }
 
@@ -52,6 +66,11 @@ public class PlayerConditionBase : MonoBehaviour
 
     protected virtual IEnumerator OnExitCondition() {
         yield return null;
+
+        if (conditionEffect != null) {
+            // エフェクト破棄
+            Destroy(conditionEffect.gameObject);
+        }
 
         Debug.Log("コンディション削除");
 
