@@ -12,8 +12,8 @@ public class SceneStateManager : MonoBehaviour {
 
     public Battle battle;
 
-    [SerializeField]
-    private float sliderWaitTime;
+    //[SerializeField]
+    //private float sliderWaitTime;
 
     [SerializeField]
     private Fade fade;

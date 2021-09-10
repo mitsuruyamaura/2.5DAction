@@ -26,11 +26,13 @@ public class EnemyGenerator : MonoBehaviour
 
             int index = Random.Range(0, enemyPrefabs.Length);
 
+            EnemyData enemyData = DataBaseManager.instance.enemyDataSO.enemyDatasList.Find(x => x.enemyNo == index);
+
             // “G‚Ì¶¬
-            EnemyController enemyController = Instantiate(enemyPrefabs[index], GetRandomEnemyPos(index), Quaternion.identity);
+            EnemyController enemyController = Instantiate(enemyPrefabs[index], GetRandomEnemyPos(index), Quaternion.identity);   // enemyData.enemyPrefab
 
             // “G‚Ì‰Šúİ’è
-            enemyController.SetUpEnemy(battle);
+            enemyController.SetUpEnemy(battle, enemyData);
 
             // List ‚Ö“o˜^
             this.battle.AddEnemyFromEnemiesList(enemyController);

@@ -18,6 +18,9 @@ public class DataBaseManager : MonoBehaviour
 
     public List<AbilityItemDataSO> abilityItemDataSOList;
 
+    public EnemyDataSO enemyDataSO;
+    public DebuffDataSO debuffDataSO;
+
 
     void Awake() {
         if (instance == null) {

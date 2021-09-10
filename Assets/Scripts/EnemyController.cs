@@ -54,6 +54,8 @@ public class EnemyController : MonoBehaviour
 
     private Tween tween;
 
+    private EnemyData enemyData;
+
 
     public enum EnemyState{
         Attack,
@@ -273,11 +275,27 @@ public class EnemyController : MonoBehaviour
     /// “G‚Ì‰Šúİ’è
     /// </summary>
     /// <param name="battle"></param>
-    public void SetUpEnemy(Battle battle) {
+    public void SetUpEnemy(Battle battle, EnemyData enemyData) {
         this.battle = battle;
 
         moveEvent = DataBaseManager.instance.enemyMoveEventDataSO.GetEnemyMove(enemyMoveType);
 
         moveEvent.Invoke(transform, moveDuraiton);
+
+        this.enemyData = enemyData;
+
+        attackPower = this.enemyData.attackPower;
+
+        hp = this.enemyData.hp;
+
+        // ‘¼‚É‚àİ’è‚·‚é
+    }
+
+    /// <summary>
+    /// EnemyData ‚Ìæ“¾
+    /// </summary>
+    /// <returns></returns>
+    public EnemyData GetEnemyData() {
+        return enemyData;
     }
 }
