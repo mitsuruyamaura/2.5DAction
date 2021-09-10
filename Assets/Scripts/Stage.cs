@@ -252,7 +252,10 @@ public class Stage : MonoBehaviour {
         //    CurrentTurnState = TurnState.Player;
         //}
 
-        // ターンの確認
+        // バトルで付与されたデバフの確認と付与
+        CheckDebuffConditions();
+
+        // ターンの確認とプレイヤーのターンに切り替え。コンディションの更新
         CheckTurn();
 
         // オーブを獲得している場合は獲得処理を実行
@@ -334,7 +337,7 @@ public class Stage : MonoBehaviour {
     }
 
     /// <summary>
-    /// ターンの確認
+    /// ターンの確認。プレイヤーのターンに切り替え。コンディションの更新
     /// </summary>
     private void CheckTurn() {
         if (GameData.instance.staminaPoint.Value <= 0) {
@@ -459,5 +462,69 @@ public class Stage : MonoBehaviour {
 
     public InputButtonManager GetInputManager() {
         return inputButtonManager;
+    }
+
+
+    /// <summary>
+    /// バトルで付与されたデバフの確認
+    /// </summary>
+    private void CheckDebuffConditions() {
+
+        if (GameData.instance.debuffConditionsList.Count == 0) {
+            return;
+        }
+
+        for (int i =0; i < GameData.instance.debuffConditionsList.Count; i++) {
+            // デバフの付与
+            AddDebuff(GameData.instance.debuffConditionsList[i]);
+        }
+
+        // デバフリストをクリア
+        GameData.instance.debuffConditionsList.Clear();
+    }
+
+    /// <summary>
+    /// デバフの付与
+    /// </summary>
+    private void AddDebuff(ConditionType conditionType) {
+
+        DebuffData debuffData = DataBaseManager.instance.debuffDataSO.debuffDatasList.Find(x => x.debuffConditionTypes == conditionType);
+
+        // すでに同じコンディションが付与されているか確認
+        if (mapMoveController.GetConditionsList().Exists(x => x.GetConditionType() == conditionType)) {
+            // すでに付与されている場合は、持続時間を更新し、効果は上書きして処理を終了する
+            mapMoveController.GetConditionsList().Find(x => x.GetConditionType() == conditionType).ExtentionCondition(debuffData.duration, debuffData.debuffValue);
+            return;
+        }
+
+        // 付与するコンディションが睡眠かつ、すでに混乱のコンディションが付与されているときには、睡眠のコンディションは無視する(操作不能になるため)
+        if (conditionType == ConditionType.Sleep && mapMoveController.GetConditionsList().Exists(x => x.GetConditionType() == ConditionType.Confusion)) {
+            return;
+        }
+
+        // 付与されていないコンディションの場合は、付与する準備する
+        PlayerConditionBase playerCondition;
+
+        // Player にコンディションを付与
+        playerCondition = conditionType switch {
+
+            ConditionType.View => mapMoveController.gameObject.AddComponent<PlayerCondition_View>(),
+            ConditionType.Hide_Symbols => mapMoveController.gameObject.AddComponent<PlayerCondition_HideSymbol>(),
+            ConditionType.Untouchable => mapMoveController.gameObject.AddComponent<PlayerCondition_Untouchable>(),
+            ConditionType.Walk_through => mapMoveController.gameObject.AddComponent<PlayerCondition_WalkThrough>(),
+            ConditionType.Sleep => mapMoveController.gameObject.AddComponent<PlayerCondition_Sleep>(),
+            ConditionType.Confusion => mapMoveController.gameObject.AddComponent<PlayerCondition_Confusion>(),
+            ConditionType.Curse => mapMoveController.gameObject.AddComponent<PlayerCondition_Curse>(),
+            ConditionType.Poison => mapMoveController.gameObject.AddComponent<PlayerCondition_Poison>(),
+            ConditionType.Disease => mapMoveController.gameObject.AddComponent<PlayerCondition_Disease>(),
+            ConditionType.Fatigue => mapMoveController.gameObject.AddComponent<PlayerCondition_Fatigue>(),
+            _ => null
+        };
+
+        // 初期設定を実行
+        playerCondition.AddCondition(conditionType, debuffData.duration, debuffData.debuffValue, mapMoveController, symbolManager);
+
+        // コンディション用の List に追加
+        mapMoveController.AddConditionsList(playerCondition);
     }
 }

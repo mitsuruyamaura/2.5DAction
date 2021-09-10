@@ -34,6 +34,9 @@ public class GameData : MonoBehaviour
     // アビリティアイテムのリスト
     public List<InventryAbilityItemData> abilityItemDatasList = new List<InventryAbilityItemData>();
 
+    // バトルで付与されたデバフのリスト
+    public List<ConditionType> debuffConditionsList = new List<ConditionType>();
+
 
     void Awake() {
         if (instance == null) {

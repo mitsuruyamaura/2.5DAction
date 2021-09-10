@@ -322,6 +322,9 @@ public class PlayerController : MonoBehaviour
 
             CalcHp(-bullet.bulletPower);
 
+            // TODO デバフ付与の判定
+
+
             Destroy(other.gameObject);
         }
 
@@ -329,6 +332,9 @@ public class PlayerController : MonoBehaviour
             if (enemy.currentEnemyState == EnemyController.EnemyState.Attack) {
                 // ダメージ
                 CalcHp(-enemy.attackPower);
+
+                // デバフ付与の判定
+                JudgeDebuffCondition(enemy.GetEnemyData());
             }
         }
     }
@@ -343,5 +349,35 @@ public class PlayerController : MonoBehaviour
 
         actionCoroutine = null;
         imgCutin.gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// デバフ付与の判定
+    /// </summary>
+    private void JudgeDebuffCondition(EnemyData enemyData) {
+
+        // デバフの付与がない場合には処理しない
+        if (enemyData.debuffDatas.Length == 0) {
+            return;
+        }
+
+        // デバフの数だけ判定
+        for (int i = 0; i < enemyData.debuffDatas.Length; i++) {
+
+            // 乱数が付与確率以下なら
+            if (Random.Range(0, 100) <= enemyData.debuffDatas[i].rate) {
+
+                // デバフ付与
+                AddDebuffCondition(enemyData.debuffDatas[i].debuffConditionType);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 指定したタイプのデバフを付与
+    /// </summary>
+    /// <param name="debuffConditionType"></param>
+    private void AddDebuffCondition(ConditionType debuffConditionType) {
+        GameData.instance.debuffConditionsList.Add(debuffConditionType);
     }
 }

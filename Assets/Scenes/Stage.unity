@@ -2100,7 +2100,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stage: {fileID: 1594420609}
   battle: {fileID: 0}
-  sliderWaitTime: 5
   fade: {fileID: 486184415}
   fadeDuration: 1
 --- !u!4 &592485142
@@ -2907,6 +2906,8 @@ MonoBehaviour:
   abilityItemDataSOList:
   - {fileID: 11400000, guid: 58d10d67aa371264ba5c7064f2065321, type: 2}
   - {fileID: 11400000, guid: 58d10d67aa371264ba5c7064f2065321, type: 2}
+  enemyDataSO: {fileID: 11400000, guid: ec81d48725951e04587730e0ea399cbc, type: 2}
+  debuffDataSO: {fileID: 11400000, guid: ee479803e2c4ae245b160393ebfd5499, type: 2}
 --- !u!4 &878749739
 Transform:
   m_ObjectHideFlags: 0
@@ -3306,6 +3307,7 @@ MonoBehaviour:
   abilityItemDatasList:
   - abilityType: 1
     abilityNo: 0
+  debuffConditionsList: 
 --- !u!4 &941425069
 Transform:
   m_ObjectHideFlags: 0
