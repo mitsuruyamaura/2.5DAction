@@ -48,6 +48,10 @@ public class MapMoveController : MonoBehaviour
     //    transform.GetChild(0).TryGetComponent(out rb);
     //}
 
+    /// <summary>
+    /// ‰Šúİ’è
+    /// </summary>
+    /// <param name="stage"></param>
     public void SetUpMapMoveController(Stage stage) {
         this.stage = stage;
         tilemapCollider = DataBaseManager.instance.tilemapCollider;
