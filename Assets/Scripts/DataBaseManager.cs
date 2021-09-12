@@ -14,7 +14,7 @@ public class DataBaseManager : MonoBehaviour
     [SerializeField]
     private Transform spriteMaskTran;
 
-    public Tilemap tilemapCollider;
+    public Tilemap tilemapCollider;   // Grid_Collison ‚Ì Tilemap ‚ğƒAƒTƒCƒ“
 
     public List<AbilityItemDataSO> abilityItemDataSOList;
 

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 using System.Linq;
 
 /// <summary>
@@ -29,7 +28,7 @@ public class SymbolManager : MonoBehaviour
     /// <summary>
     /// ‚·‚×‚Ä‚ÌƒVƒ“ƒ{ƒ‹‚Ì‰Šúİ’è
     /// </summary>
-    public void SetUpAllSymbos() {
+    public void SetUpAllSymbols() {
 
         List<SymbolBase> specialSymbols = new List<SymbolBase>();
 

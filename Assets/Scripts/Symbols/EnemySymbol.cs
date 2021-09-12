@@ -52,25 +52,13 @@ public class EnemySymbol : SymbolBase
     /// </summary>
     private void PreparateBattle() {
 
-        //symbolManager.SwitchEnemyCollider(false);
-
-        // TODO すべてのエネミーのシンボルの移動が終了しているか待機
-
-
-        // TODO バトル前に座標情報を GameData に保持
-
-
-        // TODO エフェクトや SE
-
-
-        // TODO 敵の情報を取得
-
-
-        // TODO シーン遷移
-
+        // シーン遷移の準備
         SceneStateManager.instance.PreparateBattleScene();
     }
 
+    /// <summary>
+    /// エネミーをランダムな方向に１マス移動するか、その場で待機
+    /// </summary>
     public void EnemyMove() {
 
         // 移動する方向をランダムに１つ設定
@@ -129,6 +117,10 @@ public class EnemySymbol : SymbolBase
         };
     }
 
+    /// <summary>
+    /// コライダーのオンオフ切り替え
+    /// </summary>
+    /// <param name="isSwicth"></param>
     public void SwtichCollider(bool isSwicth) {
         boxCol.enabled = isSwicth;
     }

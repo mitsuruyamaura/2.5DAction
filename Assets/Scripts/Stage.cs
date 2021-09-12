@@ -91,7 +91,7 @@ public class Stage : MonoBehaviour {
         symbolManager.SymbolsList.AddRange(stageGenerator.GenerateSpecialSymbols());
 
         // 全シンボルの設定
-        symbolManager.SetUpAllSymbos();
+        symbolManager.SetUpAllSymbols();
 
         // スタミナの値の購読開始
         GameData.instance.staminaPoint.Subscribe(_ => UpdateDisplayStaminaPoint());
@@ -224,9 +224,6 @@ public class Stage : MonoBehaviour {
 
     private void OnEnable() {
         Debug.Log("OnEneble");
-
-        // TODO トランジション処理
-
 
         // バトル前の Hp からアニメして表示するために待機時間を作る
         StartCoroutine(UpdateDisplayHp(1.0f));
