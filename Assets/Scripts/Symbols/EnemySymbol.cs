@@ -21,7 +21,7 @@ public class EnemySymbol : SymbolBase
     public override void OnEnterSymbol(SymbolManager symbolManager) {
         base.OnEnterSymbol(symbolManager);
 
-        tilemapCollider = DataBaseManager.instance.tilemapCollider;
+        tilemapCollider = symbolManager.tilemapCollider;
         TryGetComponent(out boxCol);
     }
 

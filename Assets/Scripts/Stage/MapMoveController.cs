@@ -54,7 +54,7 @@ public class MapMoveController : MonoBehaviour
     /// <param name="stage"></param>
     public void SetUpMapMoveController(Stage stage) {
         this.stage = stage;
-        tilemapCollider = DataBaseManager.instance.tilemapCollider;
+        tilemapCollider = this.stage.GetSymbolManager().tilemapCollider;
     }
 
     /// <summary>

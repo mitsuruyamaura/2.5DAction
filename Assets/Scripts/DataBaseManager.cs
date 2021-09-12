@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class DataBaseManager : MonoBehaviour
 {
@@ -11,15 +10,11 @@ public class DataBaseManager : MonoBehaviour
 
     public ExpTableSO expTableSO;
 
-    [SerializeField]
-    private Transform spriteMaskTran;
-
-    public Tilemap tilemapCollider;   // Grid_Collison の Tilemap をアサイン
-
     public List<AbilityItemDataSO> abilityItemDataSOList;
 
     public EnemyDataSO enemyDataSO;
     public DebuffDataSO debuffDataSO;
+    public StageDataSO stageDataSO;
 
 
     void Awake() {
@@ -40,13 +35,7 @@ public class DataBaseManager : MonoBehaviour
         return expTableSO.expTablesList[level].maxExp;
     }
 
-    /// <summary>
-    /// SpriteMask ゲームオブジェクトの Transfrom を取得
-    /// </summary>
-    /// <returns></returns>
-    public Transform GetSpriteMaskTransform() {
-        return spriteMaskTran;
-    }
+
 
     /// <summary>
     /// レベルと AbilityType による AbilityPointTable の取得

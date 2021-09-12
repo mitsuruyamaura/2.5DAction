@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.Tilemaps;
 
 /// <summary>
 /// シンボルの生成・管理・制御を行うクラス
@@ -19,6 +20,12 @@ public class SymbolManager : MonoBehaviour
 
     [SerializeField]　　// Debug 用
     private List<EnemySymbol> enemiesList = new List<EnemySymbol>();
+
+    [SerializeField]
+    private Transform spriteMaskTran;
+
+    public Tilemap tilemapCollider;   // Grid_Collison の Tilemap をアサイン
+
 
     //void Start() {
     //    // Debug
@@ -145,5 +152,13 @@ public class SymbolManager : MonoBehaviour
         for (int i = 0; i < enemiesList.Count; i++) {
             enemiesList[i].SwtichCollider(isSwitch);
         }
+    }
+
+    /// <summary>
+    /// SpriteMask ゲームオブジェクトの Transfrom を取得
+    /// </summary>
+    /// <returns></returns>
+    public Transform GetSpriteMaskTransform() {
+        return spriteMaskTran;
     }
 }

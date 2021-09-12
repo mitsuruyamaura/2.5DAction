@@ -8,6 +8,7 @@ using DG.Tweening;
 using UnityEngine.Tilemaps;
 
 public class Stage : MonoBehaviour {
+
     [SerializeField]
     private Text txtStaminaPoint;
 
@@ -80,6 +81,9 @@ public class Stage : MonoBehaviour {
 
 
     void Start() {
+        // Stage の情報設定
+        SceneStateManager.instance.stage = this;
+
         // ステージのランダム作成
         stageGenerator.GenerateStageFromRandomTiles();
 
@@ -459,6 +463,11 @@ public class Stage : MonoBehaviour {
 
     public InputButtonManager GetInputManager() {
         return inputButtonManager;
+    }
+
+
+    public SymbolManager GetSymbolManager() {
+        return symbolManager;
     }
 
 
