@@ -7,8 +7,7 @@ public class SceneStateManager : MonoBehaviour {
 
     public static SceneStateManager instance;
 
-    [SerializeField]
-    private Stage stage;
+    public Stage stage;
 
     public Battle battle;
 
@@ -98,16 +97,7 @@ public class SceneStateManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// 未使用
-    /// </summary>
-    /// <param name="nextScene"></param>
-    /// <param name="mode"></param>
-    private void SceneLoaded(Scene nextScene, LoadSceneMode mode) {
-        //StartCoroutine(stage.UpdateDisplayHp(sliderWaitTime));
-    }
-
-    /// <summary>
-    /// 指定したシーンへ遷移準備。現在は未使用
+    /// 指定したシーンへ遷移準備
     /// </summary>
     /// <param name="nextLoadSceneName"></param>
     public void PrepareteNextScene(SceneName nextLoadSceneName) {
@@ -122,7 +112,7 @@ public class SceneStateManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// 指定したシーンへ遷移。現在は未使用
+    /// 指定したシーンへ遷移
     /// </summary>
     /// <param name="nextLoadSceneName"></param>
     /// <returns></returns>
@@ -143,5 +133,15 @@ public class SceneStateManager : MonoBehaviour {
 
     public Scene GetScene(SceneName nextLoadSceneName) {
         return SceneManager.GetSceneByName(nextLoadSceneName.ToString());
+    }
+
+
+    /// <summary>
+    /// 未使用
+    /// </summary>
+    /// <param name="nextScene"></param>
+    /// <param name="mode"></param>
+    private void SceneLoaded(Scene nextScene, LoadSceneMode mode) {
+        //StartCoroutine(stage.UpdateDisplayHp(sliderWaitTime));
     }
 }

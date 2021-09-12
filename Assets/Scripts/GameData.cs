@@ -37,6 +37,14 @@ public class GameData : MonoBehaviour
     // バトルで付与されたデバフのリスト
     public List<ConditionType> debuffConditionsList = new List<ConditionType>();
 
+    // 選択しているステージの番号
+    public int chooseStageNo;
+
+    // クリア済のステージの番号
+    public List<int> clearedStageNos;
+
+    public StageData currentStageData;
+
 
     void Awake() {
         if (instance == null) {

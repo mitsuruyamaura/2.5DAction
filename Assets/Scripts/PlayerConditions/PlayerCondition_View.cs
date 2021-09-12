@@ -14,7 +14,7 @@ public class PlayerCondition_View : PlayerConditionBase
     protected override void OnEnterCondition() {
                         
         // マスクの情報を取得
-        spriteMaskTran = DataBaseManager.instance.GetSpriteMaskTransform();
+        spriteMaskTran = symbolManager.GetSpriteMaskTransform();
 
         // マスクのスケールを操作して、視界のサイズを変更
         spriteMaskTran.DOScale(Vector3.one * conditionValue, viewAnimeDuration).SetEase(Ease.InBack);

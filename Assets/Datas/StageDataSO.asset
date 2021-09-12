@@ -15,14 +15,14 @@ MonoBehaviour:
   stageDatasList:
   - stageName: "\u306F\u3058\u307E\u308A\u306E\u5730"
     stageNo: 0
-    stageIconTran: {fileID: 450737917147517586, guid: 0c026872d932edb4f862881d08c6dac4, type: 3}
-    initStamina: 20
-    appearEnemyNos: 0000000001000000
+    playerIconTran: {fileID: 450737917147517586, guid: 0c026872d932edb4f862881d08c6dac4, type: 3}
+    initStamina: 50
+    appearEnemyNos: 01000000
     bossNo: 0
     clearBonusPoint: 100
   - stageName: "\u30C0\u30FC\u30E0\u5EC3\u5751"
     stageNo: 1
-    stageIconTran: {fileID: 7129038030090245827, guid: fc658b95de7e9d74ca5a091677b56879, type: 3}
+    playerIconTran: {fileID: 7129038030090245827, guid: fc658b95de7e9d74ca5a091677b56879, type: 3}
     initStamina: 25
     appearEnemyNos: 0000000001000000
     bossNo: 0
