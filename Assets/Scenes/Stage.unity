@@ -873,6 +873,8 @@ MonoBehaviour:
   - {fileID: 8935083710537485097}
   - {fileID: 715765112}
   enemiesList: []
+  spriteMaskTran: {fileID: 1638652407}
+  tilemapCollider: {fileID: 175135994}
 --- !u!212 &298270345 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 1144797423341432948, guid: 0b9db4349246fcb41ba5519d8c85ca21, type: 3}

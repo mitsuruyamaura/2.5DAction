@@ -54,7 +54,11 @@ public class World : MonoBehaviour
     /// ゲーム開始用のボタンの処理
     /// </summary>
     public void OnClickSubmit() {
+        
+        // 選択しているステージの番号から StageData を取得
+        GameData.instance.currentStageData = DataBaseManager.instance.stageDataSO.stageDatasList.Find(x => x.stageNo == GameData.instance.chooseStageNo);
 
+        // ボタンアニメ演出
         btnSubmit.transform.DOShakeScale(0.5f)
             .SetEase(Ease.OutQuart)
             .OnComplete(() => 

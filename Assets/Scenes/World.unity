@@ -1480,8 +1480,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4722163574315472991, guid: fb9764e6b43fc284da2e5263bb82276e, type: 3}
+      propertyPath: staminaPoint.value
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722163574315472991, guid: fb9764e6b43fc284da2e5263bb82276e, type: 3}
       propertyPath: clearedStageNos.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4722163574315472991, guid: fb9764e6b43fc284da2e5263bb82276e, type: 3}
       propertyPath: clearedStageNos.Array.data[0]

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class EnemyGenerator : MonoBehaviour
 {
@@ -19,6 +20,17 @@ public class EnemyGenerator : MonoBehaviour
     public IEnumerator GenerateEnemies(Battle battle) {
 
         this.battle = battle;
+
+        // ステージのデータがある場合
+        if (GameData.instance.currentStageData != null) {
+
+            // 生成するエネミーの種類を新しく登録
+            enemyPrefabs = new EnemyController[GameData.instance.currentStageData.appearEnemyNos.Length];
+
+            for (int i = 0; i < GameData.instance.currentStageData.appearEnemyNos.Length; i++) {
+                enemyPrefabs[i] = DataBaseManager.instance.enemyDataSO.enemyDatasList.Find(x => x.enemyNo == GameData.instance.currentStageData.appearEnemyNos[i]).enemyPrefab;
+            }
+        }
 
         //yield return null;   // これがないと Stage に敵が生成される
 

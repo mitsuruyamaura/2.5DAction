@@ -84,8 +84,8 @@ public class Stage : MonoBehaviour {
         // Stage の情報設定
         SceneStateManager.instance.stage = this;
 
-        // ステージのランダム作成
-        stageGenerator.GenerateStageFromRandomTiles();
+        // ステージのランダム作成(StageData 作成後は StageData に登録されている StageType を渡す)
+        stageGenerator.GenerateStageFromRandomTiles(GameData.instance.currentStageData.stageType);
 
         // 通常のシンボルのランダム作成して List に追加
         symbolManager.AllClearSymbolsList();
@@ -96,6 +96,9 @@ public class Stage : MonoBehaviour {
 
         // 全シンボルの設定
         symbolManager.SetUpAllSymbols();
+
+        // スタミナの値をステージごとの初期値に設定(StageData 作成後)
+        GameData.instance.staminaPoint.Value = GameData.instance.currentStageData.initStamina;
 
         // スタミナの値の購読開始
         GameData.instance.staminaPoint.Subscribe(_ => UpdateDisplayStaminaPoint());
@@ -465,7 +468,10 @@ public class Stage : MonoBehaviour {
         return inputButtonManager;
     }
 
-
+    /// <summary>
+    /// SymbolManager の情報を取得
+    /// </summary>
+    /// <returns></returns>
     public SymbolManager GetSymbolManager() {
         return symbolManager;
     }

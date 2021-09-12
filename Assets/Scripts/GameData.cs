@@ -43,6 +43,8 @@ public class GameData : MonoBehaviour
     // クリア済のステージの番号
     public List<int> clearedStageNos;
 
+    public StageData currentStageData;
+
 
     void Awake() {
         if (instance == null) {
