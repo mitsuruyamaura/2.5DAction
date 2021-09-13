@@ -15,10 +15,31 @@ MonoBehaviour:
   expTablesList:
   - level: 1
     minExp: 0
-    maxExp: 2
+    maxExp: 5
   - level: 2
-    minExp: 2
-    maxExp: 4
+    minExp: 5
+    maxExp: 10
   - level: 3
-    minExp: 4
-    maxExp: 7
+    minExp: 10
+    maxExp: 20
+  - level: 4
+    minExp: 20
+    maxExp: 35
+  - level: 5
+    minExp: 35
+    maxExp: 55
+  - level: 6
+    minExp: 55
+    maxExp: 85
+  - level: 7
+    minExp: 85
+    maxExp: 120
+  - level: 8
+    minExp: 120
+    maxExp: 175
+  - level: 9
+    minExp: 175
+    maxExp: 260
+  - level: 10
+    minExp: 260
+    maxExp: 400

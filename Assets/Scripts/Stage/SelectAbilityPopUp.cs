@@ -146,11 +146,14 @@ public class SelectAbilityPopUp : MonoBehaviour
         // 強化に必要なコストを支払う
         int startValue = GameData.instance.abilityPoint;
 
+        // アビリティを取得済にする(重複習得不可の制御)
+        currentAbilityDetail.LearnAbility();
+
         // アニメーションさせて AbilityPoint の表示を更新
         txtAbilityPoint.DOCounter(startValue, GameData.instance.abilityPoint -= currentAbilityDetail.abilityData.abilityTable.abilityCost, 1.0f).SetEase(Ease.InQuart);
 
         // エフェクト
-         StartCoroutine(stage.PlayAbilityPowerUpEffect());
+        StartCoroutine(stage.PlayAbilityPowerUpEffect());
 
         // 初期値に戻す
         Initialize();

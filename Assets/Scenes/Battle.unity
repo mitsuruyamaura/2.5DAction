@@ -16587,8 +16587,8 @@ MonoBehaviour:
       colorBlindnessType: 0
       colorBlindnessStrength: 1
   m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
-  m_ShowToolkit: 1
-  m_ShowCustomSorter: 1
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
   breakBeforeColorGrading: 0
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
@@ -17307,6 +17307,7 @@ GameObject:
   - component: {fileID: 1008047938}
   - component: {fileID: 1008047941}
   - component: {fileID: 1008047940}
+  - component: {fileID: 1008047942}
   m_Layer: 0
   m_Name: CM vcam1
   m_TagString: Untagged
@@ -17396,6 +17397,23 @@ MonoBehaviour:
   m_ChannelMask: 1
   m_Gain: 50
   m_Use2DDistance: 0
+--- !u!114 &1008047942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008047937}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 729aad4491e915a41bda2b8325cf757a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FocusTracksTarget: 0
+  m_FocusTracking: 2
+  m_FocusTarget: {fileID: 0}
+  m_FocusOffset: 0
+  m_Profile: {fileID: 11400000, guid: bd2b78902dac91148a6c7669be98262b, type: 2}
 --- !u!1001 &1008305778
 PrefabInstance:
   m_ObjectHideFlags: 0

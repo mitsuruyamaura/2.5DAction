@@ -79,6 +79,12 @@ public class Stage : MonoBehaviour {
         get => currentTurnState;
     }
 
+    [SerializeField]
+    private GameObject imgLevelUpPrefab;
+
+    [SerializeField]
+    private Transform overlayCanvasTran;
+
 
     void Start() {
         // Stage の情報設定
@@ -248,7 +254,13 @@ public class Stage : MonoBehaviour {
 
             // レベルアップのボーナス
 
+
+            // レベルアップ演出
+            GenerateLebelUpEffect();
         }
+
+        // デバッグ  レベルアップ演出
+        //GenerateLebelUpEffect();
 
         //// バトルから戻った場合
         //if (CurrentTurnState == TurnState.Enemy) {
@@ -538,5 +550,20 @@ public class Stage : MonoBehaviour {
 
         // コンディション用の List に追加
         mapMoveController.AddConditionsList(playerCondition);
+    }
+
+    /// <summary>
+    /// レベルアップ演出
+    /// </summary>
+    private void GenerateLebelUpEffect() {
+
+        GameObject levelUpLogo = Instantiate(imgLevelUpPrefab, overlayCanvasTran, false);
+        GameObject levelUpEffect = Instantiate(EffectManager.instance.levelUpPrefab, mapMoveController.transform.position, EffectManager.instance.levelUpPrefab.transform.rotation);
+        Destroy(levelUpEffect, 2.5f);
+
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(levelUpLogo.transform.DOLocalMoveY(325.0f, 1.0f).SetEase(Ease.OutQuart));
+        sequence.Append(levelUpLogo.transform.DOShakeScale(0.15f, 0.5f, 5).SetEase(Ease.InQuart));
+        sequence.AppendInterval(0.5f).OnComplete(() => { Destroy(levelUpLogo); });
     }
 }

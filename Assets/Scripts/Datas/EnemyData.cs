@@ -11,6 +11,7 @@ public class EnemyData
     public int attackPower;
     public float moveSpeed;
     public float attackInterval;
+    public int exp;
 
     public EnemyController enemyPrefab;
     public EnemyDebuffData[] debuffDatas;
