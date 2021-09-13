@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using GFramework;
 
 public class StageSelectDetail : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class StageSelectDetail : MonoBehaviour
 
     [SerializeField]
     private Button btnStageSelectDetail;
+
+    [SerializeField]
+    private SimpleRoundedImage imgStageView;
 
     private StageData stageData;
 
@@ -23,7 +27,9 @@ public class StageSelectDetail : MonoBehaviour
         this.stageData = stageData;
         this.world = world;
 
+        // äeçÄñ⁄ÇÃê›íË
         txtStageSelect.text = this.stageData.stageName;
+        imgStageView.sprite = this.stageData.stageView;
         btnStageSelectDetail.onClick.AddListener(OnClickStageSelectDetail);
     }
 

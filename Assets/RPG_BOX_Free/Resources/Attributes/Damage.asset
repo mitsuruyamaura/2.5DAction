@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e6292b2c06870d4495f009f912b9600, type: 3}
-  m_Name: Post Process Volume Profile 1
+  m_Script: {fileID: 11500000, guid: 3006f511b1f183640bd02a9bf44f1961, type: 3}
+  m_Name: Damage
   m_EditorClassIdentifier: 
-  settings: []
+  AttributeName: Damage
+  AttributeDisplay: +#VALUE# Damage

@@ -288,6 +288,8 @@ public class EnemyController : MonoBehaviour
 
         hp = this.enemyData.hp;
 
+        exp = this.enemyData.exp;
+
         // ëºÇ…Ç‡ê›íËÇ∑ÇÈ
     }
 

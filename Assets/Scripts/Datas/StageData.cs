@@ -5,6 +5,7 @@ public class StageData
 {
     public string stageName;
     public int stageNo;
+    public Sprite stageView;           // ステージの背景画像
     public Transform playerIconTran;   // プレイヤーのアイコンの配置場所
     public int initStamina;            // ステージ開始時の初期スタミナ
     public int[] appearEnemyNos;       // 出現するエネミーの種類

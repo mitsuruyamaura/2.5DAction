@@ -12,6 +12,7 @@ public class EffectManager : MonoBehaviour
     public GameObject orbGetEffectPrefab;
     public GameObject abilityPowerUpPrefab_1;
     public GameObject abilityPowerUpPrefab_2;
+    public GameObject levelUpPrefab;
 
     // Enemy ‘¤
     public GameObject enemyHitEffectPrefab;

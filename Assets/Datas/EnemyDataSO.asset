@@ -19,6 +19,7 @@ MonoBehaviour:
     attackPower: 1
     moveSpeed: 3
     attackInterval: 100
+    exp: 3
     enemyPrefab: {fileID: 1458318548233567103, guid: 4dc995d8eec81fb48ba027c47656d984, type: 3}
     debuffDatas:
     - debuffConditionType: 0
@@ -29,5 +30,6 @@ MonoBehaviour:
     attackPower: 1
     moveSpeed: 2
     attackInterval: 200
+    exp: 5
     enemyPrefab: {fileID: 5290185962481650826, guid: 6b44520406eb8c74b985e1ce1179bf20, type: 3}
     debuffDatas: []

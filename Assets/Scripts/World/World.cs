@@ -59,7 +59,7 @@ public class World : MonoBehaviour
         GameData.instance.currentStageData = DataBaseManager.instance.stageDataSO.stageDatasList.Find(x => x.stageNo == GameData.instance.chooseStageNo);
 
         // ボタンアニメ演出
-        btnSubmit.transform.DOShakeScale(0.5f)
+        btnSubmit.transform.DOShakeScale(0.35f, 0.5f, 5)
             .SetEase(Ease.OutQuart)
             .OnComplete(() => 
             {

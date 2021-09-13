@@ -21,7 +21,9 @@ public class AbilityDetail : MonoBehaviour
 
     private SelectAbilityPopUp selectAbilityPopUp;
 
-    private bool haveAbility = false;
+    private bool haveAbility = false;       // アビリティ用のアイテムを所持しているかどうかの判定
+
+    private bool learnedAbility = false;    // アビリティを習得しているかどうかの判定
 
     /// <summary>
     /// AbilityButtonDetail の設定
@@ -53,6 +55,11 @@ public class AbilityDetail : MonoBehaviour
     /// </summary>
     public void JudgeAbilityCost() {
         btnAbility.interactable = false;
+
+        // すでに習得済か判定
+        if (learnedAbility) {
+            return;
+        }
 
         // 対応するアビリティアイテムを所持しているか判定
         CheckHaveAbilityItem();
@@ -95,5 +102,12 @@ public class AbilityDetail : MonoBehaviour
             // ロック設定
             txtAbilityCost.text = "";
         }
+    }
+
+    /// <summary>
+    /// アビリティを習得済にする
+    /// </summary>
+    public void LearnAbility() {
+        learnedAbility = true;
     }
 }
