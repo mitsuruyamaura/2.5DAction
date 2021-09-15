@@ -8,17 +8,17 @@ using UnityEngine;
 public class PlayerConditionBase : MonoBehaviour
 {
     [SerializeField]  // Debug
-    protected float conditionDuration;
+    protected float conditionDuration;　　//　持続時間
 
     [SerializeField]  // Debug
-    protected float conditionValue;
+    protected float conditionValue;       //  効果  =>  攻撃力を増減する値、マップの見える範囲を増減する値
 
     protected ConditionEffect conditionEffect;
 
     protected MapMoveController mapMoveController;
     protected SymbolManager symbolManager;
 
-    protected ConditionType conditionType;
+    protected ConditionType conditionType;   //  この情報が、コンディションの適用値になる
 
     /// <summary>
     /// コンディションをセットする際に呼び出す

@@ -44,9 +44,13 @@ public class MapMoveController : MonoBehaviour
     private Transform conditionEffectTran;
 
 
-    //void Start() {
-    //    transform.GetChild(0).TryGetComponent(out rb);
-    //}
+    void Start() {
+        //transform.GetChild(0).TryGetComponent(out rb);
+
+        //PlayerConditionBase condition = gameObject.AddComponent<PlayerCondition_Fatigue>();
+        //condition.AddCondition(ConditionType.Fatigue, 5, 0.5f, this, stage.GetSymbolManager());
+        //conditionsList.Add(condition);
+    }
 
     /// <summary>
     /// èâä˙ê›íË
