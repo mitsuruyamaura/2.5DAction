@@ -33,3 +33,12 @@ MonoBehaviour:
     exp: 5
     enemyPrefab: {fileID: 5290185962481650826, guid: 6b44520406eb8c74b985e1ce1179bf20, type: 3}
     debuffDatas: []
+  - name: Boss_0
+    enemyNo: 100
+    hp: 10
+    attackPower: 2
+    moveSpeed: 2
+    attackInterval: 200
+    exp: 0
+    enemyPrefab: {fileID: 5290185962481650826, guid: 6b44520406eb8c74b985e1ce1179bf20, type: 3}
+    debuffDatas: []

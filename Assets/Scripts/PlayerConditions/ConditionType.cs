@@ -1,5 +1,5 @@
 /// <summary>
-/// 
+/// コンディションの種類
 /// </summary>
 public enum ConditionType
 {
