@@ -45,6 +45,8 @@ public class GameData : MonoBehaviour
 
     public StageData currentStageData;
 
+    public bool isBossBattled;
+
 
     void Awake() {
         if (instance == null) {

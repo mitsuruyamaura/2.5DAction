@@ -63,4 +63,24 @@ public class EnemyGenerator : MonoBehaviour
     private Vector3 GetRandomEnemyPos(int index) {
         return new Vector3(Random.Range(enemyGenerateTrans[0].position.x, enemyGenerateTrans[1].position.x), enemyPrefabs[index].transform.position.y, Random.Range(enemyGenerateTrans[0].position.z, enemyGenerateTrans[1].position.z));
     }
+
+    /// <summary>
+    /// ボスの生成
+    /// </summary>
+    public void GenerateBoss(Battle battle) {
+
+        this.battle = battle;
+
+        // ボスの情報を取得
+        EnemyData enemyData = DataBaseManager.instance.enemyDataSO.enemyDatasList.Find(x => x.enemyNo == GameData.instance.currentStageData.bossNo);
+
+        // ボスの生成
+        EnemyController enemyController = Instantiate(enemyData.enemyPrefab, GetRandomEnemyPos(0), Quaternion.identity);
+
+        // ボスの初期設定
+        enemyController.SetUpEnemy(battle, enemyData);
+
+        // List へ登録
+        battle.AddEnemyFromEnemiesList(enemyController);
+    }
 }

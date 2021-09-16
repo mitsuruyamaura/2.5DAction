@@ -13,6 +13,7 @@ public class EffectManager : MonoBehaviour
     public GameObject abilityPowerUpPrefab_1;
     public GameObject abilityPowerUpPrefab_2;
     public GameObject levelUpPrefab;
+    public GameObject clearEffectPrefab;
 
     // Enemy ‘¤
     public GameObject enemyHitEffectPrefab;

@@ -577,6 +577,9 @@ public class Stage : MonoBehaviour {
 
         yield return StartCoroutine(bossEffect.PlayEffect());
 
+        // ボスバトルであることを記録
+        GameData.instance.isBossBattled = true;
+
         // シーン遷移
         SceneStateManager.instance.PreparateBattleScene();
     }

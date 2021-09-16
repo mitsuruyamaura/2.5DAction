@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using Coffee.UIExtensions;
 
 public enum BattleState {
     Wait,
@@ -37,6 +38,12 @@ public class Battle : MonoBehaviour
 
     [SerializeField]
     private PlayerController playerController;
+
+    [SerializeField]
+    private Transform clearEffectPos;
+
+    [SerializeField]
+    private ShinyEffectForUGUI clearLogoEffect;
 
 
     IEnumerator Start()
@@ -80,8 +87,18 @@ public class Battle : MonoBehaviour
         // Hp表示更新
         UpdateDisplayHp();
 
-        // 敵の生成と List への登録
-        yield return StartCoroutine(enemyGenerator.GenerateEnemies(this));
+        // ボスバトルかノーマルバトルかの判定
+        if (GameData.instance.isBossBattled) {
+            // ボスの生成と List への登録
+            enemyGenerator.GenerateBoss(this);
+
+        } else {
+            // 敵の生成と List への登録
+            yield return StartCoroutine(enemyGenerator.GenerateEnemies(this));
+        }
+
+        // 敵の総数をクリア目標として設定
+        maxEnemyCount = enemiesList.Count;
 
         // 倒した敵の数の監視
         StartCoroutine(ObservateBattleState());
@@ -89,7 +106,6 @@ public class Battle : MonoBehaviour
         playerController.SetUpPlayerController(this);
 
         currentBattleState = BattleState.Play;
-
 
         Debug.Log("バトル開始");
     }
@@ -102,6 +118,7 @@ public class Battle : MonoBehaviour
 
         Debug.Log("倒した敵の数の監視 : 開始");
 
+        // 倒した敵の数が maxEnemyCount の値と同じになるまでループ
         while (destroyEnemyCount < maxEnemyCount) {
             yield return null;
         }
@@ -133,16 +150,25 @@ public class Battle : MonoBehaviour
 
         // クリティカルの回数やコンボした数の判定
 
+        if (GameData.instance.isBossBattled) {
 
-        // スタミナ獲得
-        GameData.instance.staminaPoint.Value += bonusStaminaPoint;
+            // クリア演出
+            yield return StartCoroutine(PlayClearEffect());
 
+            Debug.Log("ボスバトル終了 : ワールドへ戻る");
 
-        Debug.Log("バトル終了");
+            SceneStateManager.instance.PrepareteNextScene(SceneName.World);
 
+        } else {
 
-        // Stage へ戻る
-        SceneStateManager.instance.PreparateStageScene();
+            // スタミナ獲得
+            GameData.instance.staminaPoint.Value += bonusStaminaPoint;
+
+            Debug.Log("バトル終了 : ステージへ戻る");
+
+            // Stage へ戻る
+            SceneStateManager.instance.PreparateStageScene();
+        }
     }
 
     /// <summary>
@@ -155,8 +181,41 @@ public class Battle : MonoBehaviour
         destroyEnemyCount++;
     }
 
-
+    /// <summary>
+    /// エネミーの情報を List に追加
+    /// </summary>
+    /// <param name="enemyController"></param>
     public void AddEnemyFromEnemiesList(EnemyController enemyController) {
         enemiesList.Add(enemyController);
+    }
+
+    /// <summary>
+    /// ゲームクリア時の演出
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator PlayClearEffect() {
+
+        // クリアのロゴ表示
+        clearLogoEffect.transform.parent.gameObject.SetActive(true);
+
+        yield return null;
+
+        // ロゴが光るエフェクト再生
+        clearLogoEffect.Play();
+
+        // クリアのエフェクトを生成
+        for (int i = 0; i < Random.Range(3, 6); i++) {
+
+            GameObject clearEffect = Instantiate(EffectManager.instance.clearEffectPrefab, clearEffectPos);
+
+            // 位置をランダム化
+            clearEffect.transform.localPosition = new Vector3(
+                clearEffect.transform.localPosition.x + Random.Range(-10.0f, 10.0f),
+                clearEffect.transform.localPosition.y + Random.Range(-5.0f, 5.0f),
+                clearEffect.transform.localPosition.z);
+
+            Destroy(clearEffect, 1.25f);
+            yield return new WaitForSeconds(1.0f);
+        }
     }
 }
