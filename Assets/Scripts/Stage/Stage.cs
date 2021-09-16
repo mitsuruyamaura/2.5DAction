@@ -5,8 +5,6 @@ using UniRx;
 using UnityEngine.UI;
 using Coffee.UIExtensions;
 using DG.Tweening;
-using UnityEngine.Tilemaps;
-
 public class Stage : MonoBehaviour {
 
     [SerializeField]
@@ -168,12 +166,8 @@ public class Stage : MonoBehaviour {
             // ボスの出現
             Debug.Log("Boss 出現");
 
-
             // TODO 演出
-
-
-            // TODO シーン遷移
-
+            PreparateBossEffect();
         }
         //}
 
@@ -289,10 +283,7 @@ public class Stage : MonoBehaviour {
 
 
             // TODO 演出
-
-
-            // TODO シーン遷移
-
+            PreparateBossEffect();
         }
     }
 
@@ -565,5 +556,28 @@ public class Stage : MonoBehaviour {
         sequence.Append(levelUpLogo.transform.DOLocalMoveY(325.0f, 1.0f).SetEase(Ease.OutQuart));
         sequence.Append(levelUpLogo.transform.DOShakeScale(0.15f, 0.5f, 5).SetEase(Ease.InQuart));
         sequence.AppendInterval(0.5f).OnComplete(() => { Destroy(levelUpLogo); });
+    }
+
+    /// <summary>
+    /// ボス出現のエフェクト生成の準備
+    /// </summary>
+    /// <returns></returns>
+    private void PreparateBossEffect() {
+
+        StartCoroutine(PlayBossEffect());
+    }
+
+    /// <summary>
+    /// ボス出現のエフェクト生成
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator PlayBossEffect() {
+
+        BossEffect bossEffect = Instantiate(EffectManager.instance.bossEffectPrefab, overlayCanvasTran, false);
+
+        yield return StartCoroutine(bossEffect.PlayEffect());
+
+        // シーン遷移
+        SceneStateManager.instance.PreparateBattleScene();
     }
 }

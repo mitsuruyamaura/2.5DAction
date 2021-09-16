@@ -17,6 +17,7 @@ public class EffectManager : MonoBehaviour
     // Enemy ‘¤
     public GameObject enemyHitEffectPrefab;
     public GameObject destroyEffectPrefab;
+    public BossEffect bossEffectPrefab;
 
     // ‹¤’Ê
     public FloatingMessageControler floatingMessagePrefab;
