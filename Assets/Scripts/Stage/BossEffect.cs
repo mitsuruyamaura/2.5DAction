@@ -18,6 +18,8 @@ public class BossEffect : MonoBehaviour
     /// <returns></returns>
     public IEnumerator PlayEffect() {
 
+        canvasGroupMain.alpha = 0;
+
         imgLogo.color = new Color(1.0f, 1.0f, 1.0f, 0);
 
         Sequence sequence = DOTween.Sequence();
