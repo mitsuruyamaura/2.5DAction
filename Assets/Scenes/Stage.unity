@@ -2406,7 +2406,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8379203645362931014, guid: 9d791304109a73543938d8c4a9695435, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8379203645662099094, guid: 9d791304109a73543938d8c4a9695435, type: 3}
       propertyPath: m_LocalScale.x
@@ -4596,7 +4596,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8379203645362931014, guid: 9d791304109a73543938d8c4a9695435, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8379203645662099095, guid: 9d791304109a73543938d8c4a9695435, type: 3}
       propertyPath: m_FlipX
@@ -9695,7 +9695,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8379203645362931014, guid: 9d791304109a73543938d8c4a9695435, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8379203645662099095, guid: 9d791304109a73543938d8c4a9695435, type: 3}
       propertyPath: m_FlipX
@@ -11551,7 +11551,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4722163574315472991, guid: fb9764e6b43fc284da2e5263bb82276e, type: 3}
       propertyPath: staminaPoint.value
-      value: 1
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722163574315472991, guid: fb9764e6b43fc284da2e5263bb82276e, type: 3}
+      propertyPath: debuffConditionsList.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722163574315472991, guid: fb9764e6b43fc284da2e5263bb82276e, type: 3}
+      propertyPath: debuffConditionsList.Array.data[0]
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb9764e6b43fc284da2e5263bb82276e, type: 3}

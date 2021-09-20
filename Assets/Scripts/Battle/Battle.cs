@@ -45,6 +45,18 @@ public class Battle : MonoBehaviour
     [SerializeField]
     private ShinyEffectForUGUI clearLogoEffect;
 
+    [SerializeField]
+    private NormalResultCancas normalResultCancas;
+
+    [SerializeField]
+    private TimingGaugeController timingGaugeController;
+
+    [SerializeField]  // Debug用
+    private int totalComboCount;
+
+    [SerializeField]
+    private int currentBattleTotalExp;
+
 
     IEnumerator Start()
     {
@@ -80,6 +92,9 @@ public class Battle : MonoBehaviour
 
         Debug.Log("バトル開始時の処理");
 
+        // リザルト表示を隠す
+        normalResultCancas.gameObject.SetActive(false);
+
         yield return new WaitUntil(() => SceneStateManager.instance.GetScene(SceneName.Battle).isLoaded);
 
         currentBattleState = BattleState.Wait;
@@ -104,6 +119,9 @@ public class Battle : MonoBehaviour
         StartCoroutine(ObservateBattleState());
 
         playerController.SetUpPlayerController(this);
+
+        // タイミングゲージの設定と移動開始
+        timingGaugeController.SetUpTimingGaugeController(this);
 
         currentBattleState = BattleState.Play;
 
@@ -142,13 +160,22 @@ public class Battle : MonoBehaviour
         // TODO 終了時の処理
         // リザルト表示  表示内で new WaitUntil や UniRX で監視して画面のタップを待つ
 
-        // Battle 終了の余韻
-        yield return new WaitForSeconds(1.0f);
+        // リザルト表示を隠す
+        normalResultCancas.gameObject.SetActive(true);
+
+        normalResultCancas.DisplayResult(currentBattleTotalExp, totalComboCount);
+
+        // リザルト表示 + Battle 終了の余韻
+        yield return new WaitForSeconds(3.5f);
+
 
         // ノーダメージボーナスの判定
 
 
         // クリティカルの回数やコンボした数の判定
+
+        // 今回のバトルで獲得した EXP を総 EXP に加算
+        GameData.instance.totalExp += currentBattleTotalExp;
 
         if (GameData.instance.isBossBattled) {
 
@@ -217,5 +244,20 @@ public class Battle : MonoBehaviour
             Destroy(clearEffect, 1.25f);
             yield return new WaitForSeconds(1.0f);
         }
+    }
+
+    /// <summary>
+    /// クリティカル(コンボした)総数のカウントアップ
+    /// </summary>
+    public void AddTotalBattleCount() {
+        totalComboCount++;
+    }
+
+    /// <summary>
+    /// バトル内で獲得した EXP の総計
+    /// </summary>
+    /// <param name="exp"></param>
+    public void AddCurrentBattleTotalExp(int exp) {
+        currentBattleTotalExp += exp;
     }
 }

@@ -13,9 +13,11 @@ public class TimingGaugeController : MonoBehaviour
     private float pointerDuration;
 
     private Tween tween;
+    private Battle battle;
 
-    void Start()
+    public void SetUpTimingGaugeController(Battle battle)
     {
+        this.battle = battle;
         MoveGaugePointer();
     }
 
@@ -52,8 +54,21 @@ public class TimingGaugeController : MonoBehaviour
         tween.Play();
     }
 
+    /// <summary>
+    /// クリティカル判定とクリティカル(コンボ)数のカウント
+    /// </summary>
+    /// <returns></returns>
     public bool CheckCritial() {
         //Debug.Log(slider.value);
-        return slider.value >= 0.475f && slider.value < 0.540f ? true : false;
+
+        // クリティカルの判定
+        bool isCritical = slider.value >= 0.475f && slider.value < 0.540f ? true : false;
+
+        // クリティカルしていたら
+        if (isCritical) {
+            battle.AddTotalBattleCount();
+        }
+
+        return isCritical;
     }
 }

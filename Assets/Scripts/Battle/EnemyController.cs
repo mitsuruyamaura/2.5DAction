@@ -137,8 +137,10 @@ public class EnemyController : MonoBehaviour
             }
             Destroy(destroyEffect, 1.0f);
 
-            // Exp 加算　あとで上限値の制限つける
-            GameData.instance.totalExp += exp;
+            // Battle の Exp に加算　あとで上限値の制限つける
+            //GameData.instance.totalExp += exp;
+
+            battle.AddCurrentBattleTotalExp(exp);
 
             Destroy(gameObject);
         } 
