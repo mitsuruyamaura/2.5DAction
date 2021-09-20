@@ -4948,7 +4948,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8670598604849834220, guid: ffa9d8f3bb28a6143b098fb88b3b9ac0, type: 3}
       propertyPath: m_Text
-      value: 00000
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8670598604849834220, guid: ffa9d8f3bb28a6143b098fb88b3b9ac0, type: 3}
       propertyPath: m_FontData.m_MaxSize
@@ -20729,7 +20729,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8670598604849834220, guid: ffa9d8f3bb28a6143b098fb88b3b9ac0, type: 3}
       propertyPath: m_Text
-      value: 00000
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8670598604849834220, guid: ffa9d8f3bb28a6143b098fb88b3b9ac0, type: 3}
       propertyPath: m_FontData.m_MaxSize

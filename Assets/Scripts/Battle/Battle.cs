@@ -159,9 +159,13 @@ public class Battle : MonoBehaviour
 
         // TODO 終了時の処理
         // リザルト表示  表示内で new WaitUntil や UniRX で監視して画面のタップを待つ
+
+        // リザルト表示を隠す
+        normalResultCancas.gameObject.SetActive(true);
+
         normalResultCancas.DisplayResult(currentBattleTotalExp, totalComboCount);
 
-        // Battle 終了の余韻
+        // リザルト表示 + Battle 終了の余韻
         yield return new WaitForSeconds(3.5f);
 
 
