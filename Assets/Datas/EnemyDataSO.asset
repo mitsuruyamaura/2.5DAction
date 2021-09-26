@@ -22,7 +22,7 @@ MonoBehaviour:
     exp: 3
     enemyPrefab: {fileID: 1458318548233567103, guid: 4dc995d8eec81fb48ba027c47656d984, type: 3}
     debuffDatas:
-    - debuffConditionType: 0
+    - debuffConditionType: 7
       rate: 50
   - name: Archaer
     enemyNo: 1
@@ -41,4 +41,8 @@ MonoBehaviour:
     attackInterval: 200
     exp: 0
     enemyPrefab: {fileID: 5290185962481650826, guid: 6b44520406eb8c74b985e1ce1179bf20, type: 3}
-    debuffDatas: []
+    debuffDatas:
+    - debuffConditionType: 7
+      rate: 20
+    - debuffConditionType: 5
+      rate: 30
