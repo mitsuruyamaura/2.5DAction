@@ -74,6 +74,8 @@ public class GameData : MonoBehaviour
             totalExp = 0;
 
             abilityPoint += playerLevel;
+
+            moveTimeScale = 1.0f;
         }
     }
 

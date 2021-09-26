@@ -234,7 +234,7 @@ public class MapMoveController : MonoBehaviour
         //}
 
         // ˆÚ“®
-        transform.DOMove(destination, moveDuration)
+        transform.DOMove(destination, moveDuration * GameData.instance.moveTimeScale)
             .SetEase(Ease.Linear)
             .OnComplete(() => {
                 //isMoving = false;

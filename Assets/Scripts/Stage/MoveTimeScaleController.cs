@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// シンボル移動時の速度の種類と設定値
+/// </summary>
 public enum MoveTimeScale {
-    Normal = 10,
-    One_Half = 15,
-    Double = 20,
+    Normal = 100,
+    One_Half = 75,
+    Double = 50,
     Count = 3
 }
 
@@ -28,16 +31,23 @@ public class MoveTimeScaleController : MonoBehaviour
     private Button btnStaminaFrame;
 
     public MoveTimeScale currentMoveTimeScale;
-    public int currentNo;
+    public int currentTimeScaleNo;
 
+    /// <summary>
+    /// 初期設定
+    /// </summary>
     public void SetUpMoveButtonController() {
         currentMoveTimeScale = MoveTimeScale.Normal;
-        imgSpeedIcon.sprite = doubleSpeedIcon;
+        imgSpeedIcon.sprite = normalSpeedIcon;
         btnStaminaFrame.onClick.AddListener(SwitchMoveTimeScale);
     }
 
+    /// <summary>
+    /// 残りのスタミナ数表示ボタンを押した際の処理
+    /// </summary>
     private void SwitchMoveTimeScale() {
 
+        // enum 管理
         currentMoveTimeScale = currentMoveTimeScale switch {
             MoveTimeScale.Normal => MoveTimeScale.One_Half,
             MoveTimeScale.One_Half => MoveTimeScale.Double,
@@ -45,16 +55,19 @@ public class MoveTimeScaleController : MonoBehaviour
             _ => MoveTimeScale.Normal
         };
 
-        currentNo++;
-        currentNo = currentNo % (int)MoveTimeScale.Count == 0 ? 0 : currentNo;
+        // int 管理
+        currentTimeScaleNo++;
+        currentTimeScaleNo = currentTimeScaleNo % (int)MoveTimeScale.Count == 0 ? 0 : currentTimeScaleNo;
 
+        // アイコン画像の設定
         imgSpeedIcon.sprite = currentMoveTimeScale switch {
-            MoveTimeScale.Normal => oneHalfSpeedIcon,
-            MoveTimeScale.One_Half => doubleSpeedIcon,
-            MoveTimeScale.Double => normalSpeedIcon,
+            MoveTimeScale.Normal => normalSpeedIcon,
+            MoveTimeScale.One_Half => oneHalfSpeedIcon,
+            MoveTimeScale.Double => doubleSpeedIcon,
             _ => normalSpeedIcon
         };
 
-        GameData.instance.moveTimeScale = (float)currentMoveTimeScale / 10;
+        // プレイヤーとエネミーシンボルの移動速度の設定値を更新
+        GameData.instance.moveTimeScale = (float)currentMoveTimeScale / 100;
     }
 }
