@@ -14,11 +14,21 @@ public class EnemyData
     public int exp;
 
     public EnemyController enemyPrefab;
+
+    // デバフ用のコンディションのデータ
     public EnemyDebuffData[] debuffDatas;
 }
 
+/// <summary>
+/// デバフ用のコンディションの登録用
+/// </summary>
 [System.Serializable]
 public class EnemyDebuffData {
+
+    // デバフ用のコンディションの設定
     public ConditionType debuffConditionType;
+
+    // デバフ用のコンディションの付与確率
+    [Range(0, 100)]
     public int rate;
 }

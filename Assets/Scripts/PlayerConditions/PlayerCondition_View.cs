@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
+/// <summary>
+/// プレイヤーの視界を広くしたり狭くしたりするコンディション
+/// </summary>
 public class PlayerCondition_View : PlayerConditionBase
 {
     [SerializeField]

@@ -98,7 +98,7 @@ public class EnemySymbol : SymbolBase
         if (tilemapCollider.GetColliderType(tilePos) != Tile.ColliderType.Grid) {
 
             // ˆÚ“®
-            transform.DOMove(transform.position + nextPos, moveDuration).SetEase(Ease.Linear);
+            transform.DOMove(transform.position + nextPos, moveDuration * GameData.instance.moveTimeScale).SetEase(Ease.Linear);
         }
     }
 

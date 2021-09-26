@@ -4,6 +4,11 @@ public class EffectManager : MonoBehaviour
 {
     public static EffectManager instance;
 
+    public GameObject LevelUpLogoPrefab;
+
+    public Transform effectConteinerTran;
+
+    // mi
     // Player ‘¤
     public GameObject chargeUpEffectPrefab;
     public GameObject dashWindPrefab;
@@ -13,6 +18,7 @@ public class EffectManager : MonoBehaviour
     public GameObject abilityPowerUpPrefab_1;
     public GameObject abilityPowerUpPrefab_2;
     public GameObject levelUpPrefab;
+
     public GameObject clearEffectPrefab;
 
     // Enemy ‘¤
@@ -23,7 +29,7 @@ public class EffectManager : MonoBehaviour
     // ‹¤’Ê
     public FloatingMessageControler floatingMessagePrefab;
 
-    public Transform effectConteinerTran;
+
 
 
     void Awake() {

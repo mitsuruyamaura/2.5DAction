@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -39,10 +37,10 @@ public class NormalResultCancas : MonoBehaviour
 
         Sequence sequence = DOTween.Sequence();
 
-        // Canvas 表示。Result の文字だけ出る
+        // Canvas 表示。この時点では Result の文字だけ出る
         sequence.Append(canvasGroupResult.DOFade(1.0f, 0.5f).SetEase(Ease.Linear));
 
-        // フレーム表示
+        // リザルト表示用のフレームをアニメ表示(横方向に伸ばす)
         sequence.Append(imgBackFrameRect.DOSizeDelta(new Vector2(2000, 355), 0.5f).SetEase(Ease.OutQuart));
 
         // EXP 表示

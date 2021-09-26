@@ -74,6 +74,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f237a5bce038c64baef6cbaf3f6f6bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelUpLogoPrefab: {fileID: 1624014765031356503, guid: 80b3749b50aa8b04c9357d85a3acd936, type: 3}
+  effectConteinerTran: {fileID: 1431063947}
   chargeUpEffectPrefab: {fileID: 100000, guid: aa3fed151f536ee49b583c6a3ac4a2e1, type: 3}
   dashWindPrefab: {fileID: 8955571381571785372, guid: ec09c31b2a8996a45a1533624abb9bee, type: 3}
   recoveryStaminaEffectPrefab: {fileID: 100006, guid: 60bc526f4be1e044ab9e46340b82ffb3, type: 3}
@@ -87,4 +89,3 @@ MonoBehaviour:
   destroyEffectPrefab: {fileID: 1892078723244562, guid: 46876a2780737ec45a19d62f88e5ce56, type: 3}
   bossEffectPrefab: {fileID: 6392563360499707835, guid: 3cb6e7e8d8f08454c97634ade07f1595, type: 3}
   floatingMessagePrefab: {fileID: 4707443139739530422, guid: e12a793e03eb23447b9dea4e6154cc89, type: 3}
-  effectConteinerTran: {fileID: 1431063947}

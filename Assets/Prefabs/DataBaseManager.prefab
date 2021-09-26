@@ -43,11 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e67bcd37482e84439ca4dde592e550f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyDataSO: {fileID: 11400000, guid: ec81d48725951e04587730e0ea399cbc, type: 2}
+  conditionDataSO: {fileID: 11400000, guid: ee479803e2c4ae245b160393ebfd5499, type: 2}
   enemyMoveEventDataSO: {fileID: 11400000, guid: 4336fc092ce914a43a12d2b21ced7f90, type: 2}
   expTableSO: {fileID: 11400000, guid: 56e379c00098b8e4a87d4fb3376afe75, type: 2}
   abilityItemDataSOList:
   - {fileID: 11400000, guid: 58d10d67aa371264ba5c7064f2065321, type: 2}
   - {fileID: 11400000, guid: 58d10d67aa371264ba5c7064f2065321, type: 2}
-  enemyDataSO: {fileID: 11400000, guid: ec81d48725951e04587730e0ea399cbc, type: 2}
-  debuffDataSO: {fileID: 11400000, guid: ee479803e2c4ae245b160393ebfd5499, type: 2}
   stageDataSO: {fileID: 11400000, guid: cc032b19ae1577f4c80a295a2249dfa4, type: 2}
