@@ -19,6 +19,11 @@ public class ConditionItemSymbol : SymbolBase {
     public override void OnEnterSymbol(SymbolManager symbolManager) {
         base.OnEnterSymbol(symbolManager);
 
+        ConditionData conditionData = DataBaseManager.instance.conditionDataSO.conditionDatasList.Find(x=> x.conditionType == conditionType);
+
+        duration = conditionData.duration;
+        itemValue = conditionData.conditionValue;
+
         // フィールドでのエフェクト演出
 
     }
@@ -50,7 +55,8 @@ public class ConditionItemSymbol : SymbolBase {
         // Player にコンディションを付与
         playerCondition = conditionType switch {
 
-            ConditionType.View => mapMoveController.gameObject.AddComponent<PlayerCondition_View>(),
+            ConditionType.View_Wide => mapMoveController.gameObject.AddComponent<PlayerCondition_View>(),
+            ConditionType.View_Narrow => mapMoveController.gameObject.AddComponent<PlayerCondition_View>(),
             ConditionType.Hide_Symbols => mapMoveController.gameObject.AddComponent<PlayerCondition_HideSymbol>(),
             ConditionType.Untouchable => mapMoveController.gameObject.AddComponent<PlayerCondition_Untouchable>(),
             ConditionType.Walk_through => mapMoveController.gameObject.AddComponent<PlayerCondition_WalkThrough>(),

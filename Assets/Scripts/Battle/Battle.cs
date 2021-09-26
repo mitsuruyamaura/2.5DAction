@@ -179,6 +179,9 @@ public class Battle : MonoBehaviour
 
         if (GameData.instance.isBossBattled) {
 
+            // ボス討伐したので、次のボスバトルのために初期化
+            GameData.instance.isBossBattled = false;
+
             // クリア演出
             yield return StartCoroutine(PlayClearEffect());
 

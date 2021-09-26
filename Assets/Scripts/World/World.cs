@@ -21,8 +21,19 @@ public class World : MonoBehaviour
     [SerializeField]
     private List<StageSelectDetail> stageSelectDetailsList = new List<StageSelectDetail>();
 
+    [SerializeField]
+    private RectTransform scrollViewRect;
 
-    void Start() {
+
+    IEnumerator Start() {
+        yield return null;
+
+        float height = scrollViewRect.sizeDelta.y;
+
+        scrollViewRect.sizeDelta = new Vector3(scrollViewRect.sizeDelta.x, 0);
+
+        scrollViewRect.DOSizeDelta(new Vector3(scrollViewRect.sizeDelta.x, height), 1.5f).SetEase(Ease.OutBack);
+
         // スタート用ボタンの設定
         btnSubmit.onClick.AddListener(OnClickSubmit);
         btnSubmit.interactable = false;

@@ -6,14 +6,19 @@ public class DataBaseManager : MonoBehaviour
 {
     public static DataBaseManager instance;
 
+    public EnemyDataSO enemyDataSO;
+    public ConditionDataSO conditionDataSO;
+    public ExpTableSO expTableSO;
+
+
+    // mi
     public EnemyMoveEventDataSO enemyMoveEventDataSO;
 
-    public ExpTableSO expTableSO;
+
 
     public List<AbilityItemDataSO> abilityItemDataSOList;
 
-    public EnemyDataSO enemyDataSO;
-    public DebuffDataSO debuffDataSO;
+
     public StageDataSO stageDataSO;
 
 
@@ -35,7 +40,7 @@ public class DataBaseManager : MonoBehaviour
         return expTableSO.expTablesList[level].maxExp;
     }
 
-
+    // mi
 
     /// <summary>
     /// ƒŒƒxƒ‹‚Æ AbilityType ‚É‚æ‚é AbilityPointTable ‚ÌŽæ“¾

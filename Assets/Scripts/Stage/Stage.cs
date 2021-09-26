@@ -83,6 +83,9 @@ public class Stage : MonoBehaviour {
     [SerializeField]
     private Transform overlayCanvasTran;
 
+    [SerializeField]
+    private MoveTimeScaleController moveTimeScaleController;
+
 
     void Start() {
         // Stage の情報設定
@@ -138,6 +141,7 @@ public class Stage : MonoBehaviour {
         CreateSelectAbilityPopUp();
 
         btnPlayerLevel.onClick.AddListener(OnClickPlayerLevel);
+        moveTimeScaleController.SetUpMoveButtonController();
     }
 
     /// <summary>
@@ -219,6 +223,8 @@ public class Stage : MonoBehaviour {
     /// <summary>
     /// Hp表示更新
     /// </summary>
+    /// <param name="waitTime"></param>
+    /// <returns></returns>
     public IEnumerator UpdateDisplayHp(float waitTime = 0.0f) {
         txtHp.text = GameData.instance.hp + "/ " + GameData.instance.maxHp;
 
@@ -250,7 +256,7 @@ public class Stage : MonoBehaviour {
 
 
             // レベルアップ演出
-            GenerateLebelUpEffect();
+            StartCoroutine(GenerateLebelUpEffect());
         }
 
         // デバッグ  レベルアップ演出
@@ -503,12 +509,12 @@ public class Stage : MonoBehaviour {
     /// </summary>
     private void AddDebuff(ConditionType conditionType) {
 
-        DebuffData debuffData = DataBaseManager.instance.debuffDataSO.debuffDatasList.Find(x => x.debuffConditionTypes == conditionType);
+        ConditionData conditionData = DataBaseManager.instance.conditionDataSO.conditionDatasList.Find(x => x.conditionType == conditionType);
 
         // すでに同じコンディションが付与されているか確認
         if (mapMoveController.GetConditionsList().Exists(x => x.GetConditionType() == conditionType)) {
             // すでに付与されている場合は、持続時間を更新し、効果は上書きして処理を終了する
-            mapMoveController.GetConditionsList().Find(x => x.GetConditionType() == conditionType).ExtentionCondition(debuffData.duration, debuffData.debuffValue);
+            mapMoveController.GetConditionsList().Find(x => x.GetConditionType() == conditionType).ExtentionCondition(conditionData.duration, conditionData.conditionValue);
             return;
         }
 
@@ -523,7 +529,8 @@ public class Stage : MonoBehaviour {
         // Player にコンディションを付与
         playerCondition = conditionType switch {
 
-            ConditionType.View => mapMoveController.gameObject.AddComponent<PlayerCondition_View>(),
+            ConditionType.View_Wide => mapMoveController.gameObject.AddComponent<PlayerCondition_View>(),
+            ConditionType.View_Narrow => mapMoveController.gameObject.AddComponent<PlayerCondition_View>(),
             ConditionType.Hide_Symbols => mapMoveController.gameObject.AddComponent<PlayerCondition_HideSymbol>(),
             ConditionType.Untouchable => mapMoveController.gameObject.AddComponent<PlayerCondition_Untouchable>(),
             ConditionType.Walk_through => mapMoveController.gameObject.AddComponent<PlayerCondition_WalkThrough>(),
@@ -537,7 +544,7 @@ public class Stage : MonoBehaviour {
         };
 
         // 初期設定を実行
-        playerCondition.AddCondition(conditionType, debuffData.duration, debuffData.debuffValue, mapMoveController, symbolManager);
+        playerCondition.AddCondition(conditionType, conditionData.duration, conditionData.conditionValue, mapMoveController, symbolManager);
 
         // コンディション用の List に追加
         mapMoveController.AddConditionsList(playerCondition);
@@ -546,10 +553,15 @@ public class Stage : MonoBehaviour {
     /// <summary>
     /// レベルアップ演出
     /// </summary>
-    private void GenerateLebelUpEffect() {
+    /// <returns></returns>
+    private IEnumerator GenerateLebelUpEffect() {
 
-        GameObject levelUpLogo = Instantiate(imgLevelUpPrefab, overlayCanvasTran, false);
-        GameObject levelUpEffect = Instantiate(EffectManager.instance.levelUpPrefab, mapMoveController.transform.position, EffectManager.instance.levelUpPrefab.transform.rotation);
+        Debug.Log("レベルアップ演出");
+
+        yield return new WaitForSeconds(1.0f);
+
+        GameObject levelUpLogo = Instantiate(EffectManager.instance.LevelUpLogoPrefab, overlayCanvasTran, false);
+        GameObject levelUpEffect = Instantiate(EffectManager.instance.levelUpPrefab, transform.position, EffectManager.instance.levelUpPrefab.transform.rotation);
         Destroy(levelUpEffect, 2.5f);
 
         Sequence sequence = DOTween.Sequence();

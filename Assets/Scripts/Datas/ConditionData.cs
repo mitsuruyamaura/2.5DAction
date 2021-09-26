@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class DebuffData {
-    public ConditionType debuffConditionTypes;
+public class ConditionData {
+    public ConditionType conditionType;
     public float duration;
-    public float debuffValue;
+    public float conditionValue;
 }

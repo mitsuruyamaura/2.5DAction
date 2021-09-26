@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
+/// <summary>
+/// インベントリ用のアイテムデータ
+/// </summary>
 [System.Serializable]
 public struct InventryAbilityItemData {
     public AbilityType abilityType;
@@ -47,6 +50,8 @@ public class GameData : MonoBehaviour
 
     public bool isBossBattled;
 
+    public float moveTimeScale;
+
 
     void Awake() {
         if (instance == null) {
@@ -56,8 +61,10 @@ public class GameData : MonoBehaviour
             Destroy(gameObject);
         }
 
+        // ゲームの初期化
         InitialzeGameData();
 
+        // ゲームの初期化
         void InitialzeGameData() {
             maxHp = currentCharaData.maxHp;
             hp = maxHp;

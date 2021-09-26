@@ -420,6 +420,6 @@ MonoBehaviour:
   effectTran: {fileID: 2599568853195872501}
   spriteSymbol: {fileID: 7441185091021227029}
   isSymbolTriggerd: 0
-  conditionType: 3
+  conditionType: 4
   duration: 5
   itemValue: 0
