@@ -14,7 +14,7 @@ public class DataBaseManager : MonoBehaviour
 
     // mi
     public EnemyMoveEventDataSO enemyMoveEventDataSO;
-
+    public OrbDataSO orbDataSO;
 
 
     public List<AbilityItemDataSO> abilityItemDataSOList;

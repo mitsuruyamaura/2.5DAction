@@ -3177,6 +3177,7 @@ MonoBehaviour:
     symbolWeight: 100
   - symbolBasePrefab: {fileID: 2596277188211296371, guid: 689b170fd5b340d4b85688cac937a165, type: 3}
     symbolWeight: 100
+  orbSymbolPrefab: {fileID: 2596277188211296371, guid: 10603dfca157d05429b3c50983adc7d7, type: 3}
   generateSymbolRate: 20
 --- !u!4 &983143795
 Transform:
@@ -9472,7 +9473,7 @@ MonoBehaviour:
   imgSpeedIcon: {fileID: 1918194562}
   btnStaminaFrame: {fileID: 653167440}
   currentMoveTimeScale: 10
-  currentNo: 0
+  currentTimeScaleNo: 0
 --- !u!212 &1495105632 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4417705156370372598, guid: de8ea37557390d64ea383a3813517511, type: 3}
