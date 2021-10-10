@@ -40,12 +40,16 @@ public class SymbolManager : MonoBehaviour
     /// </summary>
     public void SetUpAllSymbols() {
 
+        int orbNo = 0;
+
+        // 各シンボルの設定
         for (int i = 0; i < symbolsList.Count; i++) {
             symbolsList[i].transform.SetParent(this.transform);
             symbolsList[i].OnEnterSymbol(this);
 
-            int orbNo = 0;
+            // 特殊シンボルの場合
             if (symbolsList[i].symbolType == SymbolType.Orb) {
+                // 追加設定(画像を変えたり、オーブの種類を設定)
                 symbolsList[i].GetComponent<OrbSymbol>().SetOrbData(GameData.instance.currentStageData.orbTypes[orbNo], orbNo);
                 specialSymbols.Add(symbolsList[i].GetComponent<OrbSymbol>());
                 orbNo++;

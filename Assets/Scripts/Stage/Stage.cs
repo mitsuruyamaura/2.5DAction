@@ -120,7 +120,6 @@ public class Stage : MonoBehaviour {
             imgOrbs[i].enabled = true;
             imgOrbs[i].sprite = DataBaseManager.instance.orbDataSO.orbDatasList.Find(x => x.orbType == symbolManager.specialSymbols[i].orbType).spriteOrb;
             GameData.instance.orbs.Add(i, false);
-
         }
 
         // オーブの購読開始
