@@ -49,6 +49,8 @@ MonoBehaviour:
   stageDataSO: {fileID: 11400000, guid: cc032b19ae1577f4c80a295a2249dfa4, type: 2}
   enemyMoveEventDataSO: {fileID: 11400000, guid: 4336fc092ce914a43a12d2b21ced7f90, type: 2}
   orbDataSO: {fileID: 11400000, guid: 482a589a6a036cb4a9db267a6adcc491, type: 2}
+  treasureTableSO: {fileID: 11400000, guid: f4da82ad5e176794b88042b5b1d6fd1e, type: 2}
   abilityItemDataSOList:
   - {fileID: 11400000, guid: 58d10d67aa371264ba5c7064f2065321, type: 2}
   - {fileID: 11400000, guid: 58d10d67aa371264ba5c7064f2065321, type: 2}
+  dropItemDatasList: []

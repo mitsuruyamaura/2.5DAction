@@ -13,74 +13,11 @@ MonoBehaviour:
   m_Name: AbilityPointTableSO_ChargeSpeed
   m_EditorClassIdentifier: 
   abilityType: 3
-  abilityTablesList:
-  - abilityLevel: 0
+  abilityItemDatasList:
+  - abilityLevel: 1
     abilityCost: 0
     powerUpValue: 0
-    abilityName: 
-    abilitySprite: {fileID: 0}
-    rarity: 0
-    abitilyNo: 0
-  - abilityLevel: 0
-    abilityCost: 0
-    powerUpValue: 0
-    abilityName: 
-    abilitySprite: {fileID: 0}
-    rarity: 0
-    abitilyNo: 0
-  - abilityLevel: 0
-    abilityCost: 0
-    powerUpValue: 0
-    abilityName: 
-    abilitySprite: {fileID: 0}
-    rarity: 0
-    abitilyNo: 0
-  - abilityLevel: 0
-    abilityCost: 0
-    powerUpValue: 0
-    abilityName: 
-    abilitySprite: {fileID: 0}
-    rarity: 0
-    abitilyNo: 0
-  - abilityLevel: 0
-    abilityCost: 0
-    powerUpValue: 0
-    abilityName: 
-    abilitySprite: {fileID: 0}
-    rarity: 0
-    abitilyNo: 0
-  - abilityLevel: 0
-    abilityCost: 0
-    powerUpValue: 0
-    abilityName: 
-    abilitySprite: {fileID: 0}
-    rarity: 0
-    abitilyNo: 0
-  - abilityLevel: 0
-    abilityCost: 0
-    powerUpValue: 0
-    abilityName: 
-    abilitySprite: {fileID: 0}
-    rarity: 0
-    abitilyNo: 0
-  - abilityLevel: 0
-    abilityCost: 0
-    powerUpValue: 0
-    abilityName: 
-    abilitySprite: {fileID: 0}
-    rarity: 0
-    abitilyNo: 0
-  - abilityLevel: 0
-    abilityCost: 0
-    powerUpValue: 0
-    abilityName: 
-    abilitySprite: {fileID: 0}
-    rarity: 0
-    abitilyNo: 0
-  - abilityLevel: 0
-    abilityCost: 0
-    powerUpValue: 0
-    abilityName: 
+    abilityName: bbb
     abilitySprite: {fileID: 0}
     rarity: 0
     abitilyNo: 0

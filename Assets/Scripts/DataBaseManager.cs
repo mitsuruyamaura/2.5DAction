@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class DataBaseManager : MonoBehaviour
 {
@@ -15,12 +16,13 @@ public class DataBaseManager : MonoBehaviour
     // mi
     public EnemyMoveEventDataSO enemyMoveEventDataSO;
     public OrbDataSO orbDataSO;
+    public TreasureTableSO treasureTableSO;
 
 
     public List<AbilityItemDataSO> abilityItemDataSOList;
 
-
-
+    // ドロップするトレジャーをすべて入れる
+    public List<AbilityItemDataSO.AbilityItemData> dropItemDatasList = new List<AbilityItemDataSO.AbilityItemData>();
 
 
     void Awake() {
@@ -49,5 +51,35 @@ public class DataBaseManager : MonoBehaviour
     /// <returns></returns>
     public AbilityItemDataSO.AbilityItemData GetAbilityPointTable(int level, AbilityType abilityType) {
         return abilityItemDataSOList[(int)abilityType].abilityItemDatasList.Find(x => x.abilityLevel == level);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="dropTreasureLevel"></param>
+    public void CreateDropItemDatasList(int dropTreasureLevel) {
+
+        // TreasureTable 内の DropItemDatas を取得
+        DropItemData[] dropItemDatas = treasureTableSO.treasureTablesList.Find(x => x.treasureLevel == dropTreasureLevel).dropItemDatas;
+
+        Debug.Log(dropItemDatas.Length);
+
+        // すべてのアイテムデータのリストを検索
+        for (int i = 0; i < abilityItemDataSOList.Count; i++) {
+
+            // テーブルに含まれるレアリティを取得
+            int[] rarityArray = dropItemDatas[i].rarities.Split(',').ToArray().Select(x => int.Parse(x)).ToArray();
+            Debug.Log(rarityArray.Length);
+
+            foreach (AbilityItemDataSO.AbilityItemData itemData in abilityItemDataSOList[i].abilityItemDatasList) {
+                for (int x = 0; x < rarityArray.Length; x++) {
+
+                    if (itemData.rarity == rarityArray[x]) {
+                        dropItemDatasList.Add(itemData);
+                        continue;
+                    }
+                }
+            }
+        }
     }
 }

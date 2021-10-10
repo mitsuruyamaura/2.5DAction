@@ -150,6 +150,9 @@ public class Stage : MonoBehaviour {
 
         btnPlayerLevel.onClick.AddListener(OnClickPlayerLevel);
         moveTimeScaleController.SetUpMoveButtonController();
+
+        // ドロップするトレジャーの情報を準備
+        DataBaseManager.instance.CreateDropItemDatasList(GameData.instance.currentStageData.dropTreasureLevel);
     }
 
     /// <summary>

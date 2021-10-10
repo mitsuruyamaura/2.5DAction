@@ -12,4 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b44c028224fa0ad43a7cb00771ea807c, type: 3}
   m_Name: TreasureTableSO
   m_EditorClassIdentifier: 
-  treasureTablesList: []
+  treasureTablesList:
+  - treasureLevel: 0
+    dropItemDatas:
+    - abilityType: 0
+      rarities: 0,1
+    - abilityType: 1
+      rarities: 0
+    - abilityType: 2
+      rarities: 0
+    - abilityType: 3
+      rarities: 0
+  - treasureLevel: 1
+    dropItemDatas: []
+  - treasureLevel: 2
+    dropItemDatas: []
