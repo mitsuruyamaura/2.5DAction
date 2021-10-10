@@ -39,35 +39,50 @@ public class MoveTimeScaleController : MonoBehaviour
     public void SetUpMoveButtonController() {
         currentMoveTimeScale = MoveTimeScale.Normal;
         imgSpeedIcon.sprite = normalSpeedIcon;
-        btnStaminaFrame.onClick.AddListener(SwitchMoveTimeScale);
+        btnStaminaFrame.onClick.AddListener(OnClickSwitchMoveTimeScale);
     }
 
     /// <summary>
     /// 残りのスタミナ数表示ボタンを押した際の処理
     /// </summary>
-    private void SwitchMoveTimeScale() {
+    private void OnClickSwitchMoveTimeScale() {
 
-        // enum 管理
-        currentMoveTimeScale = currentMoveTimeScale switch {
-            MoveTimeScale.Normal => MoveTimeScale.One_Half,
-            MoveTimeScale.One_Half => MoveTimeScale.Double,
-            MoveTimeScale.Double => MoveTimeScale.Normal,
-            _ => MoveTimeScale.Normal
+        // MoveTimeScale を１つ進める。Normal => OneHalf => Double => Normal でサイクル化
+        (Sprite nextSprite, MoveTimeScale nextMoveTimeScaleType) nextTimeScaleValue = currentMoveTimeScale switch
+        {
+            MoveTimeScale.Normal => (oneHalfSpeedIcon, MoveTimeScale.One_Half),
+            MoveTimeScale.One_Half => (doubleSpeedIcon, MoveTimeScale.Double),
+            MoveTimeScale.Double => (normalSpeedIcon, MoveTimeScale.Normal),
+            _ => (normalSpeedIcon, MoveTimeScale.Normal)
         };
+
+        //    // enum 管理
+        //    currentMoveTimeScale = currentMoveTimeScale switch {
+        //    MoveTimeScaleType.Normal => MoveTimeScaleType.One_Half,
+        //    MoveTimeScaleType.One_Half => MoveTimeScaleType.Double,
+        //    MoveTimeScaleType.Double => MoveTimeScaleType.Normal,
+        //    _ => MoveTimeScaleType.Normal
+        //};
 
         // int 管理
         currentTimeScaleNo++;
         currentTimeScaleNo = currentTimeScaleNo % (int)MoveTimeScale.Count == 0 ? 0 : currentTimeScaleNo;
 
-        // アイコン画像の設定
-        imgSpeedIcon.sprite = currentMoveTimeScale switch {
-            MoveTimeScale.Normal => normalSpeedIcon,
-            MoveTimeScale.One_Half => oneHalfSpeedIcon,
-            MoveTimeScale.Double => doubleSpeedIcon,
-            _ => normalSpeedIcon
-        };
+        //// アイコン画像の設定
+        //imgSpeedIcon.sprite = currentMoveTimeScale switch {
+        //    MoveTimeScaleType.Normal => normalSpeedIcon,
+        //    MoveTimeScaleType.One_Half => oneHalfSpeedIcon,
+        //    MoveTimeScaleType.Double => doubleSpeedIcon,
+        //    _ => normalSpeedIcon
+        //};
 
-        // プレイヤーとエネミーシンボルの移動速度の設定値を更新
+        // MoveTimeScale を変更
+        currentMoveTimeScale = nextTimeScaleValue.nextMoveTimeScaleType;
+
+        // アイコン画像の変更し、現在の MoveTimeScale に合わせる
+        imgSpeedIcon.sprite = nextTimeScaleValue.nextSprite;
+
+        // プレイヤーとエネミーシンボルの移動速度の設定値を現在の MoveTimeScale の内容に更新
         GameData.instance.moveTimeScale = (float)currentMoveTimeScale / 100;
     }
 }

@@ -366,7 +366,7 @@ public class Stage : MonoBehaviour {
 
             // コンディションの効果を適用
             ApplyEffectConditions();
-            
+
             mapMoveController.IsMoving = false;
 
             // プレイヤーの移動の監視再開
@@ -495,7 +495,7 @@ public class Stage : MonoBehaviour {
             return;
         }
 
-        for (int i =0; i < GameData.instance.debuffConditionsList.Count; i++) {
+        for (int i = 0; i < GameData.instance.debuffConditionsList.Count; i++) {
             // デバフの付与
             AddDebuff(GameData.instance.debuffConditionsList[i]);
         }
@@ -594,5 +594,5 @@ public class Stage : MonoBehaviour {
 
         // シーン遷移
         SceneStateManager.instance.PreparateBattleScene();
-    }
+    }   
 }

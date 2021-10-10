@@ -8,6 +8,10 @@ public class OrbSymbol : SymbolBase {
     [SerializeField]
     private int bonusStaminaPoint;
 
+    [SerializeField]
+    private OrbType orbType;
+
+
     public override void OnEnterSymbol(SymbolManager symbolManager) {
         base.OnEnterSymbol(symbolManager);
 

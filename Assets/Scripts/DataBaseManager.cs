@@ -9,6 +9,7 @@ public class DataBaseManager : MonoBehaviour
     public EnemyDataSO enemyDataSO;
     public ConditionDataSO conditionDataSO;
     public ExpTableSO expTableSO;
+    public StageDataSO stageDataSO;
 
 
     // mi
@@ -19,7 +20,7 @@ public class DataBaseManager : MonoBehaviour
     public List<AbilityItemDataSO> abilityItemDataSOList;
 
 
-    public StageDataSO stageDataSO;
+
 
 
     void Awake() {
