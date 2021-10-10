@@ -14,7 +14,8 @@ public class StageData
     public StageType stageType;        // ステージのタイルマップの種類
 
     public OrbType[] orbTypes;         // 出現するオーブの種類
+    public int dropTreasureLevel;      // ドロップするトレジャーのレベル
 
-    // TODO 他にもあれば追加
+    // TODO 他にもあれば追加 Stage ごとにシンボルの出現率変える、とか
 
 }
