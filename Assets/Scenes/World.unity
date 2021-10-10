@@ -336,8 +336,8 @@ MonoBehaviour:
       colorBlindnessType: 0
       colorBlindnessStrength: 1
   m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
-  m_ShowToolkit: 0
-  m_ShowCustomSorter: 0
+  m_ShowToolkit: 1
+  m_ShowCustomSorter: 1
   breakBeforeColorGrading: 0
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
@@ -424,7 +424,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 132824112}
   m_HandleRect: {fileID: 132824111}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -734,7 +734,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1802906735}
-  - {fileID: 536712592}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -856,12 +855,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1073816438}
-  m_Father: {fileID: 533446896}
-  m_RootOrder: 1
+  m_Father: {fileID: 2122588461}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -345}
+  m_AnchoredPosition: {x: 0, y: -430}
   m_SizeDelta: {x: 500, y: 275}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &621924699
@@ -1244,7 +1243,7 @@ GameObject:
   - component: {fileID: 1448204757}
   - component: {fileID: 1448204756}
   m_Layer: 5
-  m_Name: imgplayer
+  m_Name: imgPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1670,6 +1669,7 @@ RectTransform:
   m_Children:
   - {fileID: 1388896933}
   - {fileID: 189442144}
+  - {fileID: 536712592}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -8,6 +8,9 @@ public class OrbSymbol : SymbolBase {
     [SerializeField]
     private int bonusStaminaPoint;
 
+    public OrbType orbType;
+
+
     public override void OnEnterSymbol(SymbolManager symbolManager) {
         base.OnEnterSymbol(symbolManager);
 
@@ -44,5 +47,24 @@ public class OrbSymbol : SymbolBase {
         BoxCollider2D boxCol = GetComponent<BoxCollider2D>();
         boxCol.enabled = false;
         transform.DOMove(newPos, 1.0f).SetEase(Ease.InQuart).OnComplete(() => { boxCol.enabled = true; });
+    }
+
+    /// <summary>
+    /// オーブの情報設定
+    /// </summary>
+    /// <param name="setOrbType"></param>
+    public void SetOrbData(OrbType setOrbType, int orbNo) {
+
+        no = orbNo;
+
+        // ランダムの場合
+        if (setOrbType == OrbType.Random) {
+            orbType = (OrbType)Random.Range(0, (int)OrbType.Random);
+        } else {
+            orbType = setOrbType;
+        }
+
+        // 画像設定
+        spriteSymbol.sprite = DataBaseManager.instance.orbDataSO.orbDatasList.Find(x => x.orbType == this.orbType).spriteOrb;
     }
 }

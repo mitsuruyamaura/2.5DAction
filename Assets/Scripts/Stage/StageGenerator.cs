@@ -35,7 +35,8 @@ public class StageGenerator : MonoBehaviour
 
     // シンボル生成用のデータリスト
     [SerializeField] private List<SymbolGenerateData> symbolGenerateDatasList = new List<SymbolGenerateData>();
-    [SerializeField] private List<SymbolGenerateData> specialSymbolGenerateDatasList = new List<SymbolGenerateData>();
+    [HideInInspector, SerializeField] private List<SymbolGenerateData> specialSymbolGenerateDatasList = new List<SymbolGenerateData>();
+    [SerializeField] private SymbolBase orbSymbolPrefab;
 
     [SerializeField, Header("シンボルの生成率"), Range(0, 100)] private int generateSymbolRate;
 
@@ -187,23 +188,44 @@ public class StageGenerator : MonoBehaviour
     /// ４つの特殊シンボルをランダムな順番に作成
     /// </summary>
     /// <returns></returns>
-    public List<SymbolBase> GenerateSpecialSymbols() {
+    public List<SymbolBase> GenerateSpecialSymbols(OrbType[] orbTypes) {
 
         List<SymbolBase> symbolsList = new List<SymbolBase>();
 
-        // ランダムに並び替える
-        List<SymbolGenerateData> randomSymbolsList = new List<SymbolGenerateData>(specialSymbolGenerateDatasList);
-        randomSymbolsList =  randomSymbolsList.OrderBy(x => Guid.NewGuid()).ToList();
+        // ステージのデータに合わせて特殊シンボルを設定
+        List<OrbType> randomOrbTypeList = new List<OrbType>(orbTypes);
+        randomOrbTypeList = randomOrbTypeList.OrderBy(x => Guid.NewGuid()).ToList();
 
         int index = 0;
 
         // 最初はキャラのそばに生成
         for (int x = -1; x < 2; x += 2) {
+            if (randomOrbTypeList.Count <= index) {
+                break;
+            }
             for (int y = -1; y < 2; y += 2) {
-                symbolsList.Add(Instantiate(randomSymbolsList[index].symbolBasePrefab, new Vector3(x, y, 0), Quaternion.identity));
+                symbolsList.Add(Instantiate(orbSymbolPrefab, new Vector3(x, y, 0), Quaternion.identity));
                 index++;
+                if (randomOrbTypeList.Count <= index) {
+                    break;
+                }               
             }
         }
+
+        //// ランダムに並び替える(ここもちゃんとうごく)
+        //List<SymbolGenerateData> randomSymbolsList = new List<SymbolGenerateData>(specialSymbolGenerateDatasList);
+        //randomSymbolsList = randomSymbolsList.OrderBy(x => Guid.NewGuid()).ToList();
+
+        //int index = 0;
+
+        //// 最初はキャラのそばに生成
+        //for (int x = -1; x < 2; x += 2) {
+        //    for (int y = -1; y < 2; y += 2) {
+        //        symbolsList.Add(Instantiate(randomSymbolsList[index].symbolBasePrefab, new Vector3(x, y, 0), Quaternion.identity));
+        //        index++;
+        //    }
+        //}
+
         // List に登録する
         return symbolsList;
     }    

@@ -13,6 +13,8 @@ public class StageData
     public int clearBonusPoint;        // クリアしたときのボーナス
     public StageType stageType;        // ステージのタイルマップの種類
 
+    public OrbType[] orbTypes;         // 出現するオーブの種類
+
     // TODO 他にもあれば追加
 
 }

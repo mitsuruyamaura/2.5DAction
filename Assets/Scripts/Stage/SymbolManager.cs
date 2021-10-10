@@ -21,6 +21,9 @@ public class SymbolManager : MonoBehaviour
     [SerializeField]　　// Debug 用
     private List<EnemySymbol> enemiesList = new List<EnemySymbol>();
 
+    public List<OrbSymbol> specialSymbols = new List<OrbSymbol>();
+
+
     [SerializeField]
     private Transform spriteMaskTran;
 
@@ -37,28 +40,48 @@ public class SymbolManager : MonoBehaviour
     /// </summary>
     public void SetUpAllSymbols() {
 
-        List<SymbolBase> specialSymbols = new List<SymbolBase>();
+        int orbNo = 0;
 
+        // 各シンボルの設定
         for (int i = 0; i < symbolsList.Count; i++) {
             symbolsList[i].transform.SetParent(this.transform);
             symbolsList[i].OnEnterSymbol(this);
 
+            // 特殊シンボルの場合
             if (symbolsList[i].symbolType == SymbolType.Orb) {
-                specialSymbols.Add(symbolsList[i]);
+                // 追加設定(画像を変えたり、オーブの種類を設定)
+                symbolsList[i].GetComponent<OrbSymbol>().SetOrbData(GameData.instance.currentStageData.orbTypes[orbNo], orbNo);
+                specialSymbols.Add(symbolsList[i].GetComponent<OrbSymbol>());
+                orbNo++;
             }
         }
 
         // Enemy の種類だけを抽出して List に代入
         enemiesList = GetListSimbolTypeFromSymbolsList(SymbolType.Enemy);
 
-        // 各オーブをエネミーの上に配置
-        int randomIndex = Mathf.FloorToInt(enemiesList.Count / specialSymbols.Count);
-        for (int i = 0; i < specialSymbols.Count; i++) {
-            if (i == 3 && enemiesList.Count % specialSymbols.Count == 0) {
-                randomIndex = 0;
-            }
-            specialSymbols[i].GetComponent<OrbSymbol>().SetPositionOrbSymbol(enemiesList[randomIndex * (i + 1)].transform.position);
+        // オーブの配置用にエネミーの数分の番号を登録
+        List<int> numbers = new List<int>();
+
+        for (int i = 0; i < enemiesList.Count; i++) {
+            numbers.Add(i);
         }
+
+        //各オーブをランダムなエネミーの上に配置
+        for (int i = 0; i < specialSymbols.Count; i++) {
+            int randomIndex = Random.Range(0, numbers.Count);
+            specialSymbols[i].GetComponent<OrbSymbol>().SetPositionOrbSymbol(enemiesList[randomIndex].transform.position);
+            Debug.Log(randomIndex);
+            numbers.RemoveAt(randomIndex);
+        }
+
+        ////各オーブをエネミーの上に配置(動くけどイマイチ)
+        //int randomIndex = Mathf.FloorToInt(enemiesList.Count / specialSymbols.Count);
+        //for (int i = 0; i < specialSymbols.Count; i++) {
+        //    if (i == 3 && enemiesList.Count % specialSymbols.Count == 0) {
+        //        randomIndex = 0;
+        //    }
+        //    specialSymbols[i].GetComponent<OrbSymbol>().SetPositionOrbSymbol(enemiesList[randomIndex * (i + 1)].transform.position);
+        //}
     }
 
     /// <summary>

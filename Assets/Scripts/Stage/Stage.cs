@@ -99,7 +99,7 @@ public class Stage : MonoBehaviour {
         symbolManager.SymbolsList = stageGenerator.GenerateSymbols(-1);
 
         // 特殊シンボルのランダム作成して List に追加
-        symbolManager.SymbolsList.AddRange(stageGenerator.GenerateSpecialSymbols());
+        symbolManager.SymbolsList.AddRange(stageGenerator.GenerateSpecialSymbols(GameData.instance.currentStageData.orbTypes));
 
         // 全シンボルの設定
         symbolManager.SetUpAllSymbols();
@@ -110,10 +110,18 @@ public class Stage : MonoBehaviour {
         // スタミナの値の購読開始
         GameData.instance.staminaPoint.Subscribe(_ => UpdateDisplayStaminaPoint());
 
-        // オーブの情報作成
+        // 一旦、獲得したオーブの情報を非表示
         for (int i = 0; i < imgOrbs.Length; i++) {
+            imgOrbs[i].enabled = false;           
+        }
+
+        // オーブの情報作成
+        for (int i = 0; i < GameData.instance.currentStageData.orbTypes.Length; i++) {
+            imgOrbs[i].enabled = true;
+            imgOrbs[i].sprite = DataBaseManager.instance.orbDataSO.orbDatasList.Find(x => x.orbType == symbolManager.specialSymbols[i].orbType).spriteOrb;
             GameData.instance.orbs.Add(i, false);
         }
+
         // オーブの購読開始
         GameData.instance.orbs.ObserveReplace().Subscribe((DictionaryReplaceEvent<int, bool> x) => UpdateDisplayOrbs(x.Key, x.NewValue));
 
@@ -366,7 +374,7 @@ public class Stage : MonoBehaviour {
 
             // コンディションの効果を適用
             ApplyEffectConditions();
-            
+
             mapMoveController.IsMoving = false;
 
             // プレイヤーの移動の監視再開
@@ -495,7 +503,7 @@ public class Stage : MonoBehaviour {
             return;
         }
 
-        for (int i =0; i < GameData.instance.debuffConditionsList.Count; i++) {
+        for (int i = 0; i < GameData.instance.debuffConditionsList.Count; i++) {
             // デバフの付与
             AddDebuff(GameData.instance.debuffConditionsList[i]);
         }
@@ -594,5 +602,5 @@ public class Stage : MonoBehaviour {
 
         // シーン遷移
         SceneStateManager.instance.PreparateBattleScene();
-    }
+    }   
 }
