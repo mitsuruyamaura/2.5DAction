@@ -49,8 +49,11 @@ public class TreasureBoxSymbol : SymbolBase
         // GameData に追加
         GameData.instance.AddaAbilityItemDatasList(getItemData.abilityType, getItemData.abitilyNo);
 
-        // 破棄
-        base.OnExitSymbol();
+        // TODO どのアイテムを取得したかをポップアップ表示
+
+
+        // 小さくしながら破棄
+        tween = transform.DOScale(0, 0.5f).SetEase(Ease.OutBack).OnComplete(() => { base.OnExitSymbol(); });
     }
 
 

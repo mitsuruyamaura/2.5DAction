@@ -293,8 +293,8 @@ public class MapMoveController : MonoBehaviour
                 Debug.Log("登録");
             }
 
-            // オーブの場合
-            if (symbolBase.symbolType == SymbolType.Orb) {
+            // オーブか、トレジャーボックスの場合
+            if (symbolBase.symbolType == SymbolType.Orb || symbolBase.symbolType == SymbolType.TreasureBox) {
                 // シンボルのイベントを登録して予約し、バトル後 Stage に戻ってきてから実行
                 //orbSymbolTriggerEvent = _ => symbolBase.TriggerAppearEffect(this);
                 orbSymbolTriggerEvent = new UnityEvent<MapMoveController>();
