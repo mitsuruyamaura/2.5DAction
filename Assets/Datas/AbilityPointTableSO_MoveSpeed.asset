@@ -13,74 +13,18 @@ MonoBehaviour:
   m_Name: AbilityPointTableSO_MoveSpeed
   m_EditorClassIdentifier: 
   abilityType: 2
-  abilityTablesList:
-  - abilityLevel: 0
+  abilityItemDatasList:
+  - abilityLevel: 1
     abilityCost: 0
     powerUpValue: 0
-    abilityName: 
+    abilityName: aaa
     abilitySprite: {fileID: 0}
     rarity: 0
     abitilyNo: 0
-  - abilityLevel: 0
+  - abilityLevel: 1
     abilityCost: 0
     powerUpValue: 0
-    abilityName: 
+    abilityName: aaa
     abilitySprite: {fileID: 0}
     rarity: 0
-    abitilyNo: 0
-  - abilityLevel: 0
-    abilityCost: 0
-    powerUpValue: 0
-    abilityName: 
-    abilitySprite: {fileID: 0}
-    rarity: 0
-    abitilyNo: 0
-  - abilityLevel: 0
-    abilityCost: 0
-    powerUpValue: 0
-    abilityName: 
-    abilitySprite: {fileID: 0}
-    rarity: 0
-    abitilyNo: 0
-  - abilityLevel: 0
-    abilityCost: 0
-    powerUpValue: 0
-    abilityName: 
-    abilitySprite: {fileID: 0}
-    rarity: 0
-    abitilyNo: 0
-  - abilityLevel: 0
-    abilityCost: 0
-    powerUpValue: 0
-    abilityName: 
-    abilitySprite: {fileID: 0}
-    rarity: 0
-    abitilyNo: 0
-  - abilityLevel: 0
-    abilityCost: 0
-    powerUpValue: 0
-    abilityName: 
-    abilitySprite: {fileID: 0}
-    rarity: 0
-    abitilyNo: 0
-  - abilityLevel: 0
-    abilityCost: 0
-    powerUpValue: 0
-    abilityName: 
-    abilitySprite: {fileID: 0}
-    rarity: 0
-    abitilyNo: 0
-  - abilityLevel: 0
-    abilityCost: 0
-    powerUpValue: 0
-    abilityName: 
-    abilitySprite: {fileID: 0}
-    rarity: 0
-    abitilyNo: 0
-  - abilityLevel: 0
-    abilityCost: 0
-    powerUpValue: 0
-    abilityName: 
-    abilitySprite: {fileID: 0}
-    rarity: 0
-    abitilyNo: 0
+    abitilyNo: 2

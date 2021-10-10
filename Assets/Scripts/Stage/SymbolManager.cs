@@ -70,7 +70,7 @@ public class SymbolManager : MonoBehaviour
         for (int i = 0; i < specialSymbols.Count; i++) {
             int randomIndex = Random.Range(0, numbers.Count);
             specialSymbols[i].GetComponent<OrbSymbol>().SetPositionOrbSymbol(enemiesList[randomIndex].transform.position);
-            Debug.Log(randomIndex);
+            //Debug.Log(randomIndex);
             numbers.RemoveAt(randomIndex);
         }
 

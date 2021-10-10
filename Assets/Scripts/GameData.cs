@@ -85,4 +85,11 @@ public class GameData : MonoBehaviour
     public void AddAbilityPoint() {
         abilityPoint += playerLevel;
     }
+
+    /// <summary>
+    /// Šl“¾‚µ‚½ƒgƒŒƒWƒƒ[‚Ìî•ñ‚ğ’Ç‰Á
+    /// </summary>
+    public void AddaAbilityItemDatasList(AbilityType abilityType, int abilityNo) {
+        abilityItemDatasList.Add(new InventryAbilityItemData { abilityType = abilityType, abilityNo = abilityNo});
+    }
 }

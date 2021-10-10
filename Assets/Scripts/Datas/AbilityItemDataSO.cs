@@ -10,6 +10,7 @@ public class AbilityItemDataSO : ScriptableObject
 
     [System.Serializable]
     public class AbilityItemData {
+        public AbilityType abilityType;
         public int abilityLevel;
         public int abilityCost;
         public float powerUpValue;
@@ -17,5 +18,6 @@ public class AbilityItemDataSO : ScriptableObject
         public Sprite abilitySprite;
         public int rarity;
         public int abitilyNo;
+        public int weight;
     }
 }

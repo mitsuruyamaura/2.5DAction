@@ -150,6 +150,9 @@ public class Stage : MonoBehaviour {
 
         btnPlayerLevel.onClick.AddListener(OnClickPlayerLevel);
         moveTimeScaleController.SetUpMoveButtonController();
+
+        // ドロップするトレジャーの情報を準備
+        DataBaseManager.instance.CreateDropItemDatasList(GameData.instance.currentStageData.dropTreasureLevel);
     }
 
     /// <summary>
@@ -171,7 +174,10 @@ public class Stage : MonoBehaviour {
         Debug.Log(isEnemyTriggerEvent);
 
         // ターンの状態を確認
-        if (!isEnemyTriggerEvent) CheckTurn();
+        if (!isEnemyTriggerEvent) {
+            CheckTurn();
+            CheckTreasureBox();
+        }
 
         if (CurrentTurnState == TurnState.Boss) {
 
@@ -285,6 +291,9 @@ public class Stage : MonoBehaviour {
         // オーブを獲得している場合は獲得処理を実行
         CheckOrb();
 
+        // トレジャーボックスをエネミーの下に置いた場合に使う
+        //CheckTreasureBox();
+
         //if (CurrentTurnState == TurnState.Player) {
 
         //    // プレイヤーの移動の監視再開
@@ -387,6 +396,13 @@ public class Stage : MonoBehaviour {
     /// オーブのイベントが登録されているか確認して、登録されている場合には実行
     /// </summary>
     private void CheckOrb() {
+        mapMoveController.CallBackOrbSymbolTriggerEvent();
+    }
+
+    /// <summary>
+    /// トレジャーボックスのイベントが登録されているか確認して、登録されている場合には実行
+    /// </summary>
+    private void CheckTreasureBox() {
         mapMoveController.CallBackOrbSymbolTriggerEvent();
     }
 

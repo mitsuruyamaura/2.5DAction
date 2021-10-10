@@ -35,7 +35,7 @@ public class OrbSymbol : SymbolBase {
 
         Destroy(effect, 1.5f);
 
-        tween = transform.DOScale(0, 0.5f).SetEase(Ease.InQuart).OnComplete(() => { base.OnExitSymbol(); });        
+        tween = transform.DOScale(0, 0.5f).SetEase(Ease.InQuart).OnComplete(() => { base.OnExitSymbol(); });
     }
 
     /// <summary>

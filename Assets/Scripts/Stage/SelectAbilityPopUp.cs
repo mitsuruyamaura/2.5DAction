@@ -68,7 +68,7 @@ public class SelectAbilityPopUp : MonoBehaviour
     private void CreateAbilityDetails() {
         abilityDetailsList = new List<AbilityDetail[]>(4);
 
-        for (int i = 0; i < (int)AbilityType.Count - 2; i++) {
+        for (int i = 0; i < (int)AbilityType.Count - 3; i++) {  // TODO ‚ ‚Æ‚ÅðŒ‚ð’¼‚·
             abilityDetailsList.Add(new AbilityDetail[10]);
 
             for (int x = 0; x < DataBaseManager.instance.abilityItemDataSOList[i].abilityItemDatasList.Count; x++) {

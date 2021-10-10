@@ -851,6 +851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   symbolsList: []
   enemiesList: []
+  specialSymbols: []
   spriteMaskTran: {fileID: 1638652407}
   tilemapCollider: {fileID: 175135994}
 --- !u!212 &298270345 stripped
@@ -3168,6 +3169,8 @@ MonoBehaviour:
     symbolWeight: 20
   - symbolBasePrefab: {fileID: 1144797422582530982, guid: 632ebe4cd946cd043a4a08320e84414d, type: 3}
     symbolWeight: 20
+  - symbolBasePrefab: {fileID: 7270295834764086183, guid: 5f9f022182f3ef246bba49b83dd9172d, type: 3}
+    symbolWeight: 300
   specialSymbolGenerateDatasList:
   - symbolBasePrefab: {fileID: 2596277188211296371, guid: 10603dfca157d05429b3c50983adc7d7, type: 3}
     symbolWeight: 100
