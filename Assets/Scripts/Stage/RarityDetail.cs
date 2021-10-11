@@ -12,8 +12,6 @@ public class RarityDetail : MonoBehaviour
 
     public void PlayAnim() {
 
-        float scale = transform.localScale.x;
-
-        imgRarity.transform.DOScale(1.5f, 0.5f).SetEase(Ease.InOutBack);
+        imgRarity.transform.DOScale(1.5f, 0.5f).SetEase(Ease.InOutBack).OnComplete(() => { imgRarity.transform.localScale = Vector3.one; } );
     }
 }

@@ -49,12 +49,12 @@ public class TreasurePopUp : MonoBehaviour
     /// <returns></returns>
     private IEnumerator CreateRarityDetails(int rarity) {
 
-        for (int i = 0; i < rarity; i++) {
+        for (int i = 0; i < rarity + 1; i++) {
 
             RarityDetail rarityDetail = Instantiate(rarityDetailPrefab, raritySetTran);
             rarityDetail.PlayAnim();
 
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(0.55f * (i + 1));
         }
         btnFilter.interactable = true;
     }
