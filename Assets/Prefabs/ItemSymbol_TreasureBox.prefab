@@ -189,3 +189,4 @@ MonoBehaviour:
   effectTran: {fileID: 3683721527280202681}
   spriteSymbol: {fileID: 2994424780626682822}
   isSymbolTriggerd: 0
+  treasurePopUpPrefab: {fileID: 2866691374823175937, guid: 728dd17c08d646741887bb09d251dc78, type: 3}

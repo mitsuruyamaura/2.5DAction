@@ -619,4 +619,12 @@ public class Stage : MonoBehaviour {
         // ƒV[ƒ“‘JˆÚ
         SceneStateManager.instance.PreparateBattleScene();
     }   
+
+    /// <summary>
+    /// Overlay İ’è‚Ì Canvas ‚Ìî•ñ‚ğæ“¾
+    /// </summary>
+    /// <returns></returns>
+    public Transform GetOverlayCanvasTran() {
+        return overlayCanvasTran;
+    }
 }
