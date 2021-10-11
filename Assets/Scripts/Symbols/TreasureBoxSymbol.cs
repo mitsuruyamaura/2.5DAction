@@ -6,6 +6,9 @@ using System.Linq;
 
 public class TreasureBoxSymbol : SymbolBase
 {
+    [SerializeField]
+    private TreasurePopUp treasurePopUpPrefab;
+
     public override void OnEnterSymbol(SymbolManager symbolManager) {
         base.OnEnterSymbol(symbolManager);
 
@@ -50,7 +53,9 @@ public class TreasureBoxSymbol : SymbolBase
         GameData.instance.AddaAbilityItemDatasList(getItemData.abilityType, getItemData.abitilyNo);
 
         // TODO どのアイテムを取得したかをポップアップ表示
+        TreasurePopUp treasurePopUp = Instantiate(treasurePopUpPrefab, mapMoveController.GetStage().GetOverlayCanvasTran());
 
+        treasurePopUp.DisplayPopUp(getItemData);
 
         // 小さくしながら破棄
         tween = transform.DOScale(0, 0.5f).SetEase(Ease.OutBack).OnComplete(() => { base.OnExitSymbol(); });

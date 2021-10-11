@@ -197,6 +197,10 @@ public class Stage : MonoBehaviour {
     /// スタミナポイントの表示更新
     /// </summary>
     private void UpdateDisplayStaminaPoint() {
+
+        // TODO スタミナ回復をアニメさせたい
+        //txtStaminaPoint.DOCounter(GameData.instance.staminaPoint, 1.0f).SetEase(Ease.Linear);
+
         txtStaminaPoint.text = GameData.instance.staminaPoint.ToString();
 
         if (GameData.instance.staminaPoint.Value <= 0) {
@@ -619,4 +623,12 @@ public class Stage : MonoBehaviour {
         // シーン遷移
         SceneStateManager.instance.PreparateBattleScene();
     }   
+
+    /// <summary>
+    /// Overlay 設定の Canvas の情報を取得
+    /// </summary>
+    /// <returns></returns>
+    public Transform GetOverlayCanvasTran() {
+        return overlayCanvasTran;
+    }
 }
