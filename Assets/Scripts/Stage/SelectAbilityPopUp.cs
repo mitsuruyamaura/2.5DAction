@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class SelectAbilityPopUp : MonoBehaviour
+public class SelectAbilityPopUp : PopUpBase
 {
     [SerializeField]
     private Button btnExit;
@@ -17,9 +17,6 @@ public class SelectAbilityPopUp : MonoBehaviour
 
     [SerializeField]
     private Text txtDescription;
-
-    [SerializeField]
-    private CanvasGroup canvasGroup;
 
     private Stage stage;
 
@@ -36,7 +33,6 @@ public class SelectAbilityPopUp : MonoBehaviour
 
     // AbilityDetail の管理用
     public List<AbilityDetail[]> abilityDetailsList;
-
 
     /// <summary>
     /// 
@@ -56,7 +52,7 @@ public class SelectAbilityPopUp : MonoBehaviour
         Initialize();
 
         // ボタンにメソッドを登録
-        btnExit.onClick.AddListener(ClosePopUp);
+        btnExit.onClick.AddListener(OnExitPopUp);
 
         btnSubmit.onClick.AddListener(PowerUpAbility);
         btnSubmit.interactable = false;
@@ -89,6 +85,12 @@ public class SelectAbilityPopUp : MonoBehaviour
         Initialize();
 
         canvasGroup.DOFade(1.0f, 0.5f).SetEase(Ease.Linear);
+    }
+
+    public override void OnExitPopUp() {
+        base.OnExitPopUp();
+
+        ClosePopUp();
     }
 
     /// <summary>
