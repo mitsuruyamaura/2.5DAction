@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class TreasurePopUp : MonoBehaviour
+public class TreasurePopUp : PopUpBase
 {
     [SerializeField]
     private Button btnFilter;
@@ -21,10 +21,6 @@ public class TreasurePopUp : MonoBehaviour
     [SerializeField]
     private RarityDetail rarityDetailPrefab;
 
-    [SerializeField]
-    private CanvasGroup canvasGroup;
-
-
     /// <summary>
     /// 設定してポップアップを開く
     /// </summary>
@@ -33,7 +29,7 @@ public class TreasurePopUp : MonoBehaviour
 
         canvasGroup.alpha = 0;
 
-        btnFilter.onClick.AddListener(ClosePopUp);
+        btnFilter.onClick.AddListener(OnExitPopUp);
         btnFilter.interactable = false;
 
         imgTreasureIcon.sprite = itemData.abilitySprite;
@@ -57,6 +53,12 @@ public class TreasurePopUp : MonoBehaviour
             yield return new WaitForSeconds(0.55f * (i + 1));
         }
         btnFilter.interactable = true;
+    }
+
+    public override void OnExitPopUp() {
+        base.OnExitPopUp();
+
+        ClosePopUp();
     }
 
     /// <summary>
