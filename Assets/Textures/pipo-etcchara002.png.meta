@@ -1,34 +1,43 @@
 fileFormatVersion: 2
-guid: 67edbb5eded9da4478f06f49f635c3ac
+guid: 27a5c2fec32d09f44b1e6dc57cf08c74
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -9171842734723559180
-    second: 00922_0
+      213: 1564161098127499006
+    second: pipo-etcchara002_0
   - first:
-      213: 2887752590461847514
-    second: 00922_1
+      213: -5331848727443328834
+    second: pipo-etcchara002_1
   - first:
-      213: 8459762417125996863
-    second: 00922_2
+      213: -6916387346812254461
+    second: pipo-etcchara002_2
   - first:
-      213: 3569500249468683079
-    second: 00922_3
+      213: 5855668460979440042
+    second: pipo-etcchara002_3
   - first:
-      213: 9134669110238985101
-    second: 00922_4
+      213: -8663549444364225589
+    second: pipo-etcchara002_4
   - first:
-      213: -4925858999856126700
-    second: 00922_5
+      213: 8705472089940424990
+    second: pipo-etcchara002_5
   - first:
-      213: -7968936680673349468
-    second: 00922_6
+      213: 1861035350804057617
+    second: pipo-etcchara002_6
   - first:
-      213: 8845966130494992138
-    second: 00922_7
+      213: -2033003500120976626
+    second: pipo-etcchara002_7
   - first:
-      213: 2371345566225806533
-    second: 00922_8
+      213: -6392961197436366488
+    second: pipo-etcchara002_8
+  - first:
+      213: 1135892030997288096
+    second: pipo-etcchara002_9
+  - first:
+      213: -8931754645695959768
+    second: pipo-etcchara002_10
+  - first:
+      213: 5366162429491191467
+    second: pipo-etcchara002_11
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -74,7 +83,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -131,13 +140,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 00922_0
+      name: pipo-etcchara002_0
       rect:
         serializedVersion: 2
-        x: 99
-        y: 436
-        width: 148
-        height: 140
+        x: 0
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +154,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f01e0590a117b080800000000000000
-      internalID: -9171842734723559180
+      spriteID: efedf514b3405b510800000000000000
+      internalID: 1564161098127499006
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 00922_1
+      name: pipo-etcchara002_1
       rect:
         serializedVersion: 2
-        x: 325
-        y: 435
-        width: 151
-        height: 143
+        x: 32
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +175,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ad741b95eab531820800000000000000
-      internalID: 2887752590461847514
+      spriteID: eb03f9ce4d77106b0800000000000000
+      internalID: -5331848727443328834
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 00922_2
+      name: pipo-etcchara002_2
       rect:
         serializedVersion: 2
-        x: 538
-        y: 433
-        width: 154
-        height: 147
+        x: 64
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,20 +196,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f39befcb81d176570800000000000000
-      internalID: 8459762417125996863
+      spriteID: 307cf384a5e0400a0800000000000000
+      internalID: -6916387346812254461
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 00922_3
+      name: pipo-etcchara002_3
       rect:
         serializedVersion: 2
-        x: 100
-        y: 225
-        width: 148
-        height: 141
+        x: 0
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,20 +217,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 743cf3b9099698130800000000000000
-      internalID: 3569500249468683079
+      spriteID: aa9432bc073834150800000000000000
+      internalID: 5855668460979440042
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 00922_4
+      name: pipo-etcchara002_4
       rect:
         serializedVersion: 2
-        x: 326
-        y: 224
-        width: 151
-        height: 143
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -229,20 +238,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d8b3780882dd4ce70800000000000000
-      internalID: 9134669110238985101
+      spriteID: bc333aa8ea3e4c780800000000000000
+      internalID: -8663549444364225589
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 00922_5
+      name: pipo-etcchara002_5
       rect:
         serializedVersion: 2
-        x: 539
-        y: 223
-        width: 154
-        height: 146
+        x: 64
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -250,20 +259,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4152ae38655d3abb0800000000000000
-      internalID: -4925858999856126700
+      spriteID: e19f9f20ebc00d870800000000000000
+      internalID: 8705472089940424990
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 00922_6
+      name: pipo-etcchara002_6
       rect:
         serializedVersion: 2
-        x: 99
-        y: 26
-        width: 148
-        height: 141
+        x: 0
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -271,20 +280,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4a072e66f46a86190800000000000000
-      internalID: -7968936680673349468
+      spriteID: 11ece179ac9b3d910800000000000000
+      internalID: 1861035350804057617
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 00922_7
+      name: pipo-etcchara002_7
       rect:
         serializedVersion: 2
-        x: 325
-        y: 25
-        width: 151
-        height: 143
+        x: 32
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -292,20 +301,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a0f6a47e35f23ca70800000000000000
-      internalID: 8845966130494992138
+      spriteID: e03d924861259c3e0800000000000000
+      internalID: -2033003500120976626
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 00922_8
+      name: pipo-etcchara002_8
       rect:
         serializedVersion: 2
-        x: 538
-        y: 23
-        width: 154
-        height: 147
+        x: 64
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -313,8 +322,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c436928a36b8e020800000000000000
-      internalID: 2371345566225806533
+      spriteID: 86113fb89a3a747a0800000000000000
+      internalID: -6392961197436366488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pipo-etcchara002_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a45ac2b8cf73cf00800000000000000
+      internalID: 1135892030997288096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pipo-etcchara002_10
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82de852e8780c0480800000000000000
+      internalID: -8931754645695959768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pipo-etcchara002_11
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bae9ed86c40787a40800000000000000
+      internalID: 5366162429491191467
       vertices: []
       indices: 
       edges: []
@@ -322,7 +394,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 854e1b9e4e7d83a438c3adf7746f29fe
+    spriteID: a573f10e27d49254786bb288497ad963
     internalID: 0
     vertices: []
     indices: 
@@ -330,15 +402,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      00922_4: 9134669110238985101
-      00922_7: 8845966130494992138
-      00922_5: -4925858999856126700
-      00922_0: -9171842734723559180
-      00922_2: 8459762417125996863
-      00922_3: 3569500249468683079
-      00922_8: 2371345566225806533
-      00922_1: 2887752590461847514
-      00922_6: -7968936680673349468
+      pipo-etcchara002_9: 1135892030997288096
+      pipo-etcchara002_11: 5366162429491191467
+      pipo-etcchara002_3: 5855668460979440042
+      pipo-etcchara002_1: -5331848727443328834
+      pipo-etcchara002_2: -6916387346812254461
+      pipo-etcchara002_0: 1564161098127499006
+      pipo-etcchara002_10: -8931754645695959768
+      pipo-etcchara002_7: -2033003500120976626
+      pipo-etcchara002_8: -6392961197436366488
+      pipo-etcchara002_6: 1861035350804057617
+      pipo-etcchara002_4: -8663549444364225589
+      pipo-etcchara002_5: 8705472089940424990
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
