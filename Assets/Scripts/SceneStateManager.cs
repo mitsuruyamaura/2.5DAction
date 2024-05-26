@@ -89,13 +89,6 @@ public class SceneStateManager : MonoBehaviour {
         SceneManager.SetActiveScene(scene);
     }
 
-
-    /*** 未使用 ***/
-
-    void Start() {
-        //SceneManager.sceneLoaded += SceneLoaded;
-    }
-
     /// <summary>
     /// 指定したシーンへ遷移準備
     /// </summary>
@@ -136,12 +129,18 @@ public class SceneStateManager : MonoBehaviour {
     }
 
 
+    /*** 未使用 ***/
+
+    //void Start() {
+    //    SceneManager.sceneLoaded += SceneLoaded;
+    //}
+
     /// <summary>
     /// 未使用
     /// </summary>
     /// <param name="nextScene"></param>
     /// <param name="mode"></param>
-    private void SceneLoaded(Scene nextScene, LoadSceneMode mode) {
-        //StartCoroutine(stage.UpdateDisplayHp(sliderWaitTime));
-    }
+    //private void SceneLoaded(Scene nextScene, LoadSceneMode mode) {
+    //    StartCoroutine(stage.UpdateDisplayHp(sliderWaitTime));
+    //}
 }

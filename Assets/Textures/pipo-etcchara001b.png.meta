@@ -1,22 +1,34 @@
 fileFormatVersion: 2
-guid: e3ce3132dc9360e4399b8117a5aee536
+guid: 5b902fce7bca2194d8fb691c14277552
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7402891486301209574
-    second: pipo-map001_at-umi_0
+      213: 6780585724037152972
+    second: pipo-etcchara001b_0
   - first:
-      213: -5418133383008349640
-    second: pipo-map001_at-umi_1
+      213: -3306160691989200093
+    second: pipo-etcchara001b_1
   - first:
-      213: -3316019259217406885
-    second: pipo-map001_at-umi_2
+      213: 2821386864610608077
+    second: pipo-etcchara001b_2
   - first:
-      213: 1385026558420788880
-    second: pipo-map001_at-umi_3
+      213: 7163076424283989281
+    second: pipo-etcchara001b_3
   - first:
-      213: 5604882834228416585
-    second: pipo-map001_at-umi_4
+      213: 2547075477893802099
+    second: pipo-etcchara001b_4
+  - first:
+      213: -884719945170391025
+    second: pipo-etcchara001b_5
+  - first:
+      213: -1829746680638928401
+    second: pipo-etcchara001b_6
+  - first:
+      213: 4368154182485407381
+    second: pipo-etcchara001b_7
+  - first:
+      213: 8862834759444142653
+    second: pipo-etcchara001b_8
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -119,13 +131,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pipo-map001_at-umi_0
+      name: pipo-etcchara001b_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 129
-        width: 30
-        height: 30
+        x: 0
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -133,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a1cb0485a65a34990800000000000000
-      internalID: -7402891486301209574
+      spriteID: cc0c15a7aca791e50800000000000000
+      internalID: 6780585724037152972
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pipo-map001_at-umi_1
+      name: pipo-etcchara001b_1
       rect:
         serializedVersion: 2
-        x: 1
-        y: 97
-        width: 30
-        height: 30
+        x: 32
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,20 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8321a18056ceec4b0800000000000000
-      internalID: -5418133383008349640
+      spriteID: 323cf9f0e582e12d0800000000000000
+      internalID: -3306160691989200093
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pipo-map001_at-umi_2
+      name: pipo-etcchara001b_2
       rect:
         serializedVersion: 2
-        x: 1
-        y: 65
-        width: 30
-        height: 30
+        x: 64
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,20 +187,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b541ef18d022bf1d0800000000000000
-      internalID: -3316019259217406885
+      spriteID: dc3811fa764972720800000000000000
+      internalID: 2821386864610608077
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pipo-map001_at-umi_3
+      name: pipo-etcchara001b_3
       rect:
         serializedVersion: 2
-        x: 1
-        y: 33
-        width: 30
-        height: 30
+        x: 0
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -196,20 +208,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0962723115a983310800000000000000
-      internalID: 1385026558420788880
+      spriteID: 1252c686e0c586360800000000000000
+      internalID: 7163076424283989281
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pipo-map001_at-umi_4
+      name: pipo-etcchara001b_4
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1
-        width: 30
-        height: 30
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -217,8 +229,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9409ed5ed3b88cd40800000000000000
-      internalID: 5604882834228416585
+      spriteID: 378e7f3f6a7095320800000000000000
+      internalID: 2547075477893802099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pipo-etcchara001b_5
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f007a66b5e7d8b3f0800000000000000
+      internalID: -884719945170391025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pipo-etcchara001b_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe9019f961f6b96e0800000000000000
+      internalID: -1829746680638928401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pipo-etcchara001b_7
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 596fd23e51dce9c30800000000000000
+      internalID: 4368154182485407381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pipo-etcchara001b_8
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3a17a3a14d1ffa70800000000000000
+      internalID: 8862834759444142653
       vertices: []
       indices: 
       edges: []
@@ -226,7 +322,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 67399e7d571d86443969e916196108b4
+    spriteID: 7a9f680ef4fe022438a1de6e7434b10a
     internalID: 0
     vertices: []
     indices: 
@@ -234,11 +330,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      pipo-map001_at-umi_0: -7402891486301209574
-      pipo-map001_at-umi_1: -5418133383008349640
-      pipo-map001_at-umi_3: 1385026558420788880
-      pipo-map001_at-umi_2: -3316019259217406885
-      pipo-map001_at-umi_4: 5604882834228416585
+      pipo-etcchara001b_2: 2821386864610608077
+      pipo-etcchara001b_3: 7163076424283989281
+      pipo-etcchara001b_4: 2547075477893802099
+      pipo-etcchara001b_6: -1829746680638928401
+      pipo-etcchara001b_1: -3306160691989200093
+      pipo-etcchara001b_0: 6780585724037152972
+      pipo-etcchara001b_5: -884719945170391025
+      pipo-etcchara001b_7: 4368154182485407381
+      pipo-etcchara001b_8: 8862834759444142653
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
