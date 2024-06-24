@@ -11,7 +11,7 @@ public class DataBaseManager : MonoBehaviour
     public ConditionDataSO conditionDataSO;
     public ExpTableSO expTableSO;
     public StageDataSO stageDataSO;
-
+    public ItemDataSO itemDataSO;
 
     // mi
     public EnemyMoveEventDataSO enemyMoveEventDataSO;
@@ -81,5 +81,10 @@ public class DataBaseManager : MonoBehaviour
                 }
             }
         }
+    }
+
+
+    public ItemData GetItemData(int searchId) {
+        return itemDataSO.itemDataList.FirstOrDefault(data => data.id == searchId);
     }
 }

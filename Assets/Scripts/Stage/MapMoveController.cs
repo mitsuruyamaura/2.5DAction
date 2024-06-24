@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 using DG.Tweening;
 using UnityEngine.Events;
+using Cysharp.Threading.Tasks;
 
 public class MapMoveController : MonoBehaviour
 {
@@ -382,7 +383,6 @@ public class MapMoveController : MonoBehaviour
     /// 登録されているエネミーシンボルのイベント(エネミーとのバトル)を実行
     /// </summary>
     public bool CallBackEnemySymbolTriggerEvent() {
-
         if (enemySymbolTriggerEvent != null) {
             // イベントがあるときだけ実行する
             enemySymbolTriggerEvent?.Invoke(this);
@@ -395,6 +395,32 @@ public class MapMoveController : MonoBehaviour
         }
         return false;
     }
+
+    public async UniTask<bool> ExecuteSymbolEventAsync() {  // Token
+        
+
+
+        if (enemySymbolTriggerEvent != null) {
+            // Channel で待機
+            bool isBattleResult = await BattleManager.instance.StartBattle();
+
+            // イベントをクリア
+            enemySymbolTriggerEvent?.RemoveAllListeners();
+            enemySymbolTriggerEvent = null;
+            return isBattleResult;
+
+            // イベントがあるときだけ実行する
+            enemySymbolTriggerEvent?.Invoke(this);
+
+            // イベントをクリア
+            enemySymbolTriggerEvent?.RemoveAllListeners();
+            enemySymbolTriggerEvent = null;
+
+            return true;
+        }
+        return false;
+    }
+
 
     /// <summary>
     /// 登録されているオーブシンボルのイベントを実行

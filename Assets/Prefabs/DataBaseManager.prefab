@@ -24,12 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7125656954279440092}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7125656954279440095
 MonoBehaviour:
@@ -47,6 +48,7 @@ MonoBehaviour:
   conditionDataSO: {fileID: 11400000, guid: ee479803e2c4ae245b160393ebfd5499, type: 2}
   expTableSO: {fileID: 11400000, guid: 56e379c00098b8e4a87d4fb3376afe75, type: 2}
   stageDataSO: {fileID: 11400000, guid: cc032b19ae1577f4c80a295a2249dfa4, type: 2}
+  itemDataSO: {fileID: 11400000, guid: 1584c5eb68ceaa34fb39800569032785, type: 2}
   enemyMoveEventDataSO: {fileID: 11400000, guid: 4336fc092ce914a43a12d2b21ced7f90, type: 2}
   orbDataSO: {fileID: 11400000, guid: 482a589a6a036cb4a9db267a6adcc491, type: 2}
   treasureTableSO: {fileID: 11400000, guid: f4da82ad5e176794b88042b5b1d6fd1e, type: 2}

@@ -3,314 +3,270 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryManager : MonoBehaviour 
-{
-    public static Dictionary<int, CustomItemAndGo> Inventory = new Dictionary<int, CustomItemAndGo>();//Dictionary of slots and items (main inventory)
-    List<CustomBoolIntVector2> PositionsAndOccupation = new List<CustomBoolIntVector2>();//list for every position in the inventroy and is it occupied or not
-    List<CustomItemIntInt> ListOfStackables = new List<CustomItemIntInt>();//list for stackable items
+namespace RPG_BOX {
 
-    int MaxNumberOfStacks = 99;
+    public class InventoryManager : MonoBehaviour {
+        public static Dictionary<int, CustomItemAndGo> Inventory = new Dictionary<int, CustomItemAndGo>();//Dictionary of slots and items (main inventory)
+        List<CustomBoolIntVector2> PositionsAndOccupation = new List<CustomBoolIntVector2>();//list for every position in the inventroy and is it occupied or not
+        List<CustomItemIntInt> ListOfStackables = new List<CustomItemIntInt>();//list for stackable items
 
-    public Sprite BackgroundSprite;
-    public Sprite SlotSprite;
+        int MaxNumberOfStacks = 99;
 
-    Transform X1Y1;//first slot in first row
-    Transform X2Y1;//second slot in first row
-    Transform X1Y2;//first slot in second row
+        public Sprite BackgroundSprite;
+        public Sprite SlotSprite;
 
-    Transform ItemsParent;
-    Transform SlotsParent;
+        Transform X1Y1;//first slot in first row
+        Transform X2Y1;//second slot in first row
+        Transform X1Y2;//first slot in second row
 
-    RectTransform BackgroundRT;
+        Transform ItemsParent;
+        Transform SlotsParent;
 
-    GameObject ItemGoPrefab;
-    GameObject InventorySlotPrefab;
+        RectTransform BackgroundRT;
 
-    public int Rows =3;
-    public int Columns =3;
-    public int SlotSize=100;
-    public int SpacingBetweenSlots=30;
-    public int TopBottomMargin;
-    public int RightLeftMargin;
-    public int TopBottomSpace=100;
-    public int RightLeftSpace=100;
+        GameObject ItemGoPrefab;
+        GameObject InventorySlotPrefab;
 
-    int MaxNumberOfItemsALLinventory;
+        public int Rows = 3;
+        public int Columns = 3;
+        public int SlotSize = 100;
+        public int SpacingBetweenSlots = 30;
+        public int TopBottomMargin;
+        public int RightLeftMargin;
+        public int TopBottomSpace = 100;
+        public int RightLeftSpace = 100;
+
+        int MaxNumberOfItemsALLinventory;
 
 
-    void TransformsLoader()    //loads all the needed transforms
-    {
-        if (ItemsParent == null)
+        void TransformsLoader()    //loads all the needed transforms
         {
-            ItemsParent = transform.Find("ItemsParent");
-        }
-        if (SlotsParent == null)
-        {
-            SlotsParent = transform.Find("SlotsParent");
-        }
-        if (BackgroundRT == null)
-        {
-            BackgroundRT = transform.Find("InventoryBG").GetComponent<RectTransform>();
-        }
-
-    }
-
-    private void Start()
-    {
-        TransformsLoader();
-        PrefabLoader();
-        MaxNumberOfItemsALLinventory = Columns*Rows;
-        StartCoroutine(AssignXYPos());
-    }
-
-    IEnumerator AssignXYPos()
-    {
-        yield return new WaitForEndOfFrame();
-        if (Columns == 1 && SlotsParent.childCount > 1)
-        {
-            X1Y1 = SlotsParent.GetChild(0);
-            X1Y2 = SlotsParent.GetChild(1);
-            X2Y1 = SlotsParent.GetChild(0);
-            ResetPosAndOccList();
-        }
-        else if (Rows == 1 && SlotsParent.childCount > 1)
-        {
-            X1Y1 = SlotsParent.GetChild(0);
-            X1Y2 = SlotsParent.GetChild(0);
-            X2Y1 = SlotsParent.GetChild(1);
-            ResetPosAndOccList();
-        }
-        else if (SlotsParent.childCount > Columns + 1)
-        {
-            X1Y1 = SlotsParent.GetChild(0);
-            X1Y2 = SlotsParent.GetChild(Columns + 1);
-            X2Y1 = SlotsParent.GetChild(1);
-            ResetPosAndOccList();
-        }
-    }
-
-    public void ChangeSprites()//change sprites of Background and Slot
-    {
-        int cCount = SlotsParent.childCount;
-
-        if (SlotSprite != null)
-        {
-            for (int i = cCount - 1; i >= 0; i--)
-            {
-                SlotsParent.GetChild(i).GetComponent<Image>().sprite = SlotSprite;
+            if (ItemsParent == null) {
+                ItemsParent = transform.Find("ItemsParent");
             }
+            if (SlotsParent == null) {
+                SlotsParent = transform.Find("SlotsParent");
+            }
+            if (BackgroundRT == null) {
+                BackgroundRT = transform.Find("InventoryBG").GetComponent<RectTransform>();
+            }
+
         }
-        else
-        {
-            for (int i = cCount - 1; i >= 0; i--)
-            {
-                SlotsParent.GetChild(i).GetComponent<Image>().sprite = null;
+
+        private void Start() {
+            TransformsLoader();
+            PrefabLoader();
+            MaxNumberOfItemsALLinventory = Columns * Rows;
+            StartCoroutine(AssignXYPos());
+        }
+
+        IEnumerator AssignXYPos() {
+            yield return new WaitForEndOfFrame();
+            if (Columns == 1 && SlotsParent.childCount > 1) {
+                X1Y1 = SlotsParent.GetChild(0);
+                X1Y2 = SlotsParent.GetChild(1);
+                X2Y1 = SlotsParent.GetChild(0);
+                ResetPosAndOccList();
+            } else if (Rows == 1 && SlotsParent.childCount > 1) {
+                X1Y1 = SlotsParent.GetChild(0);
+                X1Y2 = SlotsParent.GetChild(0);
+                X2Y1 = SlotsParent.GetChild(1);
+                ResetPosAndOccList();
+            } else if (SlotsParent.childCount > Columns + 1) {
+                X1Y1 = SlotsParent.GetChild(0);
+                X1Y2 = SlotsParent.GetChild(Columns + 1);
+                X2Y1 = SlotsParent.GetChild(1);
+                ResetPosAndOccList();
             }
         }
 
-        if (BackgroundSprite != null)
+        public void ChangeSprites()//change sprites of Background and Slot
         {
-            BackgroundRT.GetComponent<Image>().sprite = BackgroundSprite;
-        }
-        else
-        {
-            BackgroundRT.GetComponent<Image>().sprite = null;
-        }
-    }
+            int cCount = SlotsParent.childCount;
 
-    void ResetPosAndOccList()
-    {
-        float CurrentX = X1Y1.position.x;
-        float CurrentY = X1Y1.position.y;
-        float xDiff = X2Y1.position.x - X1Y1.position.x;
-        float yDiff = X1Y2.position.y - X1Y1.position.y;
-
-        for (int i = 0; i < MaxNumberOfItemsALLinventory; i++)
-        {
-            Vector2 ThePos = new Vector2(CurrentX, CurrentY);
-
-            CurrentX += xDiff;
-            if ((i + 1) % Columns == 0)
-            {
-                CurrentX = X1Y1.position.x;
-                CurrentY += yDiff;
+            if (SlotSprite != null) {
+                for (int i = cCount - 1; i >= 0; i--) {
+                    SlotsParent.GetChild(i).GetComponent<Image>().sprite = SlotSprite;
+                }
+            } else {
+                for (int i = cCount - 1; i >= 0; i--) {
+                    SlotsParent.GetChild(i).GetComponent<Image>().sprite = null;
+                }
             }
 
-            PositionsAndOccupation.Add(new CustomBoolIntVector2(false, 0, ThePos));//0 is if the user needed more than one tab for the inventory
+            if (BackgroundSprite != null) {
+                BackgroundRT.GetComponent<Image>().sprite = BackgroundSprite;
+            } else {
+                BackgroundRT.GetComponent<Image>().sprite = null;
+            }
         }
-    }
 
-    public bool AddItemToInventory(Item ItemToAdd)//bool to check can this item be added to the inventory or no
-    {
-        if (ItemToAdd.IsStackable)
+        void ResetPosAndOccList() {
+            float CurrentX = X1Y1.position.x;
+            float CurrentY = X1Y1.position.y;
+            float xDiff = X2Y1.position.x - X1Y1.position.x;
+            float yDiff = X1Y2.position.y - X1Y1.position.y;
+
+            for (int i = 0; i < MaxNumberOfItemsALLinventory; i++) {
+                Vector2 ThePos = new Vector2(CurrentX, CurrentY);
+
+                CurrentX += xDiff;
+                if ((i + 1) % Columns == 0) {
+                    CurrentX = X1Y1.position.x;
+                    CurrentY += yDiff;
+                }
+
+                PositionsAndOccupation.Add(new CustomBoolIntVector2(false, 0, ThePos));//0 is if the user needed more than one tab for the inventory
+            }
+        }
+
+        public bool AddItemToInventory(Item ItemToAdd)//bool to check can this item be added to the inventory or no
         {
-            for (int i = 0; i < ListOfStackables.Count; i++)
+            if (ItemToAdd.IsStackable) {
+                for (int i = 0; i < ListOfStackables.Count; i++) {
+                    if (ListOfStackables[i].TheItem.itemName == ItemToAdd.itemName && ListOfStackables[i].ItemStacks < MaxNumberOfStacks) {
+                        ListOfStackables[i].ItemStacks++;
+                        Inventory[ListOfStackables[i].ItemNumberInInventory].TheGameObject.GetComponent<ItemProps>().ChangeStacks(ListOfStackables[i].ItemStacks);
+                        return true;
+                    }
+                }
+            }
+            int TheIndexOfMe = TakeIndexOfPos();
+            if (TheIndexOfMe > PositionsAndOccupation.Count)//in case the index is more than the slots numbers
             {
-                if (ListOfStackables[i].TheItem.itemName == ItemToAdd.itemName && ListOfStackables[i].ItemStacks < MaxNumberOfStacks)
-                {
-                    ListOfStackables[i].ItemStacks++;
+                ErrorMessageText.instance.ShowMessage("No Enough space in inventory");
+                return false;
+            }
+            GameObject NewItem = GameObject.Instantiate(ItemGoPrefab, ItemsParent);
+            NewItem.transform.position = PositionsAndOccupation[TheIndexOfMe].aPos;
+            ItemProps AccIP = NewItem.GetComponent<ItemProps>();
+            AccIP.TakeInfo(ItemToAdd, TheIndexOfMe, ItemHome.Inventory);
+
+            CustomItemAndGo ItemAndGo = new CustomItemAndGo(ItemToAdd, NewItem);
+            if (Inventory.ContainsKey(TheIndexOfMe)) {
+                Inventory[TheIndexOfMe] = ItemAndGo;
+            } else {
+                Inventory.Add(TheIndexOfMe, ItemAndGo);
+            }
+            if (ItemToAdd.IsStackable) {
+                ListOfStackables.Add(new CustomItemIntInt(ItemToAdd, 1, TheIndexOfMe));
+            }
+            return true;
+
+        }
+
+        public bool ReduceStackableSize(int indexOfStackable) //true means destroy the item, false means just reduce stack number
+        {
+            Item aItem = Inventory[indexOfStackable].TheItem;
+
+            for (int i = 0; i < ListOfStackables.Count; i++) {
+                if (ListOfStackables[i].TheItem.itemName == aItem.itemName && ListOfStackables[i].ItemStacks > 1) {
+                    ListOfStackables[i].ItemStacks--;
                     Inventory[ListOfStackables[i].ItemNumberInInventory].TheGameObject.GetComponent<ItemProps>().ChangeStacks(ListOfStackables[i].ItemStacks);
+                    return false;
+                } else if (ListOfStackables[i].TheItem.itemName == aItem.itemName && ListOfStackables[i].ItemStacks <= 1) {
+                    ListOfStackables.RemoveAt(i);
                     return true;
                 }
             }
+            return true;
         }
-        int TheIndexOfMe = TakeIndexOfPos();
-        if (TheIndexOfMe > PositionsAndOccupation.Count)//in case the index is more than the slots numbers
-        {
-            ErrorMessageText.instance.ShowMessage("No Enough space in inventory");
-            return false;
-        }
-        GameObject NewItem = GameObject.Instantiate(ItemGoPrefab, ItemsParent);
-        NewItem.transform.position = PositionsAndOccupation[TheIndexOfMe].aPos;
-        ItemProps AccIP = NewItem.GetComponent<ItemProps>();
-        AccIP.TakeInfo(ItemToAdd, TheIndexOfMe, ItemHome.Inventory);
 
-        CustomItemAndGo ItemAndGo = new CustomItemAndGo(ItemToAdd, NewItem);
-        if (Inventory.ContainsKey(TheIndexOfMe))
+        public void RemoveItemFromInventory(int indexOfItemRemoved) // removes the item completly from the inventory
         {
-            Inventory[TheIndexOfMe] = ItemAndGo;
+            PositionsAndOccupation[indexOfItemRemoved].IsOccupied = false;
+            ItemProps AccIP = Inventory[indexOfItemRemoved].TheGameObject.GetComponent<ItemProps>();
+            AccIP.DestroyItem();
+            Inventory.Remove(indexOfItemRemoved);
         }
-        else
-        {
-            Inventory.Add(TheIndexOfMe, ItemAndGo);
-        }
-        if (ItemToAdd.IsStackable)
-        {
-            ListOfStackables.Add(new CustomItemIntInt(ItemToAdd, 1, TheIndexOfMe));
-        }
-        return true;
 
-    }
+        int TakeIndexOfPos() {
+            int TheIndex = 99999;//basically infinty
 
-    public bool ReduceStackableSize(int indexOfStackable) //true means destroy the item, false means just reduce stack number
-    {
-        Item aItem = Inventory[indexOfStackable].TheItem;
-
-        for (int i = 0; i < ListOfStackables.Count; i++)
-        {
-            if (ListOfStackables[i].TheItem.itemName == aItem.itemName && ListOfStackables[i].ItemStacks > 1)
-            {
-                ListOfStackables[i].ItemStacks--;
-                Inventory[ListOfStackables[i].ItemNumberInInventory].TheGameObject.GetComponent<ItemProps>().ChangeStacks(ListOfStackables[i].ItemStacks);
-                return false;
+            for (int i = 0; i < PositionsAndOccupation.Count; i++) {
+                if (PositionsAndOccupation[i].IsOccupied == false) {
+                    TheIndex = i;
+                    PositionsAndOccupation[i].IsOccupied = true;
+                    break;
+                }
             }
-            else if (ListOfStackables[i].TheItem.itemName == aItem.itemName && ListOfStackables[i].ItemStacks <= 1)
-            {
-                ListOfStackables.RemoveAt(i);
-                return true;
-            }
+
+            return TheIndex;
         }
-        return true;
-    }
 
-    public void RemoveItemFromInventory(int indexOfItemRemoved) // removes the item completly from the inventory
-    {
-        PositionsAndOccupation[indexOfItemRemoved].IsOccupied = false;
-        ItemProps AccIP = Inventory[indexOfItemRemoved].TheGameObject.GetComponent<ItemProps>();
-        AccIP.DestroyItem();
-        Inventory.Remove(indexOfItemRemoved);
-    }
-
-    int TakeIndexOfPos()
-    {
-        int TheIndex=99999;//basically infinty
-
-        for (int i = 0; i < PositionsAndOccupation.Count; i++)
+        void PrefabLoader()//loads all needed prefabs
         {
-            if (PositionsAndOccupation[i].IsOccupied == false)
-            {
-                TheIndex = i;
-                PositionsAndOccupation[i].IsOccupied = true;
-                break;
+            if (ItemGoPrefab == null) {
+                ItemGoPrefab = Resources.Load<GameObject>("Prefabs/ItemInventoryGO");
+            }
+            if (InventorySlotPrefab == null) {
+                InventorySlotPrefab = Resources.Load<GameObject>("Prefabs/InventorySlot");
             }
         }
 
-        return TheIndex;
-    }
-
-    void PrefabLoader()//loads all needed prefabs
-    {
-        if (ItemGoPrefab == null)
+        public void ChangeSizes()//changes sizes of background and slots
         {
-            ItemGoPrefab = Resources.Load<GameObject>("Prefabs/ItemInventoryGO");
-        }
-        if (InventorySlotPrefab == null)
-        {
-            InventorySlotPrefab = Resources.Load<GameObject>("Prefabs/InventorySlot");
-        }
-    }
+            TransformsLoader();
+            PrefabLoader();
 
-    public void ChangeSizes()//changes sizes of background and slots
-    {
-        TransformsLoader();
-        PrefabLoader();
+            float BgWidth = (RightLeftSpace * 2) + (Columns * SlotSize) + ((Columns - 1) * SpacingBetweenSlots);
+            float BgHeight = (TopBottomSpace * 2) + (Rows * SlotSize) + ((Rows - 1) * SpacingBetweenSlots);
+            BackgroundRT.sizeDelta = new Vector2(BgWidth, BgHeight);
 
-        float BgWidth = (RightLeftSpace * 2) + (Columns * SlotSize) + ((Columns - 1) * SpacingBetweenSlots);
-        float BgHeight = (TopBottomSpace * 2) + (Rows * SlotSize) + ((Rows - 1) * SpacingBetweenSlots);
-        BackgroundRT.sizeDelta = new Vector2(BgWidth, BgHeight);
+            float SlotsParentWidth = (Columns * SlotSize) + ((Columns - 1) * SpacingBetweenSlots);
+            float SlotsParentHeight = (Rows * SlotSize) + ((Rows - 1) * SpacingBetweenSlots);
 
-        float SlotsParentWidth = (Columns * SlotSize) + ((Columns - 1) * SpacingBetweenSlots);
-        float SlotsParentHeight = (Rows * SlotSize) + ((Rows - 1) * SpacingBetweenSlots);
-
-        SlotsParent.transform.localPosition = new Vector2(0, 0);
-        SlotsParent.transform.localPosition = new Vector2(RightLeftMargin, TopBottomMargin);
-        SlotsParent.GetComponent<GridLayoutGroup>().spacing = new Vector2(SpacingBetweenSlots, SpacingBetweenSlots);
-        SlotsParent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(SlotSize, SlotSize);
-        SlotsParent.GetComponent<RectTransform>().sizeDelta = new Vector2(SlotsParentWidth, SlotsParentHeight);
-    }
-
-    public void CreateSlots()
-    {
-        int cCount = SlotsParent.childCount;
-
-        for (int i = cCount - 1; i >= 0; i--)
-        {
-            DestroyImmediate(SlotsParent.GetChild(i).gameObject);
+            SlotsParent.transform.localPosition = new Vector2(0, 0);
+            SlotsParent.transform.localPosition = new Vector2(RightLeftMargin, TopBottomMargin);
+            SlotsParent.GetComponent<GridLayoutGroup>().spacing = new Vector2(SpacingBetweenSlots, SpacingBetweenSlots);
+            SlotsParent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(SlotSize, SlotSize);
+            SlotsParent.GetComponent<RectTransform>().sizeDelta = new Vector2(SlotsParentWidth, SlotsParentHeight);
         }
 
+        public void CreateSlots() {
+            int cCount = SlotsParent.childCount;
 
-        for (int i = 0; i < Columns * Rows; i++)
-        {
-            Instantiate(InventorySlotPrefab, SlotsParent);
+            for (int i = cCount - 1; i >= 0; i--) {
+                DestroyImmediate(SlotsParent.GetChild(i).gameObject);
+            }
+
+
+            for (int i = 0; i < Columns * Rows; i++) {
+                Instantiate(InventorySlotPrefab, SlotsParent);
+            }
         }
     }
-}
 
-public class CustomBoolIntVector2
-{
-    public bool IsOccupied;
-    public Vector2 aPos;
-    public int TabNumber;
+    public class CustomBoolIntVector2 {
+        public bool IsOccupied;
+        public Vector2 aPos;
+        public int TabNumber;
 
-    public CustomBoolIntVector2(bool occ,int tab, Vector2 pos)
-    {
-        IsOccupied = occ;
-        TabNumber = tab;
-        aPos = pos;
+        public CustomBoolIntVector2(bool occ, int tab, Vector2 pos) {
+            IsOccupied = occ;
+            TabNumber = tab;
+            aPos = pos;
+        }
     }
-}
 
-public class CustomItemAndGo
-{
-    public Item TheItem;
-    public GameObject TheGameObject;
+    public class CustomItemAndGo {
+        public Item TheItem;
+        public GameObject TheGameObject;
 
-    public CustomItemAndGo(Item item, GameObject go)
-    {
-        TheItem = item;
-        TheGameObject = go;
+        public CustomItemAndGo(Item item, GameObject go) {
+            TheItem = item;
+            TheGameObject = go;
+        }
     }
-}
-public class CustomItemIntInt
-{
-    public Item TheItem;
-    public int ItemStacks;
-    public int ItemNumberInInventory;
+    public class CustomItemIntInt {
+        public Item TheItem;
+        public int ItemStacks;
+        public int ItemNumberInInventory;
 
-    public CustomItemIntInt(Item item, int itemStacks,int itemNumber)
-    {
-        TheItem = item;
-        ItemStacks = itemStacks;
-        ItemNumberInInventory = itemNumber;
+        public CustomItemIntInt(Item item, int itemStacks, int itemNumber) {
+            TheItem = item;
+            ItemStacks = itemStacks;
+            ItemNumberInInventory = itemNumber;
+        }
     }
 }
