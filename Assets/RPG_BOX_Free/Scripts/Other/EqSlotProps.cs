@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EqSlotProps : MonoBehaviour
-{
-    public GearMainType GearType;
+namespace RPG_BOX {
+
+    public class EqSlotProps : MonoBehaviour {
+        public GearMainType GearType;
+    }
 }
