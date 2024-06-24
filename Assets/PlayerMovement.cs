@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private Stage stage;
 
     private Vector3Int playerPosition;                 // プレイヤーのタイル位置
+    private Vector3Int prevPosition;                   // プレイヤーの1つ前のタイル位置
     private float offsetPos = 0.5f;
     private Tweener tweener;
 
@@ -87,6 +88,7 @@ public class PlayerMovement : MonoBehaviour {
         // ターゲット位置が移動可能であるかチェック
         if (colliderTilemap.GetColliderType(targetPosition) == Tile.ColliderType.None && walkableTilemap.HasTile(targetPosition)) {
             // プレイヤーの位置を更新
+            prevPosition = playerPosition;
             playerPosition = targetPosition;
 
             // 新しいタイル位置をワールド座標に変換
