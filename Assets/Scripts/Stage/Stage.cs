@@ -5,6 +5,8 @@ using UniRx;
 using UnityEngine.UI;
 using Coffee.UIExtensions;
 using DG.Tweening;
+using Cysharp.Threading.Tasks;
+
 public class Stage : MonoBehaviour {
 
     [SerializeField]
@@ -105,34 +107,34 @@ public class Stage : MonoBehaviour {
         symbolManager.SetUpAllSymbols();
 
         // スタミナの値をステージごとの初期値に設定(StageData 作成後)
-        GameData.instance.staminaPoint.Value = GameData.instance.currentStageData.initStamina;
+        //GameData.instance.staminaPoint.Value = GameData.instance.currentStageData.initStamina;
 
         // スタミナの値の購読開始
         GameData.instance.staminaPoint.Subscribe(_ => UpdateDisplayStaminaPoint());
 
         // 一旦、獲得したオーブの情報を非表示
-        for (int i = 0; i < imgOrbs.Length; i++) {
-            imgOrbs[i].enabled = false;           
-        }
+        //for (int i = 0; i < imgOrbs.Length; i++) {
+        //    imgOrbs[i].enabled = false;
+        //}
 
         // オーブの情報作成
-        for (int i = 0; i < GameData.instance.currentStageData.orbTypes.Length; i++) {
-            imgOrbs[i].enabled = true;
-            imgOrbs[i].sprite = DataBaseManager.instance.orbDataSO.orbDatasList.Find(x => x.orbType == symbolManager.specialSymbols[i].orbType).spriteOrb;
-            GameData.instance.orbs.Add(i, false);
-        }
+        //for (int i = 0; i < GameData.instance.currentStageData.orbTypes.Length; i++) {
+        //    imgOrbs[i].enabled = true;
+        //    imgOrbs[i].sprite = DataBaseManager.instance.orbDataSO.orbDatasList.Find(x => x.orbType == symbolManager.specialSymbols[i].orbType).spriteOrb;
+        //    GameData.instance.orbs.Add(i, false);
+        //}
 
         // オーブの購読開始
-        GameData.instance.orbs.ObserveReplace().Subscribe((DictionaryReplaceEvent<int, bool> x) => UpdateDisplayOrbs(x.Key, x.NewValue));
+        //GameData.instance.orbs.ObserveReplace().Subscribe((DictionaryReplaceEvent<int, bool> x) => UpdateDisplayOrbs(x.Key, x.NewValue));
 
-        //GameData.instance.maxHp = GameData.instance.hp;
+        GameData.instance.maxHp = GameData.instance.hp;
 
         // Hp表示更新
         //StartCoroutine(UpdateDisplayHp());
 
         // プレイヤーレベルと経験値の表示更新
-        UpdateDisplayPlayerLevel();
-        UpdateDisplayExp(true);
+        //UpdateDisplayPlayerLevel();
+        //UpdateDisplayExp(true);
 
         // プレイヤーの設定
         mapMoveController.SetUpMapMoveController(this);
@@ -148,8 +150,8 @@ public class Stage : MonoBehaviour {
         // アビリティ選択用ウインドウの生成
         CreateSelectAbilityPopUp();
 
-        btnPlayerLevel.onClick.AddListener(OnClickPlayerLevel);
-        moveTimeScaleController.SetUpMoveButtonController();
+        //btnPlayerLevel.onClick.AddListener(OnClickPlayerLevel);
+        //moveTimeScaleController.SetUpMoveButtonController();
 
         // ドロップするトレジャーの情報を準備
         DataBaseManager.instance.CreateDropItemDatasList(GameData.instance.currentStageData.dropTreasureLevel);
@@ -192,6 +194,44 @@ public class Stage : MonoBehaviour {
         //yield return null;
         //}
     }
+
+    public async UniTask ExecuteEnemyTurnAsync() {
+        //while (CurrentTurnState == TurnState.Enemy) {    // あとで GameState に変える
+
+        //if (CurrentTurnState == TurnState.Enemy) {
+        Debug.Log("敵の移動　開始");
+        //yield return StartCoroutine(symbolManager.EnemisMove());
+
+        Debug.Log("すべての敵の移動 完了");
+
+        // シンボルのイベントを発生させる
+        bool isEnemyTriggerEvent = await mapMoveController.ExecuteSymbolEventAsync();
+
+        Debug.Log(isEnemyTriggerEvent);
+
+        // ターンの状態を確認
+        if (!isEnemyTriggerEvent) {
+            CheckTurn();
+            CheckTreasureBox();
+        }
+
+        if (CurrentTurnState == TurnState.Boss) {
+
+            // ボスの出現
+            Debug.Log("Boss 出現");
+
+            // TODO 演出
+            PreparateBossEffect();
+        }
+        //}
+
+        //yield return null;
+        //}
+
+        // TODO プレイヤーの移動再開
+
+    }
+
 
     /// <summary>
     /// スタミナポイントの表示更新
