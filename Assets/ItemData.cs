@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 
 public enum Rarity {
@@ -23,17 +23,34 @@ public enum ItemType {
 }
 
 public enum EffectType {
-    Physical,  // �����n�̍U��
-    Magic,     // ���@�n�̍U��
-    Passive    // �������������œ�����p�b�V�u����
+    Physical,  // 物理系の攻撃
+    Magic,     // 魔法系の攻撃
+    Passive    // 装備しただけで得られるパッシブ効果
 }
 
 public enum StatusType {
-    Strength,       // �́A�̗́A�ؗ�
-    Intelligence,   // �m���A�m��
-    Dexterity,      // ��p���A�f����
-    Charm,          // ����
-    Luck            // �^�̗ǂ�
+    Strength,       // 力、体力、筋力
+    Intelligence,   // 知性、知力
+    Dexterity,      // 器用さ、素早さ
+    Charm,          // 魅力
+    Luck            // 運の良さ
+}
+
+public enum BuffDebuffType {
+    // バフ (Beneficial Effects)
+    // デバフ (Harmful Effects)
+    クリティカル,   // ダメージ増加　CriticalDamageIncrease
+    攻撃ダウン,     // 攻撃力(ダメージ) -20％位  DamageDown
+    防御ダウン,     // 防御力 -20％位　DefenseDown
+    HP吸収,         // ダメージの20％位　HpAbsorption    
+    防御無視,       // シールド破壊　DefenseIgnore
+    スタン,         // 攻撃停止。マヒ　Stun
+    幻惑,           // 命中力へのデバフ。1スタック当たり、-30%位　Confusion
+    猛毒,           // 一定時間ごとにダメージ　Poison
+    即死,           // Hp 無視で倒す　InstantDeath
+    速度ダウン,     // クールタイム延長。1スタック当たり ⁺30秒　Slow
+    呪い,           // 一定確率で行動不能(攻撃前にチェックして、その効果を無視する。複数回攻撃する前に行う)　Curse
+    忘却,           // クリティカル発生率 0％　Forget
 }
 
 [System.Serializable]
@@ -47,22 +64,24 @@ public class ItemData
     public int price;
 
     public float coolTime;
-    public float accuracy;          // ������
-    public int minValue;            // �ŏ��l�B�_���[�W�A�V�[���h�A��
-    public int maxValue;            // �ő�l
+    public float accuracy;          // 命中力
+    public int minValue;            // 最小値。ダメージ、シールド、回復
+    public int maxValue;            // 最大値
 
-    public int minAttackCount;      // 1�񓖂���̍U����
+    public int minAttackCount;      // 1回当たりの攻撃回数
     public int maxAttackCount;
 
     public EffectType effectType;
 
-    // �R�X�g�͔\�͒l�ƃZ�b�g�ɂ��� STR 5�A�̂悤�ɁBAP ����̊T�O�͂Ȃ���
+    // コストは能力値とセットにする STR 5、のように。AP 消費の概念はなくす
     public StatusType[] statusTypes;
     public int[] requiredValues;
+    public float criticalRate;
+    public BuffDebuffType buffDebuffType;  // 複数セットでもいい クリティカル ⁺ 攻撃ダウン、など
 
     public string effect;
 
-    // �T�C�Y(�E�F�C�g)
+    // サイズ(ウェイト)
 
 
 
@@ -83,10 +102,12 @@ public class ItemData
         maxAttackCount = int.Parse(datas[11]);
         effectType = (EffectType)Enum.Parse(typeof(EffectType), datas[12]);
 
-        // ���p�X���b�V���ŋ�؂��Ĕz��ɕϊ�
+        // 半角スラッシュで区切って配列に変換
         statusTypes = datas[13].Split('/').Select(type => (StatusType)Enum.Parse(typeof(StatusType), type)).ToArray();
         requiredValues = datas[14].Split('/').Select(int.Parse).ToArray();
+        criticalRate = float.Parse(datas[15]);
+        buffDebuffType = (BuffDebuffType)Enum.Parse(typeof(BuffDebuffType), datas[16]);
 
-        effect = datas.Length > 15 ? datas[15] : string.Empty;
+        effect = datas.Length > 17 ? datas[17] : string.Empty;
     }
 }
