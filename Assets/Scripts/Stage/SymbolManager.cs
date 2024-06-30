@@ -10,7 +10,7 @@ using UnityEngine.Tilemaps;
 public class SymbolManager : MonoBehaviour
 {
     [SerializeField]
-    private List<SymbolBase> symbolsList = new List<SymbolBase>();
+    private List<SymbolBase> symbolsList = new List<SymbolBase>();  // これを不要として、最初から各シンボルの種類ごとで List 化しておき、全部必要な時は List を結合する
 
     public List<SymbolBase> SymbolsList
     {
@@ -28,6 +28,8 @@ public class SymbolManager : MonoBehaviour
     private Transform spriteMaskTran;
 
     public Tilemap tilemapCollider;   // Grid_Collison の Tilemap をアサイン
+
+
 
 
     //void Start() {
@@ -152,6 +154,8 @@ public class SymbolManager : MonoBehaviour
             if (enemiesList[i].isSymbolTriggerd) {
                 continue;
             }
+
+            // 移動待機カウントのカウントダウン
 
             enemiesList[i].EnemyMove();
             yield return new WaitForSeconds(0.05f);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class SymbolBase : MonoBehaviour
+public class SymbolBase : PoolBase
 {
     public SymbolType symbolType;
     public int no;
@@ -49,6 +49,8 @@ public class SymbolBase : MonoBehaviour
         if (tween != null) {
             tween.Kill();
         }
+
+        // オブジェクトプールにして、自動的に戻るようにすれば SymbolManager の参照いらなくなる
 
         // List からシンボルを削除
         symbolManager.RemoveSymbolsList(this);

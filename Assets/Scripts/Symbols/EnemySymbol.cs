@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Tilemaps;
@@ -9,7 +7,6 @@ public enum MoveDirectionTpye {
     Down,
     Left,
     Right,
-    Count
 }
 
 public class EnemySymbol : SymbolBase
@@ -17,6 +14,11 @@ public class EnemySymbol : SymbolBase
     private Tilemap tilemapCollider;
     private BoxCollider2D boxCol;
     private float moveDuration = 0.05f;
+
+    public int moveIntervalCount = 0;     // 移動するまでの待機カウント
+
+    // EnemyData から、待機時間を設定する
+
 
     public override void OnEnterSymbol(SymbolManager symbolManager) {
         base.OnEnterSymbol(symbolManager);
@@ -62,7 +64,7 @@ public class EnemySymbol : SymbolBase
     public void EnemyMove() {
 
         // 移動する方向をランダムに１つ設定
-        MoveDirectionTpye randomDirType = (MoveDirectionTpye)Random.Range(0, (int)MoveDirectionTpye.Count);
+        MoveDirectionTpye randomDirType = (MoveDirectionTpye)Random.Range(0, System.Enum.GetValues(typeof(MoveDirectionTpye)).Length);
 
         Vector3 nextPos = GetMoveDirection(randomDirType);
 
@@ -123,5 +125,18 @@ public class EnemySymbol : SymbolBase
     /// <param name="isSwicth"></param>
     public void SwtichCollider(bool isSwicth) {
         boxCol.enabled = isSwicth;
+    }
+
+
+    public void CountDownMoveInterval() {
+        // 移動カウントを停止するデバフ(睡眠・移動停止など)があるか確認し、ある場合には処理しない
+
+
+        moveIntervalCount--;
+
+        if (moveIntervalCount <= 0) {
+            // 移動
+
+        }
     }
 }
