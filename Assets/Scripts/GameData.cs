@@ -7,15 +7,13 @@ using UniRx;
 /// インベントリ用のアイテムデータ
 /// </summary>
 [System.Serializable]
-public struct InventryAbilityItemData {
+public class InventryAbilityItemData {
     public AbilityType abilityType;
     public int abilityNo;
 } 
 
-public class GameData : MonoBehaviour
+public class GameData : AbstractSingleton<GameData>
 {
-    public static GameData instance;
-
     public ReactiveProperty<int> staminaPoint = new ReactiveProperty<int>();
 
     public ReactiveDictionary<int, bool> orbs = new ReactiveDictionary<int, bool>();
@@ -52,17 +50,19 @@ public class GameData : MonoBehaviour
 
     public float moveTimeScale;
 
+    public CharaStatus currentCharaStatus;
+    public UserData userData;
 
-    void Awake() {
-        if (instance == null) {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        } else {
-            Destroy(gameObject);
-        }
+    public CombatData playerCombatData;
+    public CombatData enemyCombatData;
+
+
+    protected override void Awake() {
+        base.Awake();
 
         // ゲームの初期化
         InitialzeGameData();
+
 
         // ゲームの初期化
         void InitialzeGameData() {
